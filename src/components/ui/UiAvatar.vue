@@ -1,7 +1,19 @@
 <template>
   <div class="avatar">
-    <div class="ring-base-content ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
-      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+    <div class=" ring-offset-base-100 w-8 rounded-full">
+      <div class="silhouette bg-base-content" />
     </div>
   </div>
 </template>
+
+<style>
+@reference "tailwindcss";
+.silhouette {
+  @apply h-full;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  mask: url(/svg/silhouette.svg) no-repeat 25% 25%;
+}
+</style>
+<script setup lang="ts">
+</script>

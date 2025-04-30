@@ -1,10 +1,17 @@
 <template>
   <div class="h-auto w-auto relative items-center">
-    <div class="w-8 h-12">
+    <div :style="`height: ${size}px; width: ${size}px;`">
       <div class="logo bg-base-content" />
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+interface Props {
+  size?: number
+}
+withDefaults(defineProps<Props>(), { size: 36 })
+</script>
 
 <style>
 @reference "tailwindcss";
