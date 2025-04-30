@@ -10,7 +10,18 @@
     <LoginForm/>
   </div>
 
-
+  <div class="text-end mt-2">
+  <i18n-t
+    keypath="login.signup_redirection.text"
+    tag="label"
+    for="login.signup_redirection.link"
+    class="mt-1 text-xs"
+  >
+    <RouterLink to="signup" class="font-bold"
+    >{{ $t(`login.signup_redirection.link`) }}
+    </RouterLink>
+  </i18n-t>
+  </div>
 
 </template>
 <script setup lang="ts">
