@@ -5,15 +5,17 @@
     </button>
 
     <ul
-      class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+      class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm mt-2"
       popover
       id="popover-1"
       style="position-anchor: --anchor-1"
     >
-      <li><a>Item 1</a></li>
-      <li><a>Item 2</a></li>
+      <slot name="dropdown"/>
     </ul>
   </div>
+
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Icon } from '@iconify/vue'
+</script>

@@ -6,16 +6,16 @@
 </template>
 
 <script setup lang="ts">
-import UiHeader from '@/components/ui/UiHeader.vue'
-import UiFooter from '@/components/ui/UiFooter.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useDeviceStore } from '@/stores/device.store.ts'
 import LoginModal from '@/components/project/global/LoginModal.vue'
-import { useRoute } from 'vue-router'
 import AppLayout from '@/layouts/AppLayout.vue'
+import { useConfigStore } from '@/stores/config.store.ts'
 
 const deviceStore = useDeviceStore()
-const route = useRoute()
+const configStore = useConfigStore()
+
+configStore.get_language()
 
 onMounted(async () => {
   await deviceStore.initialize()
