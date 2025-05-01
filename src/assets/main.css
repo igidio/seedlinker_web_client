@@ -33,10 +33,10 @@
   --color-error-content: oklch(97% 0.014 343.198);
   --radius-selector: 1rem;
   --radius-field: 2rem;
-  --radius-box: 2rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.28125rem;
-  --border: 2px;
+  --radius-box: 1.5rem;
+  --size-selector: 0.0.1875remrem;
+  --size-field: 0.1875rem;
+  --border: 0.5px;
   --depth: 1;
   --noise: 1;
 }
