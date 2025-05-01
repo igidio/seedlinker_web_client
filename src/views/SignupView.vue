@@ -13,6 +13,7 @@
     <i18n-t
       keypath="signup.login_redirection.text"
       tag="label"
+      scope="global"
       for="signup.login_redirection.link"
       class="mt-1 text-xs"
     >
@@ -24,6 +25,5 @@
 </template>
 <script setup lang="ts">
 import UiLogo from '@/components/ui/UiLogo.vue'
-import LoginForm from '@/components/project/auth/LoginForm.vue'
 import SignupForm from '@/components/project/auth/SignupForm.vue'
 </script>

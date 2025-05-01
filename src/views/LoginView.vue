@@ -13,6 +13,7 @@
   <div class="text-end mt-2">
   <i18n-t
     keypath="login.signup_redirection.text"
+    scope="global"
     tag="label"
     for="login.signup_redirection.link"
     class="mt-1 text-xs"
