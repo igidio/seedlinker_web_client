@@ -3,7 +3,7 @@
     <div>
       <UiHeader/>
       <div class="flex flex-row gap-4">
-      <SidebarContent/>
+      <SidebarContent class="hidden md:block"/>
         <div class="w-full">
       <Suspense fallback="">
         <slot/>

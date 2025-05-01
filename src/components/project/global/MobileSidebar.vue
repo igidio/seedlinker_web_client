@@ -1,14 +1,12 @@
 <template>
   <UiDrawer>
     <template #trigger>
-      <button class="btn btn-ghost">
+      <button class="btn btn-ghost  text-lg">
         <Icon icon="ph:list-bold" />
       </button>
     </template>
     <template #default>
-      <div class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
       <SidebarContent/>
-      </div>
     </template>
   </UiDrawer>
 </template>

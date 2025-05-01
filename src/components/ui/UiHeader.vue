@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row justify-between items-center mb-4">
-    <MobileSidebar class="md:hidden w-fit"/>
+    <MobileSidebar class="md:hidden w-fit" />
 
     <router-link class="flex flex-row items-center gap-2" :to="{ name: 'home' }">
       <UiLogo :size="36" />
@@ -27,13 +27,34 @@
       </UiDropdown>
     </div>
 
-    <div class="flex flex-row items-center gap-2" v-else>
-      <router-link :to="{ name: 'login' }" class="btn btn-ghost"
-        >{{ $t('login.title') }}
-      </router-link>
-      <router-link :to="{ name: 'signup' }" class="btn btn-neutral"
-        >{{ $t('signup.title') }}
-      </router-link>
+    <div v-else>
+      <div class="hidden md:flex flex-row items-center gap-2">
+        <router-link :to="{ name: 'login' }" class="btn btn-ghost"
+          >{{ $t('login.title') }}
+        </router-link>
+        <router-link :to="{ name: 'signup' }" class="btn btn-neutral"
+          >{{ $t('signup.title') }}
+        </router-link>
+      </div>
+      <div class="flex flex-row items-center gap-2 md:hidden">
+        <UiDropdown>
+          <button class="btn btn-ghost text-lg">
+          <Icon icon="ph:sign-in-duotone"  />
+          </button>
+          <template #dropdown>
+            <li>
+              <RouterLink to="login">
+                {{ $t('login.title') }}
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="signup">
+                {{ $t('signup.title') }}
+              </RouterLink>
+            </li>
+          </template>
+        </UiDropdown>
+      </div>
     </div>
   </div>
 </template>
