@@ -3,7 +3,7 @@
     <div>
       <UiHeader/>
       <div class="flex flex-row gap-4">
-      <DefaultSidebar/>
+      <SidebarContent/>
         <div class="w-full">
       <Suspense fallback="">
         <slot/>
@@ -18,5 +18,5 @@
 <script setup lang="ts">
 import UiHeader from '@/components/ui/UiHeader.vue'
 import UiFooter from '@/components/ui/UiFooter.vue'
-import DefaultSidebar from '@/components/project/global/DefaultSidebar.vue'
+import SidebarContent from '@/components/project/global/SidebarContent.vue'
 </script>
