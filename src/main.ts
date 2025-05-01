@@ -12,11 +12,13 @@ import { translations } from '@/translations.ts'
 const i18n = createI18n({
   locale: 'en',
   fallbackLocale: 'en',
-  messages: translations
+  messages: translations,
+  globalInjection: true,
+  legacy: false
 })
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(router)
 app.use(i18n)
+app.use(router)
 app.mount('#app')
