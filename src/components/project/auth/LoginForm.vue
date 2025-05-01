@@ -13,7 +13,7 @@
             class="input w-full"
             v-model="form.username"
             @input="validate_inputs"
-            autocomplete="off"
+            autocomplete="username"
           />
         </fieldset>
 
@@ -24,7 +24,7 @@
             class="input w-full"
             v-model="form.password"
             @input="validate_inputs"
-            autocomplete="new-password"
+            autocomplete="password"
           />
         </fieldset>
         <p class="text-error text-center" v-if="error_message">{{ $t(error_message) }}</p>
@@ -54,6 +54,7 @@ import axios, { AxiosError } from 'axios'
 import { reactive, ref } from 'vue'
 import { z } from 'zod'
 import { api_client } from '@/utils/axios.ts'
+import { set_cookie } from '@/utils/cookie.ts'
 
 const form = reactive({
   username: '',
@@ -91,6 +92,8 @@ const submit = async () => {
     .then((response) => {
       console.log('Login successful')
       console.log(response)
+      set_cookie('token', response.data)
+      window.location.href = '/'
     })
     .catch((e: AxiosError) => {
       error_message.value = (e.response?.data as { detail?: string })?.detail || null

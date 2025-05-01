@@ -85,7 +85,7 @@ const submit = async () => {
   }
 
   try {
-    const response = await api_client.post('/api/service/auth/signup', form)
+    const response = await api_client.post('/service/auth/signup', form)
     console.log(response.data)
   } catch (e) {
     if (e instanceof AxiosError) {
