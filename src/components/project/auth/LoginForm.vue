@@ -33,11 +33,11 @@
           {{ $t('login.button') }}
         </button>
         <div class="flex flex-row gap-2">
-          <button class="btn btn-base-200 btn-sm w-1/2 block mt-2 flex flex-row">
+          <button class="btn btn-base-200 btn-sm w-1/2 block mt-2 flex flex-row" type="button">
             <Icon icon="ph:github-logo-fill" />
             {{ $t('login.button_github') }}
           </button>
-          <button class="btn btn-lg btn-sm grow block mt-2 flex flex-row">
+          <button class="btn btn-lg btn-sm grow block mt-2 flex flex-row" type="button">
             <Icon icon="ph:google-logo-bold" />
             {{ $t('login.button_google') }}
           </button>
@@ -53,14 +53,15 @@ import { Icon } from '@iconify/vue'
 import axios, { AxiosError } from 'axios'
 import { reactive, ref } from 'vue'
 import { z } from 'zod'
+import { api_client } from '@/utils/axios.ts'
 
 const form = reactive({
   username: '',
   password: '',
 })
 const schema = z.object({
-  username: z.string().min(1, { message: 'error.input.username' }),
-  password: z.string().min(1, { message: 'error.input.password' }),
+  username: z.string().min(1, { message: 'error.input.username.required' }),
+  password: z.string().min(1, { message: 'error.input.password.required' }),
 })
 const error_message = ref<string | null>(null)
 const is_loading = ref(false)
@@ -82,8 +83,8 @@ const submit = async () => {
     is_loading.value = false
     return
   }
-  await axios
-    .post(`api/service/auth/login`, {
+  await api_client
+    .post(`service/auth/login`, {
       username_or_email: form.username,
       password: form.password,
     })
