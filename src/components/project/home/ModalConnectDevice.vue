@@ -50,16 +50,12 @@ const error_message = ref<string | null>(null)
 const props = defineProps<{
   data: {
     uuid: string
-    type: string
+    type: string|null
     is_new: boolean
   }
 }>()
-
-
-
 const new_uuid = ref('')
 const is_loading = ref(false)
-
 const disable_save_button = computed(() => {
   return props.data.is_new && !is_valid_uuid(new_uuid.value)
 })

@@ -1,18 +1,20 @@
 <template>
   <div class="main">
     <div>
-      <UiHeader/>
+      <UiHeader />
       <div class="flex flex-row gap-4">
-      <SidebarContent class="hidden md:block"/>
+        <div class="hidden md:block w-72">
+          <SidebarContent />
+        </div>
         <div class="w-full">
-      <Suspense fallback="">
-        <slot/>
-      </Suspense>
+          <Suspense fallback="">
+            <slot />
+          </Suspense>
         </div>
       </div>
     </div>
 
-    <UiFooter/>
+    <UiFooter />
   </div>
 </template>
 <script setup lang="ts">

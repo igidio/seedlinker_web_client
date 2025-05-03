@@ -14,13 +14,13 @@
           <li>
             <a>
               <Icon icon="ph:user-fill" />
-              Modificar perfil</a
-            >
+              {{ $t('profile') }}
+            </a>
           </li>
           <li>
             <button @click="configStore.logout">
               <Icon icon="ph:door-duotone" />
-              Cerrar sesión
+              {{ $t('logout') }}
             </button>
           </li>
         </template>
@@ -39,7 +39,7 @@
       <div class="flex flex-row items-center gap-2 md:hidden">
         <UiDropdown>
           <button class="btn btn-ghost text-lg">
-          <Icon icon="ph:sign-in-duotone"  />
+            <Icon icon="ph:sign-in-duotone" />
           </button>
           <template #dropdown>
             <li>

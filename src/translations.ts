@@ -7,6 +7,8 @@ export const translations = {
     connect_manually: 'Connect manually',
     go_home: 'Go to home',
     select_language: 'Select language',
+    profile: 'Edit profile',
+    logout: 'Log out',
     home: {
       available_devices: 'Available devices',
       modal_connect_device: {
@@ -27,6 +29,9 @@ export const translations = {
             already_registered: 'The device is already registered',
           },
         },
+      },
+      card_connected_client: {
+        title: 'Connected clients',
       },
     },
     login: {
@@ -87,6 +92,8 @@ export const translations = {
     delete: 'Eliminar',
     connect: 'Conectar',
     close: 'Cerrar',
+    profile: 'Modificar perfil',
+    logout: 'Cerrar sesión',
     connect_manually: 'Conectar manualmente',
     go_home: 'Ir a inicio',
     select_language: 'Seleccionar idioma',
@@ -111,6 +118,9 @@ export const translations = {
           },
         },
       },
+      card_connected_client: {
+        title: 'Clientes conectados',
+      }
     },
     login: {
       title: 'Iniciar sesión',
