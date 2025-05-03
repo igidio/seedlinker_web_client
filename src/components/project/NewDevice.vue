@@ -1,17 +1,22 @@
 <template>
-<div>hola</div>
+  <div class="card w-96 bg-base-100 card-xs shadow-sm p-4" :key="device.uuid">
+    <div class="card-body">
+      <div class="flex flex-row justify-between">
+        <h2 class="card-title font-semibold">{{ device.type }}</h2>
+        <button class="btn btn-base btn-xs">
+          <Icon icon="ph:plugs-connected-fill" />
+          {{ $t('connect') }}
+        </button>
+      </div>
+      <p>ID: {{ device.uuid }}</p>
+      <div class="justify-end card-actions"></div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { device_instance } from '@/config/instances.ts'
-import { get_public_ip } from '@/utils/public_ip.ts'
-import { replace_dots_with_underscores } from '@/utils/conversion.ts'
-import { onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
+import type { device_interface } from '@/interfaces'
 
-onMounted(async () => {
-  const public_ip = await get_public_ip()
-  const ip = replace_dots_with_underscores(public_ip)
-  await device_instance.get_current_devices(ip)
-})
-
+defineProps<{ device: device_interface }>()
 </script>

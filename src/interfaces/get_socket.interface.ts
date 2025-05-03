@@ -1,10 +1,10 @@
-interface device_interface {
-  id: string;
+export interface device_interface {
+  uuid: string;
   type: string;
   status: boolean;
 }
 
-interface client_interface {
+export interface client_interface {
   info: string;
 }
 

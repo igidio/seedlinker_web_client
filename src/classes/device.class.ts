@@ -8,6 +8,6 @@ export class Device {
     this.server_direction = server_direction}
 
   async get_current_devices(group_address: string) {
-    return (await axios.get<current_devices_interface>(`${this.server_direction}/ws/group/${group_address}/clients`)).data
+    return (await axios.get<current_devices_interface>(`${this.server_direction}/devices/groups/${group_address}`)).data
   }
 }
