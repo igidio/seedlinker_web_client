@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <UiFooter />
+    <UiFooter :simple_view="false" />
   </div>
 </template>
 <script setup lang="ts">

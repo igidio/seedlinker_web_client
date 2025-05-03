@@ -74,10 +74,15 @@ export const translations = {
           required: 'Username is required',
           min_length: 'Username must be at least 3 characters long',
         },
+        email: {
+          required: 'Email is required',
+          invalid: 'Email is not valid',
+        },
         password: {
           required: 'Password is required',
           min_length: 'Password must be at least 8 characters long',
         },
+        password_compare: 'Passwords do not match',
       },
       form: {
         user_not_found: 'User not found, please check your username or email',

@@ -2,10 +2,10 @@
   <div class="flex flex-row justify-between items-center mb-4">
     <MobileSidebar class="md:hidden w-fit" />
 
-    <router-link class="flex flex-row items-center gap-2" :to="{ name: 'home' }">
-      <UiLogo :size="36" />
-      <span class="font-bold text-3xl">Seedlinker</span>
-    </router-link>
+      <router-link class="flex flex-row items-center gap-2" :to="{ name: 'home' }">
+        <UiLogo :size="36" />
+        <span class="font-bold text-3xl">Seedlinker</span>
+      </router-link>
 
     <div v-if="is_authenticated">
       <UiDropdown>
@@ -67,6 +67,7 @@ import { useConfigStore } from '@/stores/config.store.ts'
 import { storeToRefs } from 'pinia'
 import UiDrawer from '@/components/ui/UiDrawer.vue'
 import MobileSidebar from '@/components/project/global/MobileSidebar.vue'
+import ToggleLanguage from '@/components/project/global/ToggleLanguage.vue'
 
 const configStore = useConfigStore()
 const { is_authenticated } = storeToRefs(configStore)
