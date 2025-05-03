@@ -4,9 +4,14 @@
       Debes iniciar sesión para continuar
     </template>
     <template v-slot:footer>
-      <form method="dialog" class="modal-backdrop">
-        <button>{{ $t('close') }}</button>
-      </form>
+      <div @click="login_modal_state?.close" class="flex flex-row gap-2">
+        <router-link :to="{ name: 'login' }" class="btn btn-ghost"
+        >{{ $t('login.title') }}
+        </router-link>
+        <router-link :to="{ name: 'signup' }" class="btn btn-neutral"
+        >{{ $t('signup.title') }}
+        </router-link>
+      </div>
     </template>
   </UiModal>
 </template>
