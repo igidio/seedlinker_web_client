@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { get_cookie, remove_cookie } from '@/utils/cookie.ts'
+import type { ToastInterface } from '@/interfaces'
 
 export const useConfigStore = defineStore('config', () => {
   const { locale } = useI18n()
@@ -52,6 +53,19 @@ export const useConfigStore = defineStore('config', () => {
     window.location.replace('/')
   }
 
+  // TOAST
+  const toasts = ref<ToastInterface[]>([])
+  const generate_toast = (toast_data: ToastInterface) => {
+    const id = Math.random().toString(36).substring(2, 15)
+    toasts.value.push({
+      ...toast_data,
+      id,
+    })
+    setTimeout(() => {
+      toasts.value.pop()
+    }, toast_data.duration || 3000)
+  }
+
   return {
     login_modal_state,
     locale,
@@ -62,6 +76,9 @@ export const useConfigStore = defineStore('config', () => {
     is_authenticated,
     selected_theme,
     get_theme,
-    set_theme
+    set_theme,
+    // TOAST
+    toasts,
+    generate_toast,
   }
 })

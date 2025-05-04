@@ -5,7 +5,10 @@ export interface device_interface {
 }
 
 export interface client_interface {
-  info: string;
+  info: {
+    platform: string;
+    brand: string;
+  }
 }
 
 export interface current_devices_interface {
