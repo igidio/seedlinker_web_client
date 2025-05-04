@@ -1,10 +1,9 @@
+import { UAParser } from 'ua-parser-js';
+const { browser, cpu, device, os } = UAParser(navigator.userAgent);
+
 export const get_client_info = () => {
-  console.log(navigator)
-  const info = {
-    platform: navigator,
-    //platform: navigator.userAgentData.platform,
-    //brand: navigator['userAgentData']['brands'][0]['brand'],
-    brand: navigator.userAgent,
-  };
-  return `${info.brand} (${info.platform})`;
+  return {
+    platform: browser.name,
+    brand: `${os.name} ${os.version} ${cpu.architecture ? '- ' + cpu.architecture : ''}`.trim(),
+  }
 };

@@ -1,13 +1,22 @@
 <template>
   <UiCard class="w-full">
-    <div class="border-base-300 border-b border-dashed pb-2 font-bold">
+    <div class="border-base-300 border-b border-dashed pb-2 font-bold text-lg">
       {{ $t('home.card_connected_client.title') }}
     </div>
     <div class="flex flex-col gap-2">
-      <span
+      <div
         v-for="(client, key) in clients_connected"
         :key="key"
-        class="border-base-200 border-b border-dashed pb-2">{{ client }}</span>
+        class="border-base-200 border-b border-dashed pb-2 flex flex-col gap-1"
+      >
+        <span>{{ client?.brand }}</span>
+        <span class="font-bold">{{ client?.platform }}</span>
+
+      </div>
+
+      <span>
+
+      </span>
     </div>
   </UiCard>
 </template>

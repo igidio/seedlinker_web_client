@@ -4,8 +4,11 @@
   </div>
   <div class="flex flex-row justify-between items-center" v-else>
     <span class="font-bold">{{ current }} igid.io</span>
-    <ToggleLanguage/>
-    <ToggleDarkLight/>
+    <div>
+      <ToggleDarkLight/>
+      <ToggleLanguage/>
+    </div>
+
   </div>
 </template>
 

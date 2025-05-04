@@ -1,8 +1,4 @@
 <template>
-  <button class="btn btn-ghost" @click="(locale === 'en') ? set_language('es') : set_language('en')">
-    <span class="uppercase font-black">{{ locale }}</span>
-  </button>
-
   <button class="btn btn-ghost" @click="configStore.set_theme()">
   <Icon :icon="theme_icon"/>
   </button>
@@ -21,7 +17,7 @@ const { locale, selected_theme } = storeToRefs(configStore)
 
 const theme_icon = computed(() =>
   selected_theme.value === 'light'
-    ? 'ph:sun-duotone'
-    : 'ph:moon-duotone'
+    ? 'ph:sun-dim-fill'
+    : 'ph:moon-fill'
 )
 </script>
