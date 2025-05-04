@@ -10,7 +10,7 @@
           }]"
         >
           <Icon :icon="toast.icon" v-if="toast.icon"/>
-          <span>{{ toast.message }}</span>
+          <span>{{ $t(toast.message) }}</span>
         </div>
       </TransitionGroup>
     </div>

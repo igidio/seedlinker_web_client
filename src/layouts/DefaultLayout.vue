@@ -7,9 +7,11 @@
           <SidebarContent />
         </div>
         <div class="w-full">
+            <Transition>
           <Suspense fallback="">
-            <slot />
+              <slot />
           </Suspense>
+            </Transition>
         </div>
       </div>
     </div>

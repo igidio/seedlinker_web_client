@@ -19,6 +19,7 @@ export const translations = {
       sensors_and_actuators: 'Sensors and actuators',
       io: 'Connected I/O',
       conditions: 'Conditions',
+      loading: 'Device information is loading',
     },
     home: {
       available_devices: 'Available devices',
@@ -104,6 +105,7 @@ export const translations = {
         user_already_exists: 'Username already exists or email is already registered',
         invalid_password: 'Invalid password',
         invalid_uuid: 'Invalid UUID',
+        device_not_found: 'Device not found, please check the UUID',
       },
     },
   },
@@ -127,6 +129,7 @@ export const translations = {
       sensors_and_actuators: 'Sensores y actuadores',
       io: 'I/O conectados',
       conditions: 'Condiciones',
+      loading: 'La información del dispositivo se está cargando',
     },
     home: {
       available_devices: 'Dispositivos disponibles',
@@ -213,6 +216,7 @@ export const translations = {
         user_already_exists: 'El nombre de usuario ya existe o el correo ya está registrado',
         invalid_password: 'La contraseña es incorrecta',
         invalid_uuid: 'El UUID no es válido',
+        device_not_found: 'Dispositivo no encontrado, por favor verifique el UUID',
       },
     },
   },

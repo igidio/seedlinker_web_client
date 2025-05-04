@@ -2,9 +2,10 @@
   <div>
     <span class="font-bold text-lg mb-2 inline-block">{{ $t('home.my_devices.title') }}</span>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-2">
-    <OwnedDeviceCard :device="device" v-for="device in devices" />
+    <OwnedDeviceCard :device="device" v-for="device in devices" :key="device._id.$oid" />
     </div>
     {{ devices }}
+
   </div>
 </template>
 

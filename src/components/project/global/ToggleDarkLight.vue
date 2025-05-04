@@ -12,8 +12,7 @@ import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
 
 const configStore = useConfigStore()
-const  { set_language } = configStore
-const { locale, selected_theme } = storeToRefs(configStore)
+const { selected_theme } = storeToRefs(configStore)
 
 const theme_icon = computed(() =>
   selected_theme.value === 'light'

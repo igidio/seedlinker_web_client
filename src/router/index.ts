@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import { applyDefaultLayout } from '@/router/apply_default_layout.ts'
 import CenteredLayout from '@/layouts/CenteredLayout.vue'
+import { is_valid_uuid } from '@/utils/validate_uuid.ts'
 
 const routes:RouteRecordRaw[] = [
   {
@@ -32,8 +33,19 @@ const routes:RouteRecordRaw[] = [
       layout: CenteredLayout
     }
   },
+  {
+    path: '/device/:uuid',
+    name: 'device',
+    component: () => import('../views/DeviceView.vue'),
+    beforeEnter: (to, from, next) => {
+      if (is_valid_uuid(to.params.uuid as string)) {
+        next();
+      } else {
+        next({ name: 'home' });
+      }
+    },
+  },
 ]
-
 applyDefaultLayout(routes)
 
 const router = createRouter({
