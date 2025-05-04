@@ -11,12 +11,7 @@
       >
         <span>{{ client?.brand }}</span>
         <span class="font-bold">{{ client?.platform }}</span>
-
       </div>
-
-      <span>
-
-      </span>
     </div>
   </UiCard>
 </template>
@@ -25,6 +20,7 @@ import UiCard from '@/components/ui/UiCard.vue'
 import { storeToRefs } from 'pinia'
 import { useDeviceStore } from '@/stores/device.store.ts'
 import { computed } from 'vue'
+
 const { connected_by_types } = storeToRefs(useDeviceStore())
 
 const clients_connected = computed(() => {

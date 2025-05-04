@@ -9,8 +9,23 @@ export const translations = {
     select_language: 'Select language',
     profile: 'Edit profile',
     logout: 'Log out',
+    configure: 'Configure',
+    device: {
+      uuid: 'UUID',
+      status: 'Status',
+      on: 'On',
+      off: 'Off',
+      mode: 'Mode',
+      sensors_and_actuators: 'Sensors and actuators',
+      io: 'Connected I/O',
+      conditions: 'Conditions',
+    },
     home: {
       available_devices: 'Available devices',
+      my_devices: {
+        title: 'My devices',
+        description: 'These are the devices you have registered on your account',
+      },
       modal_connect_device: {
         auto: {
           title: 'Connect {0}',
@@ -100,10 +115,25 @@ export const translations = {
     profile: 'Modificar perfil',
     logout: 'Cerrar sesión',
     connect_manually: 'Conectar manualmente',
+    configure: 'Configurar',
     go_home: 'Ir a inicio',
     select_language: 'Seleccionar idioma',
+    device: {
+      uuid: 'UUID',
+      status: 'Estado',
+      on: 'Encendido',
+      off: 'Apagado',
+      mode: 'Modo',
+      sensors_and_actuators: 'Sensores y actuadores',
+      io: 'I/O conectados',
+      conditions: 'Condiciones',
+    },
     home: {
       available_devices: 'Dispositivos disponibles',
+      my_devices: {
+        title: 'Mis dispositivos',
+        description: 'Estos son los dispositivos que tienes registrados en tu cuenta',
+      },
       modal_connect_device: {
         auto: {
           title: 'Conectar {0}',
