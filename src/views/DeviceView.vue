@@ -1,12 +1,14 @@
 <template>
   <div class="flex flex-col gap-2">
     <div class="flex flex-row justify-between items-center">
-      <span class="font-bold text-xl">Tu dispositivo</span>
-      <UiLoading v-if="loading"/>
+      <span class="font-bold text-xl">{{ $t('device.title') }}</span>
+      <UiLoading v-if="loading && !device" />
     </div>
     <span class="text-base-content" v-if="loading">{{ $t('device.loading') }}...</span>
     <div class="v-else">
-      {{ data }}
+      {{ device }}
+
+      <NameInput :title="device?.name!" :save="update_data" />
     </div>
   </div>
 </template>
@@ -18,21 +20,25 @@ import { onMounted, ref } from 'vue'
 import { useConfigStore } from '@/stores/config.store.ts'
 import UiLoading from '@/components/ui/UiLoading.vue'
 import type { DeviceInterface } from '@/interfaces'
+import NameInput from '@/components/project/device/NameInput.vue'
+import { useDeviceComposable } from '@/composables/device.composable.ts'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
-const data = ref<null|DeviceInterface>(null)
 
 const route = useRoute()
 const router = useRouter()
 
+const useDevice = useDeviceComposable()
+const { device, set_device, update_data } = useDevice
+
 onMounted(async () => {
   await api_client
-    .get(`/devices/${route.params.uuid}`)
+    .get<DeviceInterface>(`/devices/${route.params.uuid}`)
     .then((response) => {
-      data.value = response.data
+      set_device(response.data)
     })
-    .catch((error) => {
+    .catch(() => {
       generate_toast({
         type: 'error',
         message: 'error.form.device_not_found',

@@ -21,9 +21,7 @@
 import { Icon } from '@iconify/vue'
 import { useConfigStore } from '@/stores/config.store.ts'
 import { storeToRefs } from 'pinia'
-
 const configStore = useConfigStore()
-const { generate_toast } = configStore
 const {toasts} = storeToRefs(configStore)
 </script>
 

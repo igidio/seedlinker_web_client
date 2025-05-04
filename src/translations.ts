@@ -20,6 +20,15 @@ export const translations = {
       io: 'Connected I/O',
       conditions: 'Conditions',
       loading: 'Device information is loading',
+      title: 'Your device',
+      fields: {
+        name: {
+          placeholder: 'Device name',
+        },
+      },
+      alert: {
+        edit: 'Device updated successfully',
+      },
     },
     home: {
       available_devices: 'Available devices',
@@ -130,6 +139,15 @@ export const translations = {
       io: 'I/O conectados',
       conditions: 'Condiciones',
       loading: 'La información del dispositivo se está cargando',
+      title: 'Tu dispositivo',
+      fields: {
+        name: {
+          placeholder: 'Nombre del dispositivo',
+        }
+      },
+      alert: {
+        edit: "Dispositivo modificado correctamente",
+      }
     },
     home: {
       available_devices: 'Dispositivos disponibles',

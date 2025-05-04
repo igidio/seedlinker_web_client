@@ -17,6 +17,7 @@ import { ref } from 'vue'
 
 const devices = ref<DeviceInterface[]>([])
 
+
 api_client
   .get<DeviceInterface[]>('/devices')
   .then((response) => {

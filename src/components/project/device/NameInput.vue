@@ -1,0 +1,60 @@
+<template>
+  <div class="w-full">
+    <div class="flex flex-row items-center gap-2" v-if="!edit">
+      <button class="btn btn-lg bg-base-300" @click="edit = true">
+        <Icon icon="ph:note-pencil-duotone" class="w-6 h-6" />
+      </button>
+      <span class="font-bold text-3xl">{{ title }}</span>
+    </div>
+    <div v-else class="flex flex-row items-center gap-2">
+      <input
+        type="text"
+        :placeholder="$t('device.title')"
+        class="input input-xl w-full"
+        v-model="new_name"
+        :maxlength="50"
+      />
+      <button class="btn btn-lg bg-base-300" @click="submit">
+        <Icon icon="ph:floppy-disk-back-duotone" class="w-6 h-6" />
+      </button>
+      <button
+        class="btn btn-lg btn-ghost"
+        @click="
+          () => {
+            edit = false
+            new_name = title
+          }
+        "
+      >
+        <Icon icon="ph:x-duotone" class="w-6 h-6" />
+      </button>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import type { DeviceInterface } from '@/interfaces'
+import { useDeviceComposable } from '@/composables/device.composable.ts'
+
+const deviceComposable = useDeviceComposable()
+const props = defineProps<{
+  title: string
+  save: (data: Partial<DeviceInterface>) => void
+}>()
+
+const edit = ref(false)
+const new_name = ref(props.title)
+
+const submit = () => {
+  // Save the new name
+  edit.value = false
+  props.save({
+    name: new_name.value,
+  })
+  deviceComposable.update_data({
+    name: new_name.value,
+  })
+  //props.title = new_name.value
+}
+</script>
