@@ -7,7 +7,7 @@
         <slot name="footer" />
       </div>
     </div>
-    <form method="dialog" class="modal-backdrop"></form>
+    <form method="dialog" class="modal-backdrop"><button/></form>
   </dialog>
 </template>
 

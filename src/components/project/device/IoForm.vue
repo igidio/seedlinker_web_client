@@ -2,59 +2,81 @@
   <form @submit.prevent="submit">
     <UiModal
       v-model="trigger"
-      :title="is_new ? $t('device.modal.io.title.create') : $t('device.modal.io.title.edit')"
+      :title="props.is_new ? $t('device.modal.io.title.create') : $t('device.modal.io.title.edit')"
+      @close="on_close"
     >
       <fieldset class="fieldset">
         <legend class="fieldset-legend">{{ $t('device.modal.io.fields.pin.legend') }}</legend>
         <select class="select w-full" v-model="pin_selected">
-          <option disabled selected :value="null">{{$t('device.modal.io.fields.pin.placeholder')}}</option>
-          <option :value="pin" v-for="(pin, index) in pin_values.esp8266" :key="index">{{ pin.label }}</option>
+          <option disabled :value="null" :selected="props.is_new">
+            {{ $t('device.modal.io.fields.pin.placeholder') }}
+          </option>
+          <option :value="pin" v-for="(pin, index) in available_pins" :key="index">
+            {{ pin.label }}
+          </option>
+          <option :value="props.pin_selected" v-if="!props.is_new">
+            {{  props.pin_selected?.label }}
+          </option>
         </select>
+        <p class="label" v-if="available_pins.length <= 0">{{ $t('device.modal.io.fields.pin.unavailable_pins') }}</p>
       </fieldset>
+
 
       <fieldset class="fieldset">
         <legend class="fieldset-legend">{{ $t('device.modal.io.fields.io_type.legend') }}</legend>
         <select class="select w-full" v-model="io_selected">
-
-          <option disabled selected :value="null">{{$t('device.modal.io.fields.io_type.placeholder')}}</option>
-          <option :value="io" v-for="(io, index) in io_values" :key="index">{{ $t(io.label) }}</option>
+          <option disabled selected :value="null">
+            {{ $t('device.modal.io.fields.io_type.placeholder') }}
+          </option>
+          <option :value="io" v-for="(io, index) in io_values" :key="index">
+            {{ $t(io.value) }}
+          </option>
         </select>
-        <p class="label" v-if="io_selected && io_selected.type">{{ io_selected.type === 'input' ? $t('device.modal.io.fields.io_type.type.sensor') : $t('device.modal.io.fields.io_type.type.actuator') }}</p>
+        <p class="label" v-if="io_selected && io_selected.type">
+          {{
+            io_selected.type === 'input'
+              ? $t('device.modal.io.fields.io_type.type.sensor')
+              : $t('device.modal.io.fields.io_type.type.actuator')
+          }}
+        </p>
 
       </fieldset>
       <template #footer>
-        <button class="btn btn-ghost">{{ $t('close') }}</button>
-        <button class="btn btn-neutral">{{ $t('save') }}</button>
+        <button class="btn btn-ghost" @click="on_close">{{ $t('close') }}</button>
+        <button class="btn btn-neutral" :disabled="is_disabled">{{ $t('save') }}</button>
       </template>
     </UiModal>
   </form>
 </template>
 
 <script setup lang="ts">
-import { api_client } from '@/utils/axios.ts'
-import { ref } from 'vue'
-import { io_values, pin_values } from '@/data/device.data.ts'
+import { computed, inject, ref, watch } from 'vue'
+import { io_values } from '@/data/device.data.ts'
 import type { IoValuesInterface, Pins, PinValuesInterface } from '@/interfaces'
 import UiModal from '@/components/ui/UiModal.vue'
-import { useRoute } from 'vue-router'
-import type { AxiosError } from 'axios'
 import { io_form_schema } from '@/schemas'
-const route = useRoute()
 const trigger = defineModel<HTMLDialogElement>()
 
 interface Props {
-  is_new?: boolean
+  io_selected: IoValuesInterface | null
+  pin_selected: PinValuesInterface | null
+  is_new: boolean
+  id: string | null
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  is_new: false,
-})
+const add_pin = inject<(pin: Pins) => Promise<void>>('add_pin')!
 
-const io_selected = ref<IoValuesInterface|null>(null)
-const pin_selected = ref<PinValuesInterface|null>(null)
+const define_props = withDefaults(defineProps<{ props: Props}>(), {})
+
+const io_selected = ref<IoValuesInterface | null>(null)
+const pin_selected = ref<PinValuesInterface | null>(null)
+const available_pins = inject<PinValuesInterface[]>('available_pins')!
 
 const validateInputs = () => {
-  const result = io_form_schema.safeParse({ pin_selected: pin_selected.value, io_selected: io_selected.value })
+  const result = io_form_schema.safeParse({
+    pin_selected: pin_selected.value,
+    io_selected: io_selected.value,
+  })
   if (!result.success) {
     console.error(result.error.errors)
     return false
@@ -66,27 +88,39 @@ const submit = async () => {
   validateInputs()
   if (!pin_selected.value || !io_selected.value) return
 
-  const data:Pins = {
+  const data: Pins = {
     pin: pin_selected.value.value,
     gpio: pin_selected.value.label,
     type: io_selected.value.type,
-    name: io_selected.value.label,
-    status: true
+    name: io_selected.value.value,
+    status: true,
   }
-
-  console.log(data)
-
-  await api_client
-    .patch(`/devices/${route.params.uuid}`, data)
-    .then((response) => {
-      trigger.value?.close()
-      console.log(response)
-    })
-    .catch((e: AxiosError) => {
-      //error_message.value = (e.response?.data as { detail?: string })?.detail || null
-    })
-    // .finally(() => {
-    //   is_loading.value = false
-    // })
+  try {
+    await add_pin(data)
+    on_close()
+  } catch (e) {
+    console.log(e)
+  } finally {
+  }
 }
+
+const is_disabled = computed(() => {
+  return !pin_selected.value || !io_selected.value;
+
+})
+
+const on_close = () => {
+  trigger.value?.close()
+  pin_selected.value = null
+  io_selected.value = null
+}
+
+
+watch(
+  () => define_props.props.pin_selected,
+  () => {
+    io_selected.value = define_props.props.io_selected
+    pin_selected.value = define_props.props.pin_selected
+  },
+)
 </script>

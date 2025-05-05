@@ -1,5 +1,5 @@
 <template>
-  <IoForm v-model="io_trigger" :props="io_props" />
+
   <div class="flex flex-col gap-2">
     <div class="flex flex-row justify-between items-center">
       <span class="font-bold text-xl">{{ $t('device.title') }}</span>
@@ -7,13 +7,9 @@
     </div>
     <span class="text-base-content" v-if="loading">{{ $t('device.loading') }}...</span>
     <div class="v-else">
-      {{ device }}
-
       <NameInput :title="device?.name!" :save="update_data"  />
-      <div>
-        <button @click="io_trigger?.showModal">Nuevo elemento</button>
-        <IoCard/>
-      </div>
+
+      <PinSection :pins="(device?.pins as Pins[])" v-if="device && device?.pins" />
     </div>
   </div>
 </template>
@@ -21,15 +17,13 @@
 <script setup lang="ts">
 import { api_client } from '@/utils/axios.ts'
 import { useRoute, useRouter } from 'vue-router'
-import { onMounted, reactive, ref } from 'vue'
+import { inject, onMounted, provide, ref } from 'vue'
 import { useConfigStore } from '@/stores/config.store.ts'
 import UiLoading from '@/components/ui/UiLoading.vue'
-import type { DeviceInterface } from '@/interfaces'
+import type { DeviceInterface, Pins } from '@/interfaces'
 import NameInput from '@/components/project/device/NameInput.vue'
 import { useDeviceComposable } from '@/composables/device.composable.ts'
-import IoCard from '@/components/project/device/IoCard.vue'
-import ModalConnectDevice from '@/components/project/home/ModalConnectDevice.vue'
-import IoForm from '@/components/project/device/IoForm.vue'
+import PinSection from '@/components/project/device/PinSection.vue'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
@@ -38,18 +32,17 @@ const route = useRoute()
 const router = useRouter()
 
 const useDevice = useDeviceComposable()
-const { device, set_device, update_data } = useDevice
+const { device, set_device, update_data, add_pin, used_pins, available_pins } = useDevice
 
-// IO
-const io_trigger = ref<HTMLDialogElement>()
-const io_props = reactive({
-  is_new: true,
-})
+provide('add_pin', add_pin)
+provide('used_pins', used_pins)
+provide('available_pins', available_pins)
 
 onMounted(async () => {
   await api_client
     .get<DeviceInterface>(`/devices/${route.params.uuid}`)
     .then((response) => {
+      console.log("sadfasdsad")
       set_device(response.data)
     })
     .catch(() => {
@@ -62,5 +55,7 @@ onMounted(async () => {
     .finally(() => {
       loading.value = false
     })
-})
+  })
+
+
 </script>

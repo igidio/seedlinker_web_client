@@ -47,7 +47,6 @@ const edit = ref(false)
 const new_name = ref(props.title)
 
 const submit = () => {
-  // Save the new name
   edit.value = false
   props.save({
     name: new_name.value,

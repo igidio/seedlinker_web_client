@@ -1,7 +1,7 @@
 import type { IoValuesInterface, PinValuesInterface } from '@/interfaces'
 
-export const pin_values: Record<'esp32' | 'esp8266', PinValuesInterface[]> = {
-  esp32: [
+export const pin_values: Record<'ESP8266' | 'ESP32', PinValuesInterface[]> = {
+  'ESP32': [
     { value: 4, label: 'D4 - GPIO4' },
     { value: 5, label: 'D5 - GPIO5' },
     { value: 12, label: 'D12 - GPIO12' },
@@ -21,7 +21,7 @@ export const pin_values: Record<'esp32' | 'esp8266', PinValuesInterface[]> = {
     { value: 32, label: 'D32 - GPIO32' },
     { value: 32, label: 'D33 - GPIO33' },
   ],
-  esp8266: [
+  'ESP8266': [
     { value: 16, label: 'DO - GPIO16' },
     { value: 5, label: 'D1 - GPIO5' },
     { value: 4, label: 'D2 - GPIO4' },
@@ -33,12 +33,11 @@ export const pin_values: Record<'esp32' | 'esp8266', PinValuesInterface[]> = {
 
 export const io_values: IoValuesInterface[] = [
   {
-    value: 'Temperature and humidity sensor',
-    label: 'device.modal.io.name.temperature_and_humidity_sensor',
+    value: 'device.io.values.temperature_and_humidity_sensor',
     type: 'input',
   },
-  { value: 'Water sensor', label: 'device.modal.io.name.water_sensor', type: 'input' },
-  { value: 'Heater', label: 'device.modal.io.name.heater', type: 'output' },
-  { value: 'Air conditioner', label: 'device.modal.io.name.air_conditioner', type: 'output' },
-  { value: 'Water pump', label: 'device.modal.io.name.air_conditioner', type: 'output' },
+  { value: 'device.io.values.water_sensor', type: 'input' },
+  { value: 'device.io.values.heater', type: 'output' },
+  { value: 'device.io.values.air_conditioner', type: 'output' },
+  { value: 'device.io.values.air_conditioner', type: 'output' },
 ]

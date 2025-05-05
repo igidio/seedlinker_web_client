@@ -7,7 +7,6 @@ export const io_form_schema = z.object({
   }).nullable().refine((val) => val !== null, { message: 'Pin is required' }),
   io_selected: z.object({
     value: z.string(),
-    label: z.string(),
     type: z.enum(['input', 'output']),
   }).nullable().refine((val) => val !== null, { message: 'IO type is required' }),
 })
