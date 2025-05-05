@@ -10,7 +10,7 @@ export const useConfigStore = defineStore('config', () => {
   const is_authenticated = ref(false)
   const selected_theme = ref<string|null>('light')
 
-  if (!!get_cookie('token')) {
+  if (!!get_cookie('access_token')) {
     is_authenticated.value = true
   }
 
@@ -49,7 +49,8 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   const logout = () => {
-    remove_cookie('token')
+    remove_cookie('access_token')
+    remove_cookie('refresh_token')
     window.location.replace('/')
   }
 
