@@ -24,6 +24,12 @@ export const translations = {
         title: 'Conditions',
         by_sensor: 'By sensor',
         by_time: 'By time',
+        error: {
+          number_comparison: 'Minimum value must be less than or equal to maximum value',
+          input_device_required: 'The sensor or input device is required',
+          output_device_required: 'The actuator or output device is required',
+          at_least_one_value_required: 'At least one value is required',
+        }
       },
       io: {
         values: {
@@ -188,6 +194,12 @@ export const translations = {
         title: 'Condiciones',
         by_sensor: 'Por sensor',
         by_time: 'Por tiempo',
+        error: {
+          input_device_required: 'El sensor o dispositivo de entrada es obligatorio',
+          output_device_required: 'El actuador o dispositivo de salida es obligatorio',
+          number_comparison: 'El valor mínimo debe ser menor o igual al valor máximo',
+          at_least_one_value_required: 'Se requiere al menos un valor',
+        }
       },
       io: {
         values: {
