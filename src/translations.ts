@@ -17,27 +17,39 @@ export const translations = {
       off: 'Off',
       mode: 'Mode',
       sensors_and_actuators: 'Sensors and actuators',
-      io: 'Connected I/O',
+      io_label: 'Connected I/O',
       conditions: 'Conditions',
       loading: 'Device information is loading',
       title: 'Your device',
+      io: {
+        values: {
+          temperature_and_humidity_sensor: 'Temperature and humidity sensor',
+          water_sensor: 'Water sensor',
+          heater: 'Heater',
+          air_conditioner: 'Air conditioner',
+          water_pump: 'Water pump',
+        }
+      },
+      pin: {
+        title: 'Connected I/O',
+        button: 'New component (I/O)',
+        status: {
+          active: 'Active',
+          inactive: 'Inactive',
+        }
+      },
       modal: {
         io: {
+          submit: 'Component (I/O) added successfully',
           title: {
             create: 'Add new component (I/O)',
             edit: 'Edit component (I/O)',
-          },
-          name: {
-            temperature_and_humidity_sensor: 'Temperature and humidity sensor',
-            water_sensor: 'Water sensor',
-            heater: 'Heater',
-            air_conditioner: 'Air conditioner',
-            water_pump: 'Water pump',
           },
           fields: {
             pin: {
               legend: 'Device pin',
               placeholder: 'Select a device pin',
+              unavailable_pins: 'No more pins available',
             },
             io_type: {
               legend: 'Sensor or actuator',
@@ -165,27 +177,39 @@ export const translations = {
       off: 'Apagado',
       mode: 'Modo',
       sensors_and_actuators: 'Sensores y actuadores',
-      io: 'I/O conectados',
+      io_label: 'I/O conectados',
       conditions: 'Condiciones',
       loading: 'La información del dispositivo se está cargando',
       title: 'Tu dispositivo',
+      io: {
+        values: {
+          temperature_and_humidity_sensor: 'Sensor de temperatura y humedad',
+          water_sensor: 'Sensor de agua',
+          heater: 'Calentador',
+          air_conditioner: 'Acondicionador de aire',
+          water_pump: 'Bomba de agua',
+        }
+      },
+      pin: {
+        title: 'I/O conectados',
+        button: 'Nuevo componente (I/O)',
+        status: {
+          active: 'Activo',
+          inactive: 'Inactivo',
+        }
+      },
       modal: {
         io: {
+          submit: 'Componente (I/O) agregado correctamente',
           title: {
             create: 'Agregar nuevo componente (I/O)',
             edit: 'Modificar componente (I/O)'
-          },
-          name: {
-            temperature_and_humidity_sensor: 'Sensor de temperatura y humedad',
-            water_sensor: 'Sensor de agua',
-            heater: 'Calentador',
-            air_conditioner: 'Acondicionador de aire',
-            water_pump: 'Bomba de agua',
           },
           fields: {
             pin: {
               legend: 'Pin del dispositivo',
               placeholder: 'Seleccione un pin del dispositivo',
+              unavailable_pins: 'Ya no quedan más pines disponibles',
             },
             io_type: {
               legend: 'Sensor o actuador',

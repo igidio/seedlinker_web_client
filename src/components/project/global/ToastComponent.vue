@@ -3,10 +3,14 @@
     <div class="toast toast-center transition-all" v-if="toasts.length > 0">
       <TransitionGroup name="toast">
         <div class="alert transition-all" v-for="(toast, index) in toasts" :key="index"
-          :class="[ 'alert-'+toast.type, {
+          :class="[{
             'alert-soft': toast.soft,
             'alert-outline': toast.outline,
             'alert-dash': toast.dash,
+            'alert-success': toast.type === 'success',
+            'alert-error': toast.type === 'error',
+            'alert-warning': toast.type === 'warning',
+            'alert-info': toast.type === 'info',
           }]"
         >
           <Icon :icon="toast.icon" v-if="toast.icon"/>
