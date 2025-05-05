@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { api_client } from '@/utils/axios.ts'
 import { useRoute, useRouter } from 'vue-router'
-import { inject, onMounted, provide, ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 import { useConfigStore } from '@/stores/config.store.ts'
 import UiLoading from '@/components/ui/UiLoading.vue'
 import type { DeviceInterface, Pins } from '@/interfaces'
@@ -32,9 +32,11 @@ const route = useRoute()
 const router = useRouter()
 
 const useDevice = useDeviceComposable()
-const { device, set_device, update_data, add_pin, used_pins, available_pins } = useDevice
+const { device, set_device, update_data, update_pin, add_pin, delete_pin, used_pins, available_pins } = useDevice
 
 provide('add_pin', add_pin)
+provide('update_pin', update_pin)
+provide('delete_pin', delete_pin)
 provide('used_pins', used_pins)
 provide('available_pins', available_pins)
 

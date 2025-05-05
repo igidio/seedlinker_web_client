@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="flex flex-row items-center gap-2" v-if="!edit">
-      <button class="btn btn-lg bg-base-300" @click="edit = true">
+      <button class="btn btn-lg bg-base-300" @click="set_edit">
         <Icon icon="ph:note-pencil-duotone" class="w-6 h-6" />
       </button>
       <span class="font-bold text-3xl">{{ title }}</span>
@@ -14,7 +14,7 @@
         v-model="new_name"
         :maxlength="50"
       />
-      <button class="btn btn-lg bg-base-300" @click="submit">
+      <button class="btn btn-lg bg-base-300" @click="submit" :disabled="is_loading">
         <Icon icon="ph:floppy-disk-back-duotone" class="w-6 h-6" />
       </button>
       <button
@@ -42,18 +42,27 @@ const props = defineProps<{
   title: string
   save: (data: Partial<DeviceInterface>) => void
 }>()
+const is_loading = ref(false)
 
 const edit = ref(false)
-const new_name = ref(props.title)
+const new_name = ref('')
 
-const submit = () => {
+const set_edit = () => {
+  edit.value = true
+  console.log(props.title)
+  new_name.value = props.title
+}
+
+const submit = async () => {
+  is_loading.value = true
   edit.value = false
   props.save({
     name: new_name.value,
   })
-  deviceComposable.update_data({
+  await deviceComposable.update_data({
     name: new_name.value,
   })
+  is_loading.value = false
   //props.title = new_name.value
 }
 </script>

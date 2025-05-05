@@ -33,6 +33,44 @@ export const useDeviceComposable = () => {
       })
   }
 
+  const update_pin = async (pin: Partial<DeviceInterface['pins'][0]>, id: string) => {
+    await api_client
+      .patch(`/devices/${device.value?.uuid}/pin/${id}`, pin)
+      .then((response) => {
+        generate_toast({
+          type: 'success',
+          message: 'device.modal.io.submit',
+        })
+        const index = device.value?.pins.findIndex(p => p._id?.$oid === id)
+        if (index !== undefined && index !== -1) {
+          device.value!.pins[index] = response.data
+        }
+      })
+      .catch((e: AxiosError) => {
+        throw e
+        //error_message.value = (e.response?.data as { detail?: string })?.detail || null
+      })
+  }
+
+  const delete_pin = async (id: string) => {
+    await api_client
+      .delete(`/devices/${device.value?.uuid}/pin/${id}`)
+      .then(() => {
+        generate_toast({
+          type: 'success',
+          message: 'device.modal.io.submit',
+        })
+        const index = device.value?.pins.findIndex(p => p._id?.$oid === id)
+        if (index !== undefined && index !== -1) {
+          device.value!.pins.splice(index, 1)
+        }
+      })
+      .catch((e: AxiosError) => {
+        throw e
+        //error_message.value = (e.response?.data as { detail?: string })?.detail || null
+      })
+  }
+
   const update_data = async (new_data: Partial<DeviceInterface>) => {
     if (!device.value) return
     await api_client
@@ -64,7 +102,9 @@ export const useDeviceComposable = () => {
     device,
     set_device,
     update_data,
+    update_pin,
     add_pin,
+    delete_pin,
     used_pins,
     available_pins
   }
