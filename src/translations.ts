@@ -21,6 +21,35 @@ export const translations = {
       conditions: 'Conditions',
       loading: 'Device information is loading',
       title: 'Your device',
+      modal: {
+        io: {
+          title: {
+            create: 'Add new component (I/O)',
+            edit: 'Edit component (I/O)',
+          },
+          name: {
+            temperature_and_humidity_sensor: 'Temperature and humidity sensor',
+            water_sensor: 'Water sensor',
+            heater: 'Heater',
+            air_conditioner: 'Air conditioner',
+            water_pump: 'Water pump',
+          },
+          fields: {
+            pin: {
+              legend: 'Device pin',
+              placeholder: 'Select a device pin',
+            },
+            io_type: {
+              legend: 'Sensor or actuator',
+              placeholder: 'Select a sensor or actuator',
+              type: {
+                sensor: 'Sensor',
+                actuator: 'Actuator',
+              }
+            },
+          }
+        },
+      },
       fields: {
         name: {
           placeholder: 'Device name',
@@ -140,6 +169,36 @@ export const translations = {
       conditions: 'Condiciones',
       loading: 'La información del dispositivo se está cargando',
       title: 'Tu dispositivo',
+      modal: {
+        io: {
+          title: {
+            create: 'Agregar nuevo componente (I/O)',
+            edit: 'Modificar componente (I/O)'
+          },
+          name: {
+            temperature_and_humidity_sensor: 'Sensor de temperatura y humedad',
+            water_sensor: 'Sensor de agua',
+            heater: 'Calentador',
+            air_conditioner: 'Acondicionador de aire',
+            water_pump: 'Bomba de agua',
+          },
+          fields: {
+            pin: {
+              legend: 'Pin del dispositivo',
+              placeholder: 'Seleccione un pin del dispositivo',
+            },
+            io_type: {
+              legend: 'Sensor o actuador',
+              placeholder: 'Seleccione un sensor o actuador',
+              type: {
+                sensor: 'Sensor',
+                actuator: 'Actuador',
+              }
+            }
+          }
+
+        }
+      },
       fields: {
         name: {
           placeholder: 'Nombre del dispositivo',

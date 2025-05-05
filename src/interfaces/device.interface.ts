@@ -4,9 +4,18 @@ export interface DeviceInterface {
   user_uuid:  string;
   name:       string;
   type:       string;
-  pins:       any[];
+  pins:       Pins[];
   status:     boolean;
   conditions: Conditions;
+}
+
+export interface Pins {
+  pin: number
+  type: 'input' | 'output'
+  gpio: string
+  name: string
+  value?: number
+  status: boolean
 }
 
 export interface ID {
@@ -16,4 +25,14 @@ export interface ID {
 export interface Conditions {
   by_time:  any[];
   by_event: any[];
+}
+
+export interface IoValuesInterface {
+  value: string;
+  label: string;
+  type: 'input' | 'output';
+}
+export interface PinValuesInterface {
+  value: number;
+  label: string;
 }

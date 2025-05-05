@@ -4,16 +4,10 @@
       <h3 class="text-lg font-bold mb-4" v-if="title">{{ title }}</h3>
       <slot name="default" />
       <div class="modal-action">
-        <slot name="footer">
-          <form method="dialog" class="modal-backdrop">
-            <button>{{ $t('close') }}</button>
-          </form>
-        </slot>
+        <slot name="footer" />
       </div>
     </div>
-    <form method="dialog" class="modal-backdrop">
-      <button />
-    </form>
+    <form method="dialog" class="modal-backdrop"></form>
   </dialog>
 </template>
 

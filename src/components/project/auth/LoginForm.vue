@@ -92,7 +92,8 @@ const submit = async () => {
     .then((response) => {
       console.log('Login successful')
       console.log(response)
-      set_cookie('token', response.data)
+      set_cookie('access_token', response.data["access_token"])
+      set_cookie('refresh_token', response.data["refresh_token"])
       window.location.href = '/'
     })
     .catch((e: AxiosError) => {
