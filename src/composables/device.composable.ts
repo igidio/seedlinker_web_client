@@ -14,7 +14,7 @@ export const useDeviceComposable = () => {
 
   const set_device = (new_device: DeviceInterface) => {
     device.value = new_device
-    pin_values_by_device.value = pin_values[device.value.type as 'ESP8266'|'ESP32']
+    pin_values_by_device.value = pin_values[device.value.type as 'ESP8266' | 'ESP32']
   }
 
   const add_pin = async (pin: Partial<DeviceInterface['pins'][0]>) => {
@@ -41,7 +41,7 @@ export const useDeviceComposable = () => {
           type: 'success',
           message: 'device.modal.io.submit',
         })
-        const index = device.value?.pins.findIndex(p => p._id?.$oid === id)
+        const index = device.value?.pins.findIndex((p) => p._id?.$oid === id)
         if (index !== undefined && index !== -1) {
           device.value!.pins[index] = response.data
         }
@@ -60,7 +60,7 @@ export const useDeviceComposable = () => {
           type: 'success',
           message: 'device.modal.io.submit',
         })
-        const index = device.value?.pins.findIndex(p => p._id?.$oid === id)
+        const index = device.value?.pins.findIndex((p) => p._id?.$oid === id)
         if (index !== undefined && index !== -1) {
           device.value!.pins.splice(index, 1)
         }
@@ -89,13 +89,26 @@ export const useDeviceComposable = () => {
 
   const used_pins = computed(() => {
     if (!device.value) return []
-    return [...new Set(device.value?.pins.map(pin => pin.pin))]
+    return [...new Set(device.value?.pins.map((pin) => pin.pin))]
   })
 
   const available_pins = computed(() => {
     return pin_values_by_device.value.filter((pin) => {
       return !used_pins.value.includes(pin.value)
     })
+  })
+
+  const device_pins_by_type = computed(() => {
+    const input_devices = device.value?.pins.filter((pin) => {
+      return pin.type === 'input'
+    })
+    const output_devices = device.value?.pins.filter((pin) => {
+      return pin.type === 'output'
+    })
+    return {
+      input: input_devices,
+      output: output_devices,
+    }
   })
 
   return {
@@ -106,6 +119,7 @@ export const useDeviceComposable = () => {
     add_pin,
     delete_pin,
     used_pins,
-    available_pins
+    available_pins,
+    device_pins_by_type,
   }
 }

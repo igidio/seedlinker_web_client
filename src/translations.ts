@@ -18,9 +18,13 @@ export const translations = {
       mode: 'Mode',
       sensors_and_actuators: 'Sensors and actuators',
       io_label: 'Connected I/O',
-      conditions: 'Conditions',
       loading: 'Device information is loading',
       title: 'Your device',
+      conditions: {
+        title: 'Conditions',
+        by_sensor: 'By sensor',
+        by_time: 'By time',
+      },
       io: {
         values: {
           temperature_and_humidity_sensor: 'Temperature and humidity sensor',
@@ -178,9 +182,13 @@ export const translations = {
       mode: 'Modo',
       sensors_and_actuators: 'Sensores y actuadores',
       io_label: 'I/O conectados',
-      conditions: 'Condiciones',
       loading: 'La información del dispositivo se está cargando',
       title: 'Tu dispositivo',
+      conditions: {
+        title: 'Condiciones',
+        by_sensor: 'Por sensor',
+        by_time: 'Por tiempo',
+      },
       io: {
         values: {
           temperature_and_humidity_sensor: 'Sensor de temperatura y humedad',

@@ -10,6 +10,7 @@
       <NameInput :title="device?.name!" :save="update_data"  />
 
       <PinSection :pins="(device?.pins as Pins[])" v-if="device && device?.pins" />
+      <SensorCondition/>
     </div>
   </div>
 </template>
@@ -24,6 +25,7 @@ import type { DeviceInterface, Pins } from '@/interfaces'
 import NameInput from '@/components/project/device/NameInput.vue'
 import { useDeviceComposable } from '@/composables/device.composable.ts'
 import PinSection from '@/components/project/device/PinSection.vue'
+import SensorCondition from '@/components/project/device/SensorCondition.vue'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
@@ -32,13 +34,14 @@ const route = useRoute()
 const router = useRouter()
 
 const useDevice = useDeviceComposable()
-const { device, set_device, update_data, update_pin, add_pin, delete_pin, used_pins, available_pins } = useDevice
+const { device, set_device, update_data, update_pin, add_pin, delete_pin, used_pins, available_pins, device_pins_by_type } = useDevice
 
 provide('add_pin', add_pin)
 provide('update_pin', update_pin)
 provide('delete_pin', delete_pin)
 provide('used_pins', used_pins)
 provide('available_pins', available_pins)
+provide('device_pins_by_type', device_pins_by_type)
 
 onMounted(async () => {
   await api_client
