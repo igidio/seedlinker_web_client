@@ -11,6 +11,7 @@
 
       <PinSection :pins="(device?.pins as Pins[])" v-if="device && device?.pins" />
       <SensorCondition/>
+      <TimeCondition/>
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@ import NameInput from '@/components/project/device/NameInput.vue'
 import { useDeviceComposable } from '@/composables/device.composable.ts'
 import PinSection from '@/components/project/device/PinSection.vue'
 import SensorCondition from '@/components/project/device/SensorCondition.vue'
+import TimeCondition from '@/components/project/device/TimeCondition.vue'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
