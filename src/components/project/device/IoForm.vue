@@ -23,7 +23,6 @@
         </p>
       </fieldset>
 
-      {{ io_selected}}
       <fieldset class="fieldset">
         <legend class="fieldset-legend">{{ $t('device.modal.io.fields.io_type.legend') }}</legend>
         <select class="select w-full" v-model="io_selected">

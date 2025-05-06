@@ -1,5 +1,7 @@
 <template>
-  <ConditionForm title="Condición" v-model="condition_trigger" />
+  <ConditionForm title="Condición" v-model="condition_trigger" :data="{
+    is_new: true
+  }" />
   <div class="flex flex-col gap-2">
     <span class="font-bold text-lg">{{ $t('device.conditions.title') }}</span>
     <button class="btn btn-primary" @click="open_condition_by_sensor">Crear</button>

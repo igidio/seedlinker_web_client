@@ -10,7 +10,7 @@
             {{ $t('device.modal.io.fields.pin.placeholder') }}
           </option>
           <option :value="pin" v-for="pin in device_pins_by_type?.input" :key="pin._id?.$oid">
-            {{ $t(pin.name) }}
+            {{ $t(pin.name) }} ({{ pin.gpio }})
           </option>
         </select>
         <p
@@ -41,7 +41,7 @@
             {{ $t('device.modal.io.fields.pin.placeholder') }}
           </option>
           <option :value="pin.pin" v-for="pin in device_pins_by_type?.output" :key="pin._id?.$oid">
-            {{ $t(pin.name) }}
+            {{ $t(pin.name) }} ({{ pin.gpio }})
           </option>
         </select>
         <p
@@ -73,10 +73,14 @@ import UiModal from '@/components/ui/UiModal.vue'
 import type { Pins } from '@/interfaces'
 import { computed, inject, reactive, ref } from 'vue'
 import { condition_sensor_schema } from '@/schemas'
-import { io_values } from '../../../data/device.data.ts'
+import { io_values } from '@/data/device.data.ts'
 
 interface Props {
-  is_new: boolean
+  selected_input?: Pins | null
+  selected_output?: Pins | null
+  min_value?: number | string | null
+  max_value?: number| string | null
+  is_new?: boolean
 }
 
 const props = withDefaults(
@@ -87,6 +91,10 @@ const props = withDefaults(
   {
     data: () => ({
       is_new: true,
+      selected_input: null,
+      selected_output: null,
+      min_value: null,
+      max_value: null,
     }),
   },
 )
@@ -105,6 +113,11 @@ const submit = () => {}
 
 const on_close = () => {
   trigger.value?.close()
+  form.selected_input = null
+  form.selected_output = null
+  form.min_value = null
+  form.max_value = null
+  error_message.value = null
 }
 
 const validate_form = () => {
