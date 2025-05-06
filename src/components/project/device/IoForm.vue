@@ -23,14 +23,15 @@
         </p>
       </fieldset>
 
+      {{ io_selected}}
       <fieldset class="fieldset">
         <legend class="fieldset-legend">{{ $t('device.modal.io.fields.io_type.legend') }}</legend>
         <select class="select w-full" v-model="io_selected">
           <option disabled selected :value="null">
             {{ $t('device.modal.io.fields.io_type.placeholder') }}
           </option>
-          <option :value="io" v-for="(io, index) in io_values" :key="index">
-            {{ $t(io.value) }}
+          <option :value="io" v-for="(io, index) in io_values.map(({ mode, ...rest }) => rest )" :key="index">
+            {{ $t(io.label) }}
           </option>
         </select>
         <p class="label" v-if="io_selected && io_selected.type">
@@ -111,7 +112,8 @@ const submit = async () => {
     pin: pin_selected.value.value,
     gpio: pin_selected.value.label,
     type: io_selected.value.type,
-    name: io_selected.value.value,
+    name: io_selected.value.label,
+    value: io_selected.value.value,
     status: true,
   }
   try {

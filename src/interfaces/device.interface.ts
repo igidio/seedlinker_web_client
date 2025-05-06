@@ -15,7 +15,7 @@ export interface Pins {
   type: 'input' | 'output'
   gpio: string
   name: string
-  value?: number
+  value: number
   status: boolean
 }
 

@@ -3,13 +3,13 @@
     <UiModal v-model="trigger" :title="title" @close="on_close">
       <fieldset class="fieldset">
         <legend class="fieldset-legend">
-          Sensor / Dispositivo de entrada<span class="text-red-500">*</span>
+          {{ $t('device.modal.condition.fields.input.label') }}<span class="text-red-500">*</span>
         </legend>
         <select class="select w-full" v-model="form.selected_input" @change="validate_form">
           <option disabled :value="null" :selected="data.is_new">
             {{ $t('device.modal.io.fields.pin.placeholder') }}
           </option>
-          <option :value="pin.pin" v-for="pin in device_pins_by_type?.input" :key="pin._id?.$oid">
+          <option :value="pin" v-for="pin in device_pins_by_type?.input" :key="pin._id?.$oid">
             {{ $t(pin.name) }}
           </option>
         </select>
@@ -17,15 +17,26 @@
           class="label text-wrap"
           v-if="device_pins_by_type.input && device_pins_by_type?.input.length <= 0"
         >
-          No hay ningún sensor registrado, debes registrar uno para continuar.
+          {{ $t('device.modal.condition.fields.input.empty') }}
         </p>
       </fieldset>
 
+      <fieldset class="fieldset" v-if="mode_options && mode_options.length > 0">
+        <legend class="fieldset-legend">{{ $t('device.modal.condition.fields.mode') }}<span class="text-red-500">*</span></legend>
+        <select class="select w-full">
+          <option :value="option.value" :selected="data.is_new" v-for="option in mode_options" :key="option.value">{{ $t(option.type) }}</option>
+        </select>
+      </fieldset>
+
+
+
+
+
       <fieldset class="fieldset">
         <legend class="fieldset-legend">
-          Actuador / Dispositivo de salida<span class="text-red-500">*</span>
+          {{ $t('device.modal.condition.fields.output.label') }}<span class="text-red-500">*</span>
         </legend>
-        <select class="select w-full" v-model="form.selected_output"  @change="validate_form">
+        <select class="select w-full" v-model="form.selected_output" @change="validate_form">
           <option disabled :value="null" :selected="data.is_new">
             {{ $t('device.modal.io.fields.pin.placeholder') }}
           </option>
@@ -37,33 +48,32 @@
           class="label text-wrap"
           v-if="device_pins_by_type.output && device_pins_by_type?.output.length <= 0"
         >
-          No hay ningún actuador registrado, debes registrar uno para continuar.
+          {{ $t('device.modal.condition.fields.output.empty') }}
         </p>
       </fieldset>
 
       <div class="flex flex-row gap-2">
         <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend">Valor mínimo</legend>
+          <legend class="fieldset-legend">{{ $t('device.modal.condition.fields.min_value') }}</legend>
           <input class="input" v-model="form.min_value" type="number" @input="validate_form" />
         </fieldset>
 
         <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend">Valor máximo</legend>
+          <legend class="fieldset-legend">{{ $t('device.modal.condition.fields.max_value') }}</legend>
           <input class="input" v-model="form.max_value" type="number" @input="validate_form" />
         </fieldset>
       </div>
 
       <p v-if="error_message" class="text-error text-xs">{{ $t(error_message) }}</p>
     </UiModal>
-
-    {{ device_pins_by_type }}
   </form>
 </template>
 <script setup lang="ts">
 import UiModal from '@/components/ui/UiModal.vue'
 import type { Pins } from '@/interfaces'
-import { inject, reactive, ref } from 'vue'
+import { computed, inject, reactive, ref } from 'vue'
 import { condition_sensor_schema } from '@/schemas'
+import { io_values } from '../../../data/device.data.ts'
 
 interface Props {
   is_new: boolean
@@ -111,4 +121,9 @@ const validate_form = () => {
     error_message.value = null
   }
 }
+
+const mode_options = computed(() => {
+  if (!form.selected_input) return []
+  return io_values.filter((io) => form.selected_input?.value == io.value )[0].mode
+})
 </script>

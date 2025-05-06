@@ -3,8 +3,9 @@ import { z } from 'zod'
 export const condition_sensor_schema = z
   .object({
     selected_input: z
-      .number()
-      .nullable()
+      .object({
+        value: z.number(),
+      })
       .refine((val) => val !== null, { message: 'device.conditions.error.input_device_required' }),
     selected_output: z
       .number()
@@ -45,7 +46,7 @@ export const io_form_schema = z.object({
     .refine((val) => val !== null, { message: 'Pin is required' }),
   io_selected: z
     .object({
-      value: z.string(),
+      value: z.number(),
       type: z.enum(['input', 'output']),
     })
     .nullable()

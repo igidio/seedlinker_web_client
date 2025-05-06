@@ -29,7 +29,7 @@ export const translations = {
           input_device_required: 'The sensor or input device is required',
           output_device_required: 'The actuator or output device is required',
           at_least_one_value_required: 'At least one value is required',
-        }
+        },
       },
       io: {
         values: {
@@ -38,7 +38,14 @@ export const translations = {
           heater: 'Heater',
           air_conditioner: 'Air conditioner',
           water_pump: 'Water pump',
-        }
+        },
+        modes: {
+          analog: 'Analog',
+          digital: 'Digital',
+          humidity: 'Humidity',
+          temperature_celsius: 'Temperature (Celsius)',
+          temperature_fahrenheit: 'Temperature (Fahrenheit)',
+        },
       },
       pin: {
         title: 'Connected I/O',
@@ -46,7 +53,7 @@ export const translations = {
         status: {
           active: 'Active',
           inactive: 'Inactive',
-        }
+        },
       },
       modal: {
         io: {
@@ -67,9 +74,34 @@ export const translations = {
               type: {
                 sensor: 'Sensor',
                 actuator: 'Actuator',
-              }
+              },
             },
-          }
+          },
+        },
+        condition: {
+          title: {
+            sensor: {
+              create: 'Add condition by sensor',
+              update: 'Edit condition by sensor',
+            },
+            time: {
+              create: 'Add condition by time',
+              update: 'Edit condition by time',
+            },
+          },
+          fields: {
+            input: {
+              label: 'Sensor or input device',
+              empty: 'No sensor registered, you must register one to continue.',
+            },
+            mode: 'Sensor mode',
+            output: {
+              label: 'Actuator or output device',
+              empty: 'No actuator registered, you must register one to continue.',
+            },
+            min_value: 'Minimum value',
+            max_value: 'Maximum value',
+          },
         },
       },
       fields: {
@@ -199,7 +231,7 @@ export const translations = {
           output_device_required: 'El actuador o dispositivo de salida es obligatorio',
           number_comparison: 'El valor mínimo debe ser menor o igual al valor máximo',
           at_least_one_value_required: 'Se requiere al menos un valor',
-        }
+        },
       },
       io: {
         values: {
@@ -208,7 +240,14 @@ export const translations = {
           heater: 'Calentador',
           air_conditioner: 'Acondicionador de aire',
           water_pump: 'Bomba de agua',
-        }
+        },
+        modes: {
+          analog: 'Analógico',
+          digital: 'Digital',
+          humidity: 'Humedad',
+          temperature_celsius: 'Temperatura (Celsius)',
+          temperature_fahrenheit: 'Temperatura (Fahrenheit)',
+        },
       },
       pin: {
         title: 'I/O conectados',
@@ -216,14 +255,14 @@ export const translations = {
         status: {
           active: 'Activo',
           inactive: 'Inactivo',
-        }
+        },
       },
       modal: {
         io: {
           submit: 'Componente (I/O) agregado correctamente',
           title: {
             create: 'Agregar nuevo componente (I/O)',
-            edit: 'Modificar componente (I/O)'
+            edit: 'Modificar componente (I/O)',
           },
           fields: {
             pin: {
@@ -237,20 +276,44 @@ export const translations = {
               type: {
                 sensor: 'Sensor',
                 actuator: 'Actuador',
-              }
-            }
-          }
-
-        }
+              },
+            },
+          },
+        },
+        condition: {
+          title: {
+            sensor: {
+              create: 'Agregar condición por sensor',
+              update: 'Modificar condición por sensor',
+            },
+            time: {
+              create: 'Agregar condición por tiempo',
+              update: 'Modificar condición por tiempo',
+            },
+          },
+          fields: {
+            input: {
+              label: 'Sensor o dispositivo de entrada',
+              empty: 'No hay ningún sensor registrado, debes registrar uno para continuar.'
+            },
+            mode: 'Modo del sensor',
+            output: {
+              label: 'Actuador o dispositivo de salida',
+              empty: 'No hay ningún actuador registrado, debes registrar uno para continuar.'
+            },
+            min_value: 'Valor mínimo',
+            max_value: 'Valor máximo',
+          },
+        },
       },
       fields: {
         name: {
           placeholder: 'Nombre del dispositivo',
-        }
+        },
       },
       alert: {
-        edit: "Dispositivo modificado correctamente",
-      }
+        edit: 'Dispositivo modificado correctamente',
+      },
     },
     home: {
       available_devices: 'Dispositivos disponibles',
@@ -279,7 +342,7 @@ export const translations = {
       },
       card_connected_client: {
         title: 'Clientes conectados',
-      }
+      },
     },
     login: {
       title: 'Iniciar sesión',

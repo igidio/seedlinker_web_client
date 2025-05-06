@@ -38,15 +38,15 @@ export const io_values: IoValuesInterface[] = [
     value: 1,
     mode: [
       {
-        type: 'humidity',
+        type: 'device.io.modes.humidity',
         value: 0,
       },
       {
-        type: 'temperature_celsius',
+        type: 'device.io.modes.temperature_celsius',
         value: 1,
       },
       {
-        type: 'temperature_fahrenheit',
+        type: 'device.io.modes.temperature_fahrenheit',
         value: 2,
       },
     ]
@@ -57,16 +57,16 @@ export const io_values: IoValuesInterface[] = [
     value: 2,
     mode: [
       {
-        type: 'digital',
+        type: 'device.io.modes.digital',
         value: 0,
       },
       {
-        type: 'analog',
+        type: 'device.io.modes.analog',
         value: 1,
       },
     ],
   },
   { label: 'device.io.values.heater', type: 'output', value: 3 },
   { label: 'device.io.values.air_conditioner', type: 'output', value: 4 },
-  { label: 'device.io.values.water_punp', type: 'output', value: 5 },
+  { label: 'device.io.values.water_pump', type: 'output', value: 5 },
 ]

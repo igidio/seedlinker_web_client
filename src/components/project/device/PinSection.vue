@@ -41,11 +41,14 @@ const create = () => {
 }
 
 const modify = (pin: Pins) => {
+  console.log(pin)
   send_props.id = pin._id!.$oid
   send_props.io_selected = {
-    value: pin.name,
+    label: pin.name,
     type: pin.type,
+    value: pin.value,
   }
+  console.log(send_props.io_selected)
   send_props.pin_selected = {
     value: pin.pin,
     label: pin.gpio,

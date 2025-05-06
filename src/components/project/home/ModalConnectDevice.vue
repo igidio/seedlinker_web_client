@@ -21,6 +21,7 @@
             />
             <p class="label">{{ $t('home.modal_connect_device.manual.field.label') }}</p>
           </fieldset>
+
         </div>
         <div class="flex flex-col w-full" v-else>
           <p>{{ $t('home.modal_connect_device.auto.description') }}</p>
