@@ -1,7 +1,7 @@
 import type { IoValuesInterface, PinValuesInterface } from '@/interfaces'
 
 export const pin_values: Record<'ESP8266' | 'ESP32', PinValuesInterface[]> = {
-  'ESP32': [
+  ESP32: [
     { value: 4, label: 'D4 - GPIO4' },
     { value: 5, label: 'D5 - GPIO5' },
     { value: 12, label: 'D12 - GPIO12' },
@@ -21,7 +21,7 @@ export const pin_values: Record<'ESP8266' | 'ESP32', PinValuesInterface[]> = {
     { value: 32, label: 'D32 - GPIO32' },
     { value: 32, label: 'D33 - GPIO33' },
   ],
-  'ESP8266': [
+  ESP8266: [
     { value: 16, label: 'DO - GPIO16' },
     { value: 5, label: 'D1 - GPIO5' },
     { value: 4, label: 'D2 - GPIO4' },
@@ -33,11 +33,40 @@ export const pin_values: Record<'ESP8266' | 'ESP32', PinValuesInterface[]> = {
 
 export const io_values: IoValuesInterface[] = [
   {
-    value: 'device.io.values.temperature_and_humidity_sensor',
+    label: 'device.io.values.temperature_and_humidity_sensor',
     type: 'input',
+    value: 1,
+    mode: [
+      {
+        type: 'humidity',
+        value: 0,
+      },
+      {
+        type: 'temperature_celsius',
+        value: 1,
+      },
+      {
+        type: 'temperature_fahrenheit',
+        value: 2,
+      },
+    ]
   },
-  { value: 'device.io.values.water_sensor', type: 'input' },
-  { value: 'device.io.values.heater', type: 'output' },
-  { value: 'device.io.values.air_conditioner', type: 'output' },
-  { value: 'device.io.values.air_conditioner', type: 'output' },
+  {
+    label: 'device.io.values.water_sensor',
+    type: 'input',
+    value: 2,
+    mode: [
+      {
+        type: 'digital',
+        value: 0,
+      },
+      {
+        type: 'analog',
+        value: 1,
+      },
+    ],
+  },
+  { label: 'device.io.values.heater', type: 'output', value: 3 },
+  { label: 'device.io.values.air_conditioner', type: 'output', value: 4 },
+  { label: 'device.io.values.water_punp', type: 'output', value: 5 },
 ]

@@ -28,9 +28,16 @@ export interface Conditions {
   by_event: any[]
 }
 
+export interface IoInputModesInterface {
+  type: string
+  value: number
+}
+
 export interface IoValuesInterface {
-  value: string
+  value: number
   type: 'input' | 'output'
+  label: string
+  mode?: IoInputModesInterface[]
 }
 
 export interface PinValuesInterface {
