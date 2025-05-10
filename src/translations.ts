@@ -94,7 +94,11 @@ export const translations = {
               label: 'Sensor or input device',
               empty: 'No sensor registered, you must register one to continue.',
             },
-            mode: 'Sensor mode',
+            mode: {
+              label: 'Sensor mode',
+              empty: 'No mode selected, please select one.',
+              placeholder: 'Select a mode',
+            },
             output: {
               label: 'Actuator or output device',
               empty: 'No actuator registered, you must register one to continue.',
@@ -140,6 +144,7 @@ export const translations = {
       },
       card_connected_client: {
         title: 'Connected clients',
+        subtitle: 'Connected devices as clients will be shown here',
       },
     },
     login: {
@@ -296,7 +301,11 @@ export const translations = {
               label: 'Sensor o dispositivo de entrada',
               empty: 'No hay ningún sensor registrado, debes registrar uno para continuar.'
             },
-            mode: 'Modo del sensor',
+            mode: {
+              label: 'Modo del sensor',
+              empty: 'No hay ningún modo seleccionado, por favor selecciona uno.',
+              placeholder: 'Selecciona un modo',
+            },
             output: {
               label: 'Actuador o dispositivo de salida',
               empty: 'No hay ningún actuador registrado, debes registrar uno para continuar.'
@@ -342,6 +351,7 @@ export const translations = {
       },
       card_connected_client: {
         title: 'Clientes conectados',
+        subtitle: 'Los dispositivos conectados como \'cliente\' se mostrarán aquí',
       },
     },
     login: {

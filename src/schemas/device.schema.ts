@@ -5,22 +5,19 @@ export const condition_sensor_schema = z
     selected_input: z
       .object({
         value: z.number(),
-      })
+      }, { message: 'device.conditions.error.input_device_required' })
       .refine((val) => val !== null, { message: 'device.conditions.error.input_device_required' }),
     selected_output: z
-      .number()
+      .number({ message: 'device.conditions.error.output_device_required' })
       .nullable()
       .refine((val) => val !== null, { message: 'device.conditions.error.output_device_required' }),
     min_value: z.number().nullable(),
     max_value: z.number().nullable(),
   })
-  .refine(
-    (data) => data.min_value !== null || data.max_value !== null,
-    {
-      message: 'device.conditions.error.at_least_one_value_required',
-      path: ['min_value', 'max_value'],
-    },
-  )
+  .refine((data) => data.min_value !== null || data.max_value !== null, {
+    message: 'device.conditions.error.at_least_one_value_required',
+    path: ['min_value', 'max_value'],
+  })
   .refine(
     (data) => {
       if (data.min_value !== null && data.max_value !== null) {

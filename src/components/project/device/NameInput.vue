@@ -14,7 +14,7 @@
         v-model="new_name"
         :maxlength="50"
       />
-      <button class="btn btn-lg bg-base-300" @click="submit" :disabled="is_loading">
+      <button class="btn btn-lg bg-base-300" @click="submit" :disabled="is_loading || new_name.length <= 0">
         <Icon icon="ph:floppy-disk-back-duotone" class="w-6 h-6" />
       </button>
       <button

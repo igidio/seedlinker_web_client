@@ -22,8 +22,11 @@
       </fieldset>
 
       <fieldset class="fieldset" v-if="mode_options && mode_options.length > 0">
-        <legend class="fieldset-legend">{{ $t('device.modal.condition.fields.mode') }}<span class="text-red-500">*</span></legend>
-        <select class="select w-full">
+        <legend class="fieldset-legend">{{ $t('device.modal.condition.fields.mode.label') }}<span class="text-red-500">*</span></legend>
+        <select class="select w-full" v-model="form.mode">
+          <option disabled :value="null" :selected="data.is_new">
+            {{ $t('device.modal.condition.fields.mode.placeholder') }}
+          </option>
           <option :value="option.value" :selected="data.is_new" v-for="option in mode_options" :key="option.value">{{ $t(option.type) }}</option>
         </select>
       </fieldset>
@@ -65,6 +68,12 @@
       </div>
 
       <p v-if="error_message" class="text-error text-xs">{{ $t(error_message) }}</p>
+
+
+      {{ form.selected_input?.value }}
+      {{ form.selected_input?.pin }}
+      {{ form.mode }}
+      {{ form.selected_output }}
     </UiModal>
   </form>
 </template>
@@ -80,6 +89,7 @@ interface Props {
   selected_output?: Pins | null
   min_value?: number | string | null
   max_value?: number| string | null
+  mode?: number | null
   is_new?: boolean
 }
 
@@ -93,6 +103,7 @@ const props = withDefaults(
       is_new: true,
       selected_input: null,
       selected_output: null,
+      mode: null,
       min_value: null,
       max_value: null,
     }),
@@ -107,6 +118,7 @@ const form = reactive({
   selected_output: null as Pins | null,
   min_value: null as number | null,
   max_value: null as number | null,
+  mode: null as number | null,
 })
 
 const submit = () => {}
