@@ -44,11 +44,11 @@
       <template #footer>
         <div class="flex flex-row justify-between w-full">
           <div>
-            <button class="btn btn-error btn-ghost" v-if="!props.is_new" type="button" @click="on_delete" :disabled="is_loading">Eliminar</button>
+            <button class="btn btn-error btn-soft" v-if="!props.is_new" type="button" @click="on_delete" :disabled="is_loading">{{ $t('delete') }}</button>
           </div>
           <div class="flex flex-row gap-2">
             <button class="btn btn-ghost" @click="on_close">{{ $t('close') }}</button>
-            <button class="btn btn-neutral" :disabled="is_disabled">{{ $t('save') }}</button>
+            <button class="btn btn-primary" :disabled="is_disabled">{{ $t('save') }}</button>
           </div>
         </div>
       </template>

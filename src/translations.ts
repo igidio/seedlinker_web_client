@@ -33,6 +33,7 @@ export const translations = {
         },
       },
       io: {
+        empty: 'No connected components (I/O) registered.',
         values: {
           temperature_and_humidity_sensor: 'Temperature and humidity sensor',
           water_sensor: 'Water sensor',
@@ -241,6 +242,7 @@ export const translations = {
         },
       },
       io: {
+        empty: 'No hay ningún componente (I/O) registrado.',
         values: {
           temperature_and_humidity_sensor: 'Sensor de temperatura y humedad',
           water_sensor: 'Sensor de agua',

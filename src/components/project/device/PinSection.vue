@@ -2,7 +2,7 @@
   <UiCard>
     <div class="flex flex-row justify-between">
       <h2 class="card-title">
-        <Icon icon="ph:cpu-bold"/>
+        <Icon icon="ph:cpu-bold" />
         {{ $t('device.pin.title') }}
       </h2>
 
@@ -17,8 +17,12 @@
     </div>
 
     <IoForm v-model="io_trigger" :props="send_props" />
+
     <div class="">
       <div class="flex flex-col gap-2">
+        <span class="label text-xs text-center inline-block" v-if="pins.length <= 0">{{
+            $t('device.io.empty')
+          }}</span>
         <span class="label text-xs text-center inline-block" v-if="available_pins.length <= 0">{{
           $t('device.modal.io.fields.pin.unavailable_pins')
         }}</span>
