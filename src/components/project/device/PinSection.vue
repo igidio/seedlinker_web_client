@@ -1,18 +1,34 @@
 <template>
-  <IoForm v-model="io_trigger" :props="send_props"/>
-  <div class="">
-    <div class="flex flex-col gap-2 w-96">
-      <span class="font-bold text-lg">{{ $t('device.pin.title') }}</span>
-      <button @click="create()" class="btn btn-primary btn-block" :disabled=" available_pins.length <= 0">
+  <UiCard>
+    <div class="flex flex-row justify-between">
+      <h2 class="card-title">
+        <Icon icon="ph:cpu-bold"/>
+        {{ $t('device.pin.title') }}
+      </h2>
+
+      <button
+        @click="create()"
+        class="btn btn-primary btn-xs items-center flex flex-row"
+        :disabled="available_pins.length <= 0"
+      >
+        <Icon icon="ph:plus-bold" />
         {{ $t('device.pin.button') }}
       </button>
-      <span class="label text-xs text-center inline-block" v-if="available_pins.length <= 0">{{ $t('device.modal.io.fields.pin.unavailable_pins') }}</span>
-      <IoCard />
-      <div class="flex-col-reverse flex gap-2">
-        <PinItem :pin="pin" v-for="pin in pins" :key="pin._id!.$oid" @click="modify(pin)" />
+    </div>
+
+    <IoForm v-model="io_trigger" :props="send_props" />
+    <div class="">
+      <div class="flex flex-col gap-2">
+        <span class="label text-xs text-center inline-block" v-if="available_pins.length <= 0">{{
+          $t('device.modal.io.fields.pin.unavailable_pins')
+        }}</span>
+        <IoCard />
+        <div class="flex-col-reverse flex gap-2">
+          <PinItem :pin="pin" v-for="pin in pins" :key="pin._id!.$oid" @click="modify(pin)" />
+        </div>
       </div>
     </div>
-  </div>
+  </UiCard>
 </template>
 <script setup lang="ts">
 import IoCard from '@/components/project/device/IoCard.vue'
@@ -20,6 +36,8 @@ import IoForm from '@/components/project/device/IoForm.vue'
 import { inject, reactive, ref } from 'vue'
 import type { IoValuesInterface, Pins, PinValuesInterface } from '@/interfaces'
 import PinItem from '@/components/project/device/PinItem.vue'
+import UiCard from '@/components/ui/UiCard.vue'
+import { Icon } from '@iconify/vue'
 // IO
 const io_trigger = ref<HTMLDialogElement>()
 

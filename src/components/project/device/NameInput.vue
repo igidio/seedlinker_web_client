@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="flex flex-row items-center gap-2" v-if="!edit">
-      <button class="btn btn-lg bg-base-300" @click="set_edit">
+      <button class="btn btn-lg bg-base-300 btn-ghost" @click="set_edit">
         <Icon icon="ph:note-pencil-duotone" class="w-6 h-6" />
       </button>
       <span class="font-bold text-3xl">{{ title }}</span>

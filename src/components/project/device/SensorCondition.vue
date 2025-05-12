@@ -3,10 +3,13 @@
     is_new: true
   }" />
   <div class="flex flex-col gap-2">
-    <span class="font-bold text-lg">{{ $t('device.conditions.title') }}</span>
-    <button class="btn btn-primary" @click="open_condition_by_sensor">Crear</button>
-    <span class="font-bold text-md">{{ $t('device.conditions.by_sensor') }}</span>
-    <span class="font-bold text-md">{{ $t('device.conditions.by_time') }}</span>
+    <div class="flex flex-row gap-2 justify-between items-center">
+      <span class="font-bold text-md">{{ $t('device.conditions.by_sensor') }}</span>
+      <button class="btn btn-primary btn-xs" @click="open_condition_by_sensor">{{ $t('add') }}</button>
+    </div>
+
+
+
   </div>
 </template>
 

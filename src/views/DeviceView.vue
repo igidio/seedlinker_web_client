@@ -1,17 +1,19 @@
 <template>
-
   <div class="flex flex-col gap-2">
     <div class="flex flex-row justify-between items-center">
       <span class="font-bold text-xl">{{ $t('device.title') }}</span>
       <UiLoading v-if="loading && !device" />
     </div>
     <span class="text-base-content" v-if="loading">{{ $t('device.loading') }}...</span>
-    <div class="v-else">
-      <NameInput :title="device?.name!" :save="update_data"  />
+    <div class="flex flex-col gap-4" v-else>
+      <NameInput :title="device?.name!" :save="update_data" />
 
-      <PinSection :pins="(device?.pins as Pins[])" v-if="device && device?.pins" />
-      <SensorCondition/>
-      <TimeCondition/>
+      <div class="flex flex-row gap-4">
+        <div class="w-1/2">
+        <PinSection :pins="device?.pins as Pins[]" v-if="device && device?.pins" />
+        </div>
+        <ConditionsBy/>
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +30,8 @@ import { useDeviceComposable } from '@/composables/device.composable.ts'
 import PinSection from '@/components/project/device/PinSection.vue'
 import SensorCondition from '@/components/project/device/SensorCondition.vue'
 import TimeCondition from '@/components/project/device/TimeCondition.vue'
+import UiCard from '@/components/ui/UiCard.vue'
+import ConditionsBy from '@/components/project/device/ConditionsBy.vue'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
@@ -36,7 +40,17 @@ const route = useRoute()
 const router = useRouter()
 
 const useDevice = useDeviceComposable()
-const { device, set_device, update_data, update_pin, add_pin, delete_pin, used_pins, available_pins, device_pins_by_type } = useDevice
+const {
+  device,
+  set_device,
+  update_data,
+  update_pin,
+  add_pin,
+  delete_pin,
+  used_pins,
+  available_pins,
+  device_pins_by_type,
+} = useDevice
 
 provide('add_pin', add_pin)
 provide('update_pin', update_pin)
@@ -49,7 +63,7 @@ onMounted(async () => {
   await api_client
     .get<DeviceInterface>(`/devices/${route.params.uuid}`)
     .then((response) => {
-      console.log("sadfasdsad")
+      console.log('sadfasdsad')
       set_device(response.data)
     })
     .catch(() => {
@@ -62,7 +76,5 @@ onMounted(async () => {
     .finally(() => {
       loading.value = false
     })
-  })
-
-
+})
 </script>
