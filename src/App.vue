@@ -1,7 +1,6 @@
 <template>
   <div :data-theme="selected_theme">
-    <ToastComponent/>
-
+    <ToastComponent />
     <LoginModal />
     <AppLayout>
       <RouterView />

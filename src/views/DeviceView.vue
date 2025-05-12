@@ -8,8 +8,8 @@
     <div class="flex flex-col gap-4" v-else>
       <NameInput :title="device?.name!" :save="update_data" />
 
-      <div class="flex flex-row gap-4">
-        <div class="w-1/2">
+      <div class="flex md:flex-row flex-col gap-4">
+        <div class="w-full md:w-1/2">
         <PinSection :pins="device?.pins as Pins[]" v-if="device && device?.pins" />
         </div>
         <ConditionsBy/>

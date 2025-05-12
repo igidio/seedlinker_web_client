@@ -24,7 +24,7 @@
           <input type="password" class="input w-full" autocomplete="new_password" v-model="form.confirm_password" @input="validate_inputs"/>
         </fieldset>
         <p class="text-error text-center" v-if="error_message">{{ $t(error_message) }}</p>
-        <button class="btn btn-lg btn-neutral block mt-2 flex flex-row" :disabled="is_loading"><Icon icon="ph:door-open-fill"/>{{ $t('signup.button') }}</button>
+        <button class="btn btn-lg btn-primary block mt-2 flex flex-row" :disabled="is_loading"><Icon icon="ph:door-open-fill"/>{{ $t('signup.button') }}</button>
         <i18n-t
           keypath="signup.terms_and_conditions.text"
           tag="label"
@@ -45,7 +45,7 @@ import UiCard from '@/components/ui/UiCard.vue'
 import { Icon } from '@iconify/vue'
 import { reactive, ref } from 'vue'
 import { z } from 'zod'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { api_client } from '@/utils/axios.ts'
 
 const error_message = ref<string | null>(null)

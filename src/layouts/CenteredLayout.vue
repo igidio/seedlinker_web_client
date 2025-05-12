@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white flex flex-col justify-between items-center h-screen p-4">
-    <div class="flex flex-row justify-between w-full">
+  <div class="flex flex-col justify-between items-center min-h-screen bg-base-200">
+    <div class="flex flex-row justify-between w-full sticky top-0  z-50 bg-base-200 items-center">
       <RouterLink :to="{ name: 'home' }">
         <button class="btn btn-ghost">
           <Icon icon="ph:house-fill" />
@@ -17,7 +17,7 @@
     <div>
       <slot />
     </div>
-    <UiFooter simple_view />
+    <UiFooter :simple_view="true" />
   </div>
 </template>
 <script setup lang="ts">

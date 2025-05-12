@@ -28,7 +28,7 @@
           />
         </fieldset>
         <p class="text-error text-center" v-if="error_message">{{ $t(error_message) }}</p>
-        <button type="submit" class="btn btn-lg btn-neutral block mt-2 flex flex-row" :disabled="is_loading">
+        <button type="submit" class="btn btn-lg btn-primary block mt-2 flex flex-row" :disabled="is_loading">
           <Icon icon="ph:door-open-fill" />
           {{ $t('login.button') }}
         </button>

@@ -18,7 +18,7 @@
 
     <div class="flex flex-row justify-between">
       <span class="font-bold">{{ pin.gpio }}</span>
-      <span class="badge badge-info badge-outline">pin {{ pin.pin }}</span>
+      <span class="badge badge-outline">pin {{ pin.pin }}</span>
     </div>
     <span>{{ $t(pin.name) }}</span>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <Transition name="toast">
-    <div class="toast toast-center transition-all" v-if="toasts.length > 0">
+    <div class="toast toast-center transition-all z-100" v-if="toasts.length > 0">
       <TransitionGroup name="toast">
         <div class="alert transition-all" v-for="(toast, index) in toasts" :key="index"
           :class="[{

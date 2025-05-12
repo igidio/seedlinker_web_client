@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-row items-center justify-center" v-if="simple_view">
+  <div class="flex flex-row items-center justify-center p-2" v-if="simple_view">
     <span class="font-bold">{{ current }} igid.io</span>
   </div>
-  <div class="flex flex-row justify-between items-center" v-else>
+  <div class="flex flex-row justify-between items-center px-2 py-2" v-else>
     <span class="font-bold">{{ current }} igid.io</span>
     <div>
       <ToggleDarkLight/>

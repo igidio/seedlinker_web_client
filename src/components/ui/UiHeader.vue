@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row justify-between items-center mb-4">
+  <div class="flex flex-row justify-between items-center mb-4 sticky top-0 z-50 py-4 bg-base-200 px-4 ">
     <MobileSidebar class="md:hidden w-fit" />
 
       <router-link class="flex flex-row items-center gap-2" :to="{ name: 'home' }">
@@ -32,7 +32,7 @@
         <router-link :to="{ name: 'login' }" class="btn btn-ghost"
           >{{ $t('login.title') }}
         </router-link>
-        <router-link :to="{ name: 'signup' }" class="btn btn-neutral"
+        <router-link :to="{ name: 'signup' }" class="btn btn-primary"
           >{{ $t('signup.title') }}
         </router-link>
       </div>

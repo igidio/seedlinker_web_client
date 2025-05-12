@@ -1,12 +1,13 @@
 <template>
-  <div class="main">
-    <div>
+  <div class="flex flex-col justify-between min-h-screen bg-base-200">
+    <div class="flex flex-col flex-1 ">
       <UiHeader />
-      <div class="flex flex-row gap-4">
-        <div class="hidden md:block w-72">
+      <div class="flex flex-row gap-4 px-4 justify-center">
+        <div class="hidden md:block w-60">
           <SidebarContent />
         </div>
-        <div class="w-full">
+
+        <div class="flex-1 max-w-[2000px]">
             <Transition>
           <Suspense fallback="">
               <slot />

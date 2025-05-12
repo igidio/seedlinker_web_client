@@ -2,7 +2,7 @@
   <div class="grow">
     <UiCard>
       <h2 class="card-title">
-        <Icon icon="ph:cloud-rain-bold" />
+        <Icon icon="ph:arrows-merge-bold" />
         {{ $t('device.conditions.title') }}
       </h2>
       <SensorCondition />
