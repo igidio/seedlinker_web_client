@@ -120,6 +120,7 @@ export const translations = {
       },
     },
     home: {
+      title: 'Home',
       available_devices: 'Available devices',
       my_devices: {
         title: 'My devices',
@@ -303,7 +304,7 @@ export const translations = {
           fields: {
             input: {
               label: 'Sensor o dispositivo de entrada',
-              empty: 'No hay ningún sensor registrado, debes registrar uno para continuar.'
+              empty: 'No hay ningún sensor registrado, debes registrar uno para continuar.',
             },
             mode: {
               label: 'Modo del sensor',
@@ -312,7 +313,7 @@ export const translations = {
             },
             output: {
               label: 'Actuador o dispositivo de salida',
-              empty: 'No hay ningún actuador registrado, debes registrar uno para continuar.'
+              empty: 'No hay ningún actuador registrado, debes registrar uno para continuar.',
             },
             min_value: 'Valor mínimo',
             max_value: 'Valor máximo',
@@ -329,6 +330,7 @@ export const translations = {
       },
     },
     home: {
+      title: 'Inicio',
       available_devices: 'Dispositivos disponibles',
       my_devices: {
         title: 'Mis dispositivos',
@@ -355,7 +357,7 @@ export const translations = {
       },
       card_connected_client: {
         title: 'Clientes conectados',
-        subtitle: 'Los dispositivos conectados como \'cliente\' se mostrarán aquí',
+        subtitle: "Los dispositivos conectados como 'cliente' se mostrarán aquí",
       },
     },
     login: {

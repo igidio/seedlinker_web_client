@@ -19,7 +19,7 @@ export const pin_values: Record<'ESP8266' | 'ESP32', PinValuesInterface[]> = {
     { value: 26, label: 'D26 - GPIO26' },
     { value: 27, label: 'D27 - GPIO27' },
     { value: 32, label: 'D32 - GPIO32' },
-    { value: 32, label: 'D33 - GPIO33' },
+    { value: 33, label: 'D33 - GPIO33' },
   ],
   ESP8266: [
     { value: 16, label: 'DO - GPIO16' },
@@ -49,7 +49,7 @@ export const io_values: IoValuesInterface[] = [
         type: 'device.io.modes.temperature_fahrenheit',
         value: 2,
       },
-    ]
+    ],
   },
   {
     label: 'device.io.values.water_sensor',

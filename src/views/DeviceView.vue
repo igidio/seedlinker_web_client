@@ -1,7 +1,17 @@
 <template>
   <div class="flex flex-col gap-2">
+    <ContentHeader
+      :elements="[
+        { name: `${$t('home.title')}`, path: 'home', icon: 'ph:house-bold' },
+        {
+          name: `${$t('device.title')}${device?.name ? ': ' + device?.name : ''}`,
+          path: 'device',
+        },
+      ]"
+      :title="$t('device.title')"
+    />
+
     <div class="flex flex-row justify-between items-center">
-      <span class="font-bold text-xl">{{ $t('device.title') }}</span>
       <UiLoading v-if="loading && !device" />
     </div>
     <span class="text-base-content" v-if="loading">{{ $t('device.loading') }}...</span>
@@ -10,9 +20,9 @@
 
       <div class="flex md:flex-row flex-col gap-4">
         <div class="w-full md:w-1/2">
-        <PinSection :pins="device?.pins as Pins[]" v-if="device && device?.pins" />
+          <PinSection :pins="device?.pins as Pins[]" v-if="device && device?.pins" />
         </div>
-        <ConditionsBy/>
+        <ConditionsBy />
       </div>
     </div>
   </div>
@@ -28,10 +38,9 @@ import type { DeviceInterface, Pins } from '@/interfaces'
 import NameInput from '@/components/project/device/NameInput.vue'
 import { useDeviceComposable } from '@/composables/device.composable.ts'
 import PinSection from '@/components/project/device/PinSection.vue'
-import SensorCondition from '@/components/project/device/SensorCondition.vue'
-import TimeCondition from '@/components/project/device/TimeCondition.vue'
-import UiCard from '@/components/ui/UiCard.vue'
 import ConditionsBy from '@/components/project/device/ConditionsBy.vue'
+import UiBreadcrumb from '@/components/ui/UiBreadcrumb.vue'
+import ContentHeader from '@/components/project/global/ContentHeader.vue'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
