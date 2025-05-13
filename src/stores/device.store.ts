@@ -78,7 +78,6 @@ export const useDeviceStore = defineStore('device', () => {
   })
 
   return {
-    devices,
     socket,
     initialize,
     current_devices,
