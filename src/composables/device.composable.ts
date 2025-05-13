@@ -17,6 +17,8 @@ export const useDeviceComposable = () => {
     pin_values_by_device.value = pin_values[device.value.type as 'ESP8266' | 'ESP32']
   }
 
+  const delete_device = async (uuid: Device) => {}
+
   const add_pin = async (pin: Partial<DeviceInterface['pins'][0]>) => {
     await api_client
       .post(`/devices/${device.value?.uuid}/pin`, pin)

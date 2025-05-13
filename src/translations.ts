@@ -5,6 +5,7 @@ export const translations = {
     connect: 'Connect',
     add: 'Add',
     close: 'Close',
+    cancel: 'Cancel',
     connect_manually: 'Connect manually',
     go_home: 'Go to home',
     select_language: 'Select language',
@@ -30,6 +31,17 @@ export const translations = {
           input_device_required: 'The sensor or input device is required',
           output_device_required: 'The actuator or output device is required',
           at_least_one_value_required: 'At least one value is required',
+        },
+      },
+      config: {
+        auto: 'Automatic',
+        manual: 'Manual',
+        disable: 'Set to off',
+        enable: 'Set to on',
+        delete: {
+          trigger: 'Delete',
+          title: 'Delete device',
+          description: 'Are you sure you want to delete this device?',
         },
       },
       io: {
@@ -215,6 +227,7 @@ export const translations = {
     connect: 'Conectar',
     add: 'Agregar',
     close: 'Cerrar',
+    cancel: 'Cancelar',
     profile: 'Modificar perfil',
     logout: 'Cerrar sesión',
     connect_manually: 'Conectar manualmente',
@@ -240,6 +253,17 @@ export const translations = {
           output_device_required: 'El actuador o dispositivo de salida es obligatorio',
           number_comparison: 'El valor mínimo debe ser menor o igual al valor máximo',
           at_least_one_value_required: 'Se requiere al menos un valor',
+        },
+      },
+      config: {
+        auto: 'Automático',
+        manual: 'Manual',
+        disable: 'Desactivar',
+        enable: 'Activar',
+        delete: {
+          trigger: 'Eliminar',
+          title: 'Eliminar dispositivo',
+          description: '¿Estás seguro de que deseas eliminar este dispositivo?',
         },
       },
       io: {

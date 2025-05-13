@@ -1,22 +1,21 @@
 <template>
+  <ContentHeader
+    :elements="[
+      { name: `${$t('home.title')}`, path: 'home', icon: 'ph:house-bold' },
+      {
+        name: `${$t('device.title')}${device?.name ? ': ' + device?.name : ''}`,
+        path: 'device',
+      },
+    ]"
+    :title="$t('device.title')"
+  />
   <div class="flex flex-col gap-2">
-    <ContentHeader
-      :elements="[
-        { name: `${$t('home.title')}`, path: 'home', icon: 'ph:house-bold' },
-        {
-          name: `${$t('device.title')}${device?.name ? ': ' + device?.name : ''}`,
-          path: 'device',
-        },
-      ]"
-      :title="$t('device.title')"
-    />
-
     <div class="flex flex-row justify-between items-center">
       <UiLoading v-if="loading && !device" />
     </div>
     <span class="text-base-content" v-if="loading">{{ $t('device.loading') }}...</span>
     <div class="flex flex-col gap-4" v-else>
-      <NameInput :title="device?.name!" :save="update_data" />
+      <DeviceCardConfig :device="device as DeviceInterface" :update="update_data" />
 
       <div class="flex md:flex-row flex-col gap-4">
         <div class="w-full md:w-1/2">
@@ -35,12 +34,12 @@ import { onMounted, provide, ref } from 'vue'
 import { useConfigStore } from '@/stores/config.store.ts'
 import UiLoading from '@/components/ui/UiLoading.vue'
 import type { DeviceInterface, Pins } from '@/interfaces'
-import NameInput from '@/components/project/device/NameInput.vue'
 import { useDeviceComposable } from '@/composables/device.composable.ts'
 import PinSection from '@/components/project/device/PinSection.vue'
 import ConditionsBy from '@/components/project/device/ConditionsBy.vue'
-import UiBreadcrumb from '@/components/ui/UiBreadcrumb.vue'
+
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
+import DeviceCardConfig from '@/components/project/device/DeviceCardConfig.vue'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)

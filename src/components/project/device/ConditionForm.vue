@@ -22,18 +22,23 @@
       </fieldset>
 
       <fieldset class="fieldset" v-if="mode_options && mode_options.length > 0">
-        <legend class="fieldset-legend">{{ $t('device.modal.condition.fields.mode.label') }}<span class="text-red-500">*</span></legend>
+        <legend class="fieldset-legend">
+          {{ $t('device.modal.condition.fields.mode.label') }}<span class="text-red-500">*</span>
+        </legend>
         <select class="select w-full" v-model="form.mode">
           <option disabled :value="null" :selected="data.is_new">
             {{ $t('device.modal.condition.fields.mode.placeholder') }}
           </option>
-          <option :value="option.value" :selected="data.is_new" v-for="option in mode_options" :key="option.value">{{ $t(option.type) }}</option>
+          <option
+            :value="option.value"
+            :selected="data.is_new"
+            v-for="option in mode_options"
+            :key="option.value"
+          >
+            {{ $t(option.type) }}
+          </option>
         </select>
       </fieldset>
-
-
-
-
 
       <fieldset class="fieldset">
         <legend class="fieldset-legend">
@@ -57,18 +62,21 @@
 
       <div class="flex flex-row gap-2">
         <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend">{{ $t('device.modal.condition.fields.min_value') }}</legend>
+          <legend class="fieldset-legend">
+            {{ $t('device.modal.condition.fields.min_value') }}
+          </legend>
           <input class="input" v-model="form.min_value" type="number" @input="validate_form" />
         </fieldset>
 
         <fieldset class="fieldset w-full">
-          <legend class="fieldset-legend">{{ $t('device.modal.condition.fields.max_value') }}</legend>
+          <legend class="fieldset-legend">
+            {{ $t('device.modal.condition.fields.max_value') }}
+          </legend>
           <input class="input" v-model="form.max_value" type="number" @input="validate_form" />
         </fieldset>
       </div>
 
       <p v-if="error_message" class="text-error text-xs">{{ $t(error_message) }}</p>
-
 
       {{ form.selected_input?.value }}
       {{ form.selected_input?.pin }}
@@ -88,12 +96,12 @@ interface Props {
   selected_input?: Pins | null
   selected_output?: Pins | null
   min_value?: number | string | null
-  max_value?: number| string | null
+  max_value?: number | string | null
   mode?: number | null
   is_new?: boolean
 }
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     title: string
     data: Props
@@ -116,8 +124,8 @@ const device_pins_by_type = inject<{ input: Pins[]; output: Pins[] }>('device_pi
 const form = reactive({
   selected_input: null as Pins | null,
   selected_output: null as Pins | null,
-  min_value: null as number | null,
-  max_value: null as number | null,
+  min_value: null as number | null | string,
+  max_value: null as number | null | string,
   mode: null as number | null,
 })
 
@@ -133,11 +141,11 @@ const on_close = () => {
 }
 
 const validate_form = () => {
-  if (form.min_value === '') {
-    form.min_value = null
-  }
   if (form.max_value === '') {
     form.max_value = null
+  }
+  if (form.min_value === '') {
+    form.min_value = null
   }
   const result = condition_sensor_schema.safeParse(form)
   if (!result.success) {
@@ -149,6 +157,6 @@ const validate_form = () => {
 
 const mode_options = computed(() => {
   if (!form.selected_input) return []
-  return io_values.filter((io) => form.selected_input?.value == io.value )[0].mode
+  return io_values.filter((io) => form.selected_input?.value == io.value)[0].mode
 })
 </script>
