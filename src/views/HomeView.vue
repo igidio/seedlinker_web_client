@@ -5,7 +5,7 @@
   />
   <div class="flex flex-col gap-4">
     <ConnectedDevices />
-    <hr />
+
     <MyDevices v-if="is_authenticated" />
   </div>
 </template>

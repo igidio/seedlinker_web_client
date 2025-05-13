@@ -8,20 +8,14 @@
 
   <UiAlert color="success" size="md" class="mb-2" outline v-if="is_loading_connection">
     <Icon icon="ph:wifi-high-bold" height="30" class="animate-pulse" />
-    <span class="text-xs"
-      >Estamos conectando tu dispositivo a los servicios. Por favor, espera un momento.</span
-    >
+    <span class="text-xs">{{ $t('home.connection_state.is_loading') }}</span>
   </UiAlert>
 
   <UiAlert color="error" size="md" class="mb-2" outline v-if="!is_loading_connection && show_error">
     <Icon icon="ph:wifi-x-bold" height="30" />
-    <span class="text-xs"
-      >No se pudo conectar tu dispositivo a los servicios, recargue la página o verifique su
-      conexión</span
-    >
+    <span class="text-xs">{{ $t('home.connection_state.error') }}</span>
   </UiAlert>
 
-  {{ connected_by_types }}
   <div class="flex flex-col gap-4">
     <div
       class="flex flex-col gap-1 bg-base-100 rounded-xl border border-primary border-dashed text-xs p-2"
@@ -32,7 +26,6 @@
       <span class="font-bold">{{ client?.platform }}</span>
     </div>
   </div>
-  {{ clients_connected }}
 </template>
 
 <script setup lang="ts">

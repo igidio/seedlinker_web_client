@@ -134,6 +134,12 @@ export const translations = {
     home: {
       title: 'Home',
       available_devices: 'Available devices',
+      connection_state: {
+        is_loading: 'We are connecting your device to the services. Please wait a moment.',
+        is_idling: 'Visible devices that connect to your network will appear here.',
+        error: 'Could not connect to the services. Please check your internet connection.',
+        no_device: 'You have not registered any devices yet.',
+      },
       my_devices: {
         title: 'My devices',
         description: 'These are the devices you have registered on your account',
@@ -356,6 +362,13 @@ export const translations = {
     home: {
       title: 'Inicio',
       available_devices: 'Dispositivos disponibles',
+      connection_state: {
+        is_loading:
+          'Estamos conectando tu dispositivo a los servicios. Por favor, espere un momento.',
+        is_idling: 'Los dispositivos visibles que se conecten a tu red aparecerán acá.',
+        error: 'No se pudo conectar a los servicios. Por favor, verifica tu conexión a internet.',
+        no_device: 'No has registrado ningún dispositivo todavía.',
+      },
       my_devices: {
         title: 'Mis dispositivos',
         description: 'Estos son los dispositivos que tienes registrados en tu cuenta',

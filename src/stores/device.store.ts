@@ -6,9 +6,10 @@ import { replace_dots_with_underscores } from '@/utils/conversion.ts'
 import { device_instance } from '@/config/instances.ts'
 import type { current_devices_interface } from '@/interfaces'
 import { get_client_info } from '@/utils/device_info.ts'
+import type { DeviceInterface } from '../interfaces/device.interface'
 
 export const useDeviceStore = defineStore('device', () => {
-  const devices = ref(0)
+  const devices = ref<DeviceInterface[]>([])
   const public_ip = ref<string>('')
   const socket = ref<WebSocket | null>(null)
   const current_devices = ref<current_devices_interface>({})
@@ -20,6 +21,10 @@ export const useDeviceStore = defineStore('device', () => {
   }
 
   const get_current_devices = async () => {
+    current_devices.value = {}
+
+    show_error.value = false
+    is_loading_connection.value = true
     try {
       current_devices.value = await device_instance.get_current_devices(public_ip.value)
       if (current_devices.value) {
@@ -81,5 +86,7 @@ export const useDeviceStore = defineStore('device', () => {
     is_loading_connection,
     show_error,
     clients_connected,
+    get_current_devices,
+    devices,
   }
 })
