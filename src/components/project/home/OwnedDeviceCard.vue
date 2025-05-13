@@ -2,10 +2,10 @@
   <UiCard>
     <div class="flex flex-col gap-2">
       <div
-        class="flex flex-row justify-between items-center border-b border-base-300 border-dashed pb-2"
+        class="flex flex-row justify-between items-center border-b border-base-300 border-dashed pb-2 wrap-anywhere"
       >
-        <span class="text-lg font-bold">{{ device.name }}</span>
-        <UiBadge :message="device.type" color="primary" size="sm" />
+        <span class="text-lg font-bold max-w-[70%]">{{ device.name }}</span>
+        <UiBadge :message="device.type" color="secondary" size="sm" />
       </div>
       <div class="flex flex-col gap-2">
         <span class="">{{ $t('device.uuid') }}: {{ device.uuid }}</span>
@@ -15,8 +15,8 @@
         <span class="">{{ $t('device.io') }}: {{ device.pins.length }}</span>
       </div>
       <div class="flex flex-row justify-end gap-2">
-        <RouterLink :to="{name: 'device', params: {uuid: device.uuid}}">
-          <button class="btn btn-neutral btn-sm">{{ $t('configure') }}</button>
+        <RouterLink :to="{ name: 'device', params: { uuid: device.uuid } }">
+          <button class="btn btn-primary btn-sm">{{ $t('configure') }}</button>
         </RouterLink>
       </div>
     </div>

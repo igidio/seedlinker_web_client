@@ -2,7 +2,12 @@
   <form @submit.prevent="submit">
     <UiModal
       v-model="trigger"
-      @close="() => {new_uuid = '';error_message = null;}"
+      @close="
+        () => {
+          new_uuid = ''
+          error_message = null
+        }
+      "
       :title="
         data.is_new
           ? $t('home.modal_connect_device.manual.title')
@@ -21,7 +26,6 @@
             />
             <p class="label">{{ $t('home.modal_connect_device.manual.field.label') }}</p>
           </fieldset>
-
         </div>
         <div class="flex flex-col w-full" v-else>
           <p>{{ $t('home.modal_connect_device.auto.description') }}</p>
@@ -30,8 +34,10 @@
         <p class="text-error text-end" v-if="error_message">{{ $t(error_message) }}</p>
       </template>
       <template v-slot:footer>
-        <button class="btn" type="button" @click="trigger?.close">{{ $t('close') }}</button>
-        <button class="btn btn-neutral" :disabled="disable_save_button || is_loading">
+        <button class="btn btn-ghost" type="button" @click="trigger!.close">
+          {{ $t('close') }}
+        </button>
+        <button class="btn btn-primary" :disabled="disable_save_button || is_loading">
           {{ $t('save') }}
         </button>
       </template>
@@ -44,14 +50,17 @@ import { computed, ref } from 'vue'
 import { is_valid_uuid } from '@/utils/validate_uuid.ts'
 import { api_client } from '@/utils/axios.ts'
 import type { AxiosError } from 'axios'
+import { useDeviceStore } from '@/stores/device.store'
 
 const trigger = defineModel<HTMLDialogElement>()
 const error_message = ref<string | null>(null)
+const deviceStore = useDeviceStore()
+const { fetch_data } = deviceStore
 
 const props = defineProps<{
   data: {
     uuid: string
-    type: string|null
+    type: string | null
     is_new: boolean
   }
 }>()
@@ -63,25 +72,32 @@ const disable_save_button = computed(() => {
 
 const submit = async () => {
   const uuid_to_submit = props.data.is_new ? new_uuid.value.trim() : props.data.uuid
-  console.log(uuid_to_submit)
-  is_loading.value = true
   if (!is_valid_uuid(uuid_to_submit)) {
     error_message.value = 'error.form.invalid_uuid'
     is_loading.value = false
     return
   }
-  await api_client
-    .post(`/devices/${uuid_to_submit}`)
-    .then(() => {
-      trigger.value?.close()
-      new_uuid.value = ''
-      error_message.value = null
-    })
-    .catch((e: AxiosError) => {
-      error_message.value = (e.response?.data as { detail?: string })?.detail || null
-    })
-    .finally(() => {
-      is_loading.value = false
-    })
+  try {
+    await api_client
+      .post(`/devices/${uuid_to_submit}`)
+      .catch((e: AxiosError) => {
+        error_message.value =
+          (e.response?.data as { detail?: string })?.detail || 'error.form.unknown_error'
+        console.log(e)
+        console.log('e')
+      })
+      .then(async () => {
+        await fetch_data()
+        trigger.value?.close()
+        new_uuid.value = ''
+        error_message.value = null
+      })
+
+      .finally(() => {
+        is_loading.value = false
+      })
+  } catch (e) {
+    console.error(e)
+  }
 }
 </script>

@@ -7,6 +7,7 @@ import { device_instance } from '@/config/instances.ts'
 import type { current_devices_interface } from '@/interfaces'
 import { get_client_info } from '@/utils/device_info.ts'
 import type { DeviceInterface } from '../interfaces/device.interface'
+import { api_client } from '@/utils/axios'
 
 export const useDeviceStore = defineStore('device', () => {
   const devices = ref<DeviceInterface[]>([])
@@ -77,6 +78,17 @@ export const useDeviceStore = defineStore('device', () => {
     return connected_by_types.value.clients.map((e) => e.client?.info)
   })
 
+  const fetch_data = async () => {
+    await api_client
+      .get<DeviceInterface[]>('/devices')
+      .then((response) => {
+        devices.value = response.data
+      })
+      .catch((error) => {
+        console.error('Error fetching devices:', error)
+      })
+  }
+
   return {
     socket,
     initialize,
@@ -87,5 +99,6 @@ export const useDeviceStore = defineStore('device', () => {
     clients_connected,
     get_current_devices,
     devices,
+    fetch_data,
   }
 })

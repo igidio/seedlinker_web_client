@@ -58,6 +58,7 @@ const {
   used_pins,
   available_pins,
   device_pins_by_type,
+  delete_data,
 } = useDevice
 
 provide('add_pin', add_pin)
@@ -66,6 +67,7 @@ provide('delete_pin', delete_pin)
 provide('used_pins', used_pins)
 provide('available_pins', available_pins)
 provide('device_pins_by_type', device_pins_by_type)
+provide('delete_data', delete_data)
 
 onMounted(async () => {
   await api_client

@@ -10,7 +10,7 @@
         <button class="btn btn-sm" @click="on_close">
           {{ $t('cancel') }}
         </button>
-        <button class="btn btn-error btn-sm" @click="$emit('delete')">
+        <button class="btn btn-error btn-sm" @click="on_delete" :disabled="is_loading">
           {{ $t('delete') }}
         </button>
       </div>
@@ -20,13 +20,34 @@
 
 <script setup lang="ts">
 import UiModal from '@/components/ui/UiModal.vue'
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const trigger = defineModel<HTMLDialogElement>()
 const error_message = ref<string | null>(null)
+const is_loading = ref(false)
+const router = useRouter()
 
 const on_close = () => {
   trigger.value?.close()
   error_message.value = null
+}
+
+const delete_data = inject<() => Promise<void>>('delete_data')
+
+const on_delete = async () => {
+  is_loading.value = true
+  if (delete_data) {
+    try {
+      //await delete_data()
+      trigger.value?.close()
+      await router.replace({ name: 'home' })
+    } catch (e) {
+      console.log(e)
+
+      error_message.value = 'device.config.delete.error'
+    }
+  }
+  is_loading.value = false
 }
 </script>

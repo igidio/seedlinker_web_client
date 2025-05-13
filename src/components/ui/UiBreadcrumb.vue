@@ -1,7 +1,7 @@
 <template>
-  <div class="breadcrumbs text-sm">
+  <div class="breadcrumbs w-[92vw] md:w-[70vw]">
     <ul>
-      <li v-for="(element, key) in elements" :key="key">
+      <li v-for="(element, key) in elements" :key="key" class="text-ellipsis">
         <RouterLink :to="{ name: element.path }" v-if="key !== elements.length - 1">
           <Icon v-if="element.icon" :icon="element.icon" /> {{ element.name }}
         </RouterLink>

@@ -5,6 +5,7 @@ import type { Device } from '@/classes/device.class.ts'
 import { useConfigStore } from '@/stores/config.store.ts'
 import type { AxiosError } from 'axios'
 import { pin_values } from '@/data/device.data.ts'
+import { useRoute, useRouter } from 'vue-router'
 
 const { generate_toast } = useConfigStore()
 
@@ -89,6 +90,20 @@ export const useDeviceComposable = () => {
       })
   }
 
+  const delete_data = async () => {
+    await api_client
+      .delete(`/devices/${device.value?.uuid}`)
+      .then(() => {
+        generate_toast({
+          message: 'device.alert.delete',
+          type: 'success',
+        })
+      })
+      .catch((error) => {
+        console.error('Error deleting device:', error)
+      })
+  }
+
   const used_pins = computed(() => {
     if (!device.value) return []
     return [...new Set(device.value?.pins.map((pin) => pin.pin))]
@@ -123,5 +138,6 @@ export const useDeviceComposable = () => {
     used_pins,
     available_pins,
     device_pins_by_type,
+    delete_data,
   }
 }

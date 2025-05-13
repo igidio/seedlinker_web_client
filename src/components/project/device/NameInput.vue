@@ -1,10 +1,10 @@
 <template>
   <div class="w-full">
-    <div class="flex flex-row items-center gap-2" v-if="!edit">
+    <div class="flex flex-row items-center gap-2 wrap-anywhere" v-if="!edit">
       <button class="btn btn-lg bg-base-300 btn-ghost" @click="set_edit">
         <Icon icon="ph:note-pencil-duotone" class="w-6 h-6" />
       </button>
-      <span class="font-bold text-3xl text-ellipsis overflow-hidden w-[140svh]">{{ title }}</span>
+      <span class="font-bold text-3xl">{{ title }}</span>
     </div>
     <div v-else class="flex flex-row items-center gap-2">
       <input
@@ -14,7 +14,11 @@
         v-model="new_name"
         :maxlength="50"
       />
-      <button class="btn btn-lg bg-base-300" @click="submit" :disabled="is_loading || new_name.length <= 0">
+      <button
+        class="btn btn-lg bg-base-300"
+        @click="submit"
+        :disabled="is_loading || new_name.length <= 0"
+      >
         <Icon icon="ph:floppy-disk-back-duotone" class="w-6 h-6" />
       </button>
       <button

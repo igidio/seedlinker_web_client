@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-2">
     <div class="flex flex-row justify-between items-center">
       <span class="font-bold text-lg mb-2 inline-block">{{ $t('home.my_devices.title') }}</span>
-      <button class="btn btn-xs" @click="fetch_data">
+      <button class="btn btn-xs" @click="load">
         <Icon icon="ph:arrow-clockwise-bold" />
       </button>
     </div>
@@ -36,35 +36,32 @@
 </template>
 
 <script setup lang="ts">
-import { api_client } from '@/utils/axios.ts'
 import OwnedDeviceCard from '@/components/project/home/OwnedDeviceCard.vue'
-import type { DeviceInterface } from '@/interfaces'
 import { onMounted, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import { useDeviceStore } from '@/stores/device.store'
 import { storeToRefs } from 'pinia'
 
 const deviceStore = useDeviceStore()
-const {} = deviceStore
+const { fetch_data } = deviceStore
 const { devices } = storeToRefs(deviceStore)
 
 const is_loading = ref(true)
 const show_error = ref(false)
 
-const fetch_data = async () => {
-  await api_client
-    .get<DeviceInterface[]>('/devices')
-    .then((response) => {
-      devices.value = response.data
+const load = async () => {
+  await fetch_data()
+    .then(() => {
       is_loading.value = false
     })
     .catch((error) => {
-      console.error('Error fetching devices:', error)
+      console.error(error)
       show_error.value = true
+      is_loading.value = false
     })
 }
 
 onMounted(async () => {
-  await fetch_data()
+  await load()
 })
 </script>
