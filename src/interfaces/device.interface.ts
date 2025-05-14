@@ -7,6 +7,7 @@ export interface DeviceInterface {
   pins: Pins[]
   status: boolean
   conditions: Conditions
+  mode: 'auto' | 'manual'
 }
 
 export interface Pins {

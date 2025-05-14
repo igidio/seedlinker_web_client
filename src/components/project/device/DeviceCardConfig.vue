@@ -1,25 +1,30 @@
 <template>
   <DeviceModalDelete v-model="device_modal_delete_trigger"></DeviceModalDelete>
-  <UiCard>
+  <UiCard :class="is_loading && 'pointer-events-none opacity-70'">
     <div class="flex flex-col gap-4">
       <NameInput :title="device?.name!" :save="update" />
-      <div class="flex flex-row items-center gap-1">
-        <div class="status" :class="device?.status ? 'status-success' : 'status-error'" />
-        <span>{{
-          device?.status ? $t('device.status_values.active') : $t('device.status_values.inactive')
-        }}</span>
+
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row items-center gap-1">
+          <div class="status" :class="device?.status ? 'status-success' : 'status-error'" />
+          <span>{{
+            device?.status ? $t('device.status_values.active') : $t('device.status_values.inactive')
+          }}</span>
+        </div>
+        <UiBadge :message="device.type" color="secondary" />
       </div>
+
       <div class="flex flex-row justify-between items-center">
         <div>
           <label class="label">
-            <input type="checkbox" checked="checked" class="toggle" />
-            {{ $t('device.config.auto') }}
+            <input type="checkbox" :checked="mode_check" class="toggle" @change="toggle_mode" />
+            {{ mode_check ? $t('device.config.auto') : $t('device.config.manual') }}
           </label>
         </div>
 
         <div class="flex flex-row gap-2">
           <button class="btn btn-sm" @click="toggle_device_status">
-            {{ $t('device.config.disable') }}
+            {{ device?.status ? $t('device.config.disable') : $t('device.config.enable') }}
           </button>
           <button class="btn btn-error btn-sm" @click="device_modal_delete_trigger?.showModal()">
             {{ $t('device.config.delete.trigger') }}
@@ -35,7 +40,8 @@ import NameInput from '@/components/project/device/NameInput.vue'
 import UiCard from '@/components/ui/UiCard.vue'
 import type { DeviceInterface } from '@/interfaces'
 import DeviceModalDelete from './DeviceModalDelete.vue'
-import { inject, ref } from 'vue'
+import { inject, onMounted, ref } from 'vue'
+import UiBadge from '@/components/ui/UiBadge.vue'
 
 const props = defineProps<{
   device: DeviceInterface
@@ -43,18 +49,41 @@ const props = defineProps<{
 }>()
 
 const device_modal_delete_trigger = ref<HTMLDialogElement>()
-
 const update_data = inject<(new_data: Partial<DeviceInterface>) => Promise<void>>('update_data')!
+const mode_check = ref(false)
+const is_loading = ref(false)
 
-const toggle_device_status = async () => {
+onMounted(() => {
+  mode_check.value = props.device.mode === 'auto'
+})
+
+const toggle_mode = async () => {
+  is_loading.value = true
+  mode_check.value = !mode_check.value
   const new_data = {
-    status: !props.device.status,
+    mode: mode_check.value ? 'auto' : ('manual' as 'auto' | 'manual'),
   }
 
   try {
     await update_data(new_data)
   } catch (error) {
+    console.error('Error updating device mode:', error)
+  } finally {
+    is_loading.value = false
+  }
+}
+
+const toggle_device_status = async () => {
+  is_loading.value = true
+  const new_data = {
+    status: !props.device.status,
+  }
+  try {
+    await update_data(new_data)
+  } catch (error) {
     console.error('Error updating device status:', error)
+  } finally {
+    is_loading.value = false
   }
 }
 </script>
