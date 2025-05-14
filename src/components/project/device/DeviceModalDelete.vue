@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import UiModal from '@/components/ui/UiModal.vue'
+import { useDeviceStore } from '@/stores/device.store'
 import { inject, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -27,6 +28,7 @@ const trigger = defineModel<HTMLDialogElement>()
 const error_message = ref<string | null>(null)
 const is_loading = ref(false)
 const router = useRouter()
+const { fetch_data } = useDeviceStore()
 
 const on_close = () => {
   trigger.value?.close()
@@ -39,7 +41,8 @@ const on_delete = async () => {
   is_loading.value = true
   if (delete_data) {
     try {
-      //await delete_data()
+      await delete_data()
+      await fetch_data()
       trigger.value?.close()
       await router.replace({ name: 'home' })
     } catch (e) {
