@@ -50,29 +50,18 @@ const route = useRoute()
 const router = useRouter()
 
 const useDevice = useDeviceComposable()
-const {
-  device,
-  set_device,
-  update_data,
-  update_pin,
-  add_pin,
-  delete_pin,
-  used_pins,
-  available_pins,
-  device_pins_by_type,
-  delete_data,
-  create_condition,
-} = useDevice
+const { device, set_device, update_data } = useDevice
 
-provide('add_pin', add_pin)
-provide('update_pin', update_pin)
-provide('delete_pin', delete_pin)
-provide('used_pins', used_pins)
-provide('available_pins', available_pins)
-provide('device_pins_by_type', device_pins_by_type)
-provide('delete_data', delete_data)
-provide('update_data', update_data)
-provide('create_condition', create_condition)
+provide('add_pin', useDevice.add_pin)
+provide('update_pin', useDevice.update_pin)
+provide('delete_pin', useDevice.delete_pin)
+provide('used_pins', useDevice.used_pins)
+provide('available_pins', useDevice.available_pins)
+provide('device_pins_by_type', useDevice.device_pins_by_type)
+provide('delete_data', useDevice.delete_data)
+provide('update_data', useDevice.update_data)
+provide('update_condition', useDevice.update_condition)
+provide('create_condition', useDevice.create_condition)
 
 onMounted(async () => {
   await api_client

@@ -39,15 +39,15 @@ export const io_values: IoValuesInterface[] = [
     mode: [
       {
         type: 'device.io.modes.humidity',
-        value: 0,
-      },
-      {
-        type: 'device.io.modes.temperature_celsius',
         value: 1,
       },
       {
-        type: 'device.io.modes.temperature_fahrenheit',
+        type: 'device.io.modes.temperature_celsius',
         value: 2,
+      },
+      {
+        type: 'device.io.modes.temperature_fahrenheit',
+        value: 3,
       },
     ],
   },
@@ -58,11 +58,11 @@ export const io_values: IoValuesInterface[] = [
     mode: [
       {
         type: 'device.io.modes.digital',
-        value: 0,
+        value: 1,
       },
       {
         type: 'device.io.modes.analog',
-        value: 1,
+        value: 2,
       },
     ],
   },

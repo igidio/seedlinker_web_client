@@ -29,7 +29,11 @@
           <option disabled selected :value="null">
             {{ $t('device.modal.io.fields.io_type.placeholder') }}
           </option>
-          <option :value="io" v-for="(io, index) in io_values.map(({ mode, ...rest }) => rest )" :key="index">
+          <option
+            :value="io"
+            v-for="(io, index) in io_values.map(({ mode, ...rest }) => rest)"
+            :key="index"
+          >
             {{ $t(io.label) }}
           </option>
         </select>
@@ -44,7 +48,15 @@
       <template #footer>
         <div class="flex flex-row justify-between w-full">
           <div>
-            <button class="btn btn-error btn-soft" v-if="!props.is_new" type="button" @click="on_delete" :disabled="is_loading">{{ $t('delete') }}</button>
+            <button
+              class="btn btn-error btn-soft"
+              v-if="!props.is_new"
+              type="button"
+              @click="on_delete"
+              :disabled="is_loading"
+            >
+              {{ $t('delete') }}
+            </button>
           </div>
           <div class="flex flex-row gap-2">
             <button class="btn btn-ghost" @click="on_close">{{ $t('close') }}</button>
@@ -62,7 +74,6 @@ import { io_values } from '@/data/device.data.ts'
 import type { IoValuesInterface, Pins, PinValuesInterface } from '@/interfaces'
 import UiModal from '@/components/ui/UiModal.vue'
 import { io_form_schema } from '@/schemas'
-
 
 const trigger = defineModel<HTMLDialogElement>()
 const is_loading = ref(false)
@@ -116,7 +127,11 @@ const submit = async () => {
     status: true,
   }
   try {
-    define_props.props.is_new ? await add_pin(data) : await update_pin(data, define_props.props.id!)
+    if (define_props.props.is_new) {
+      await add_pin(data)
+    } else {
+      await update_pin(data, define_props.props.id!)
+    }
     on_close()
     is_loading.value = false
   } catch (e) {

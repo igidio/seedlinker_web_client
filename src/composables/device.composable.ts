@@ -129,6 +129,35 @@ export const useDeviceComposable = () => {
       })
   }
 
+  const update_condition = async (data: Partial<ConditionDtoInterface>, id: string) => {
+    await api_client
+      .patch<
+        TimeCondition | SensorConditionInterface
+      >(`/devices/${device.value?.uuid}/condition/${id}`, data)
+      .then((result) => {
+        generate_toast({
+          //TODO: add message
+          message: 'Agregar esto',
+          type: 'success',
+        })
+        if (data.type === 'time') {
+          const index = device.value?.conditions.by_time.findIndex(
+            (condition) => condition._id?.$oid === id,
+          )
+          if (index !== undefined && index !== -1) {
+            device.value!.conditions.by_time[index] = result.data as TimeCondition
+          }
+        } else if (data.type === 'sensor') {
+          const index = device.value?.conditions.by_sensor.findIndex(
+            (condition) => condition._id?.$oid === id,
+          )
+          if (index !== undefined && index !== -1) {
+            device.value!.conditions.by_sensor[index] = result.data as SensorConditionInterface
+          }
+        }
+      })
+  }
+
   const used_pins = computed(() => {
     if (!device.value) return []
     return [...new Set(device.value?.pins.map((pin) => pin.pin))]
@@ -165,5 +194,6 @@ export const useDeviceComposable = () => {
     device_pins_by_type,
     delete_data,
     create_condition,
+    update_condition,
   }
 }

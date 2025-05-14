@@ -26,9 +26,9 @@
           {{ $t('device.modal.condition.fields.mode.label') }}<span class="text-red-500">*</span>
         </legend>
         <select class="select w-full" v-model="form.mode">
-          <otion disabled :value="null" :selected="data.is_new">
+          <option disabled :value="null" :selected="data.is_new">
             {{ $t('device.modal.condition.fields.mode.placeholder') }}
-          </otion>
+          </option>
           <option
             :value="option.value"
             :selected="data.is_new"
@@ -93,24 +93,26 @@
     </UiModal>
   </form>
 </template>
+
 <script setup lang="ts">
 import UiModal from '@/components/ui/UiModal.vue'
 import type { ConditionDtoInterface, Pins } from '@/interfaces'
-import { computed, inject, reactive, ref } from 'vue'
+import { computed, inject, reactive, ref, watch, type ComputedRef } from 'vue'
 import { condition_sensor_schema } from '@/schemas'
 import { io_values } from '@/data/device.data.ts'
 import { capture_detail_error } from '@/utils/axios'
 
 interface Props {
-  selected_input?: Pins | null
-  selected_output?: Pins | null
+  input_pin?: number | null
+  output_pin?: number | null
   min_value?: number | string | null
   max_value?: number | string | null
-  mode?: number | null
+  input_mode?: number | null
   is_new?: boolean
+  id: string | null
 }
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title: string
     data: Props
@@ -118,9 +120,10 @@ withDefaults(
   {
     data: () => ({
       is_new: true,
-      selected_input: null,
-      selected_output: null,
-      mode: null,
+      id: null,
+      input_pin: null,
+      output_pin: null,
+      input_mode: null,
       min_value: null,
       max_value: null,
     }),
@@ -128,8 +131,11 @@ withDefaults(
 )
 const trigger = defineModel<HTMLDialogElement>()
 const error_message = ref<string | null>(null)
-const device_pins_by_type = inject<{ input: Pins[]; output: Pins[] }>('device_pins_by_type')!
+const device_pins_by_type =
+  inject<ComputedRef<{ input: Pins[]; output: Pins[] }>>('device_pins_by_type')!
 const create_condition = inject<(data: ConditionDtoInterface) => Promise<void>>('create_condition')!
+const update_condition =
+  inject<(data: Partial<ConditionDtoInterface>, id: string) => Promise<void>>('update_condition')!
 const is_loading = ref(false)
 
 const form = reactive({
@@ -139,41 +145,6 @@ const form = reactive({
   max_value: null as number | null | string,
   mode: 0 as number | null,
 })
-
-const submit = async () => {
-  is_loading.value = true
-  const data: ConditionDtoInterface = {
-    type: 'sensor',
-    data: {
-      input_pin: form.selected_input?.pin!,
-      output_pin: form.selected_output!,
-      input_mode: form.mode!,
-      min_value: form.min_value != null ? +form.min_value : -1,
-      max_value: form.max_value != null ? +form.max_value : -1,
-    },
-  }
-  console.log(data)
-
-  await create_condition(data)
-    .then(() => {
-      trigger.value?.close()
-    })
-    .catch((e) => {
-      error_message.value = capture_detail_error(e)
-    })
-    .finally(() => {
-      is_loading.value = false
-    })
-}
-
-const on_close = () => {
-  trigger.value?.close()
-  form.selected_input = null
-  form.selected_output = null
-  form.min_value = null
-  form.max_value = null
-  error_message.value = null
-}
 
 const validate_form = () => {
   if (form.max_value === '') {
@@ -190,8 +161,82 @@ const validate_form = () => {
   }
 }
 
+const reset_data = () => {
+  if (props.data.is_new) {
+    form.selected_input = null
+    form.selected_output = null
+    form.min_value = null
+    form.max_value = null
+    error_message.value = null
+    return
+  }
+  form.selected_input = device_pins_by_type.value.input.find(
+    (selected_pin) => selected_pin.pin == props.data.input_pin,
+  ) as Pins | null
+  form.selected_output = props.data.output_pin || null
+  form.min_value = props.data.min_value || null
+  form.max_value = props.data.max_value || null
+  form.mode = props.data.input_mode || null
+}
+
+const on_close = () => {
+  trigger.value?.close()
+  reset_data()
+}
+
 const mode_options = computed(() => {
   if (!form.selected_input) return []
   return io_values.filter((io) => form.selected_input?.value == io.value)[0].mode
 })
+
+watch(
+  () => props.data,
+  () => {
+    reset_data()
+  },
+  { deep: true },
+)
+
+const submit = async () => {
+  is_loading.value = true
+  const data: ConditionDtoInterface = {
+    type: 'sensor',
+    data: {
+      input_pin: form.selected_input?.pin!,
+      output_pin: form.selected_output!,
+      input_mode: form.mode!,
+      min_value: form.min_value != null ? +form.min_value : -1,
+      max_value: form.max_value != null ? +form.max_value : -1,
+    },
+  }
+
+  console.log(props.data)
+  try {
+    if (props.data.is_new) {
+      await create_condition(data)
+        .then(() => {
+          trigger.value?.close()
+        })
+        .catch((e) => {
+          error_message.value = capture_detail_error(e)
+        })
+        .finally(() => {
+          is_loading.value = false
+        })
+      return
+    }
+    await update_condition(data, props.data.id!)
+      .then(() => {
+        trigger.value?.close()
+      })
+      .catch((e) => {
+        error_message.value = capture_detail_error(e)
+      })
+      .finally(() => {
+        is_loading.value = false
+      })
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
