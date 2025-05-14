@@ -158,6 +158,22 @@ export const useDeviceComposable = () => {
       })
   }
 
+  const delete_condition = async (id: string, mode: 'time' | 'sensor') => {
+    await api_client.delete(`/devices/${device.value?.uuid}/condition/${id}`).then(() => {
+      generate_toast({
+        // TODO: add message
+        message: 'Eliminar esto',
+        type: 'success',
+      })
+      const index = device.value?.conditions[mode === 'time' ? 'by_time' : 'by_sensor'].findIndex(
+        (condition) => condition._id?.$oid === id,
+      )
+      if (index !== undefined && index !== -1) {
+        device.value!.conditions.by_sensor.splice(index, 1)
+      }
+    })
+  }
+
   const used_pins = computed(() => {
     if (!device.value) return []
     return [...new Set(device.value?.pins.map((pin) => pin.pin))]
@@ -195,5 +211,6 @@ export const useDeviceComposable = () => {
     delete_data,
     create_condition,
     update_condition,
+    delete_condition,
   }
 }

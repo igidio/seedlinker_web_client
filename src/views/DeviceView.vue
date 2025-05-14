@@ -62,6 +62,7 @@ provide('delete_data', useDevice.delete_data)
 provide('update_data', useDevice.update_data)
 provide('update_condition', useDevice.update_condition)
 provide('create_condition', useDevice.create_condition)
+provide('delete_condition', useDevice.delete_condition)
 
 onMounted(async () => {
   await api_client

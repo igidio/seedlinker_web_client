@@ -79,16 +79,30 @@
       <p v-if="error_message" class="text-error text-xs text-end mt-2">{{ $t(error_message) }}</p>
 
       <template #footer>
-        <button class="btn btn-ghost" type="button" @click="trigger?.close()">
-          {{ $t('close') }}
-        </button>
-        <button
-          class="btn btn-primary"
-          type="submit"
-          :disabled="!form.selected_input || !form.selected_output || is_loading || !!error_message"
-        >
-          {{ $t('save') }}
-        </button>
+        <div class="flex flex-row justify-between w-full">
+          <button
+            class="btn btn-error btn-soft"
+            @click="_delete"
+            :disabled="is_loading"
+            type="button"
+          >
+            {{ $t('delete') }}
+          </button>
+          <div>
+            <button class="btn btn-ghost" type="button" @click="trigger?.close()">
+              {{ $t('close') }}
+            </button>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              :disabled="
+                !form.selected_input || !form.selected_output || is_loading || !!error_message
+              "
+            >
+              {{ $t('save') }}
+            </button>
+          </div>
+        </div>
       </template>
     </UiModal>
   </form>
@@ -136,6 +150,8 @@ const device_pins_by_type =
 const create_condition = inject<(data: ConditionDtoInterface) => Promise<void>>('create_condition')!
 const update_condition =
   inject<(data: Partial<ConditionDtoInterface>, id: string) => Promise<void>>('update_condition')!
+const delete_condition =
+  inject<(id: string, mode: 'time' | 'sensor') => Promise<void>>('delete_condition')!
 const is_loading = ref(false)
 
 const form = reactive({
@@ -210,7 +226,6 @@ const submit = async () => {
     },
   }
 
-  console.log(props.data)
   try {
     if (props.data.is_new) {
       await create_condition(data)
@@ -226,6 +241,25 @@ const submit = async () => {
       return
     }
     await update_condition(data, props.data.id!)
+      .then(() => {
+        trigger.value?.close()
+      })
+      .catch((e) => {
+        error_message.value = capture_detail_error(e)
+      })
+      .finally(() => {
+        is_loading.value = false
+      })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const _delete = async () => {
+  is_loading.value = true
+  if (!props.data.id || props.data.is_new) return
+  try {
+    await delete_condition(props.data.id, 'sensor')
       .then(() => {
         trigger.value?.close()
       })
