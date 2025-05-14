@@ -15,13 +15,15 @@
     </div>
     <span class="text-base-content" v-if="loading">{{ $t('device.loading') }}...</span>
     <div class="flex flex-col gap-4" v-else>
-      <DeviceCardConfig :device="device as DeviceInterface" :update="update_data" />
+      <DeviceCardConfig v-if="device" :device="device" :update="update_data" />
 
       <div class="flex md:flex-row flex-col gap-4">
         <div class="w-full md:w-1/2">
-          <PinSection :pins="device?.pins as Pins[]" v-if="device && device?.pins" />
+          <PinSection :pins="device.pins as Pins[]" v-if="device && device.pins" />
         </div>
-        <ConditionsBy :conditions="device?.conditions || { by_sensor: [], by_time: [] }" />
+        <div class="grow md:w-1/2">
+          <ConditionsBy :conditions="device?.conditions || { by_sensor: [], by_time: [] }" />
+        </div>
       </div>
     </div>
   </div>
