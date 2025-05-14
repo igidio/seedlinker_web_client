@@ -6,7 +6,7 @@ export interface DeviceInterface {
   type: string
   pins: Pins[]
   status: boolean
-  conditions: Conditions
+  conditions: ConditionsInterface
   mode: 'auto' | 'manual'
 }
 
@@ -24,9 +24,27 @@ export interface ID {
   $oid: string
 }
 
-export interface Conditions {
-  by_time: any[]
-  by_event: any[]
+export interface SensorConditionInterface {
+  _id: ID
+  input_pin: number
+  input_mode: number
+  output_pin: number
+  min_value: number
+  max_value: number
+}
+
+export interface TimeCondition {
+  _id: ID
+  output_pin: number
+  start_hour: number
+  start_minute: number
+  end_hour: number
+  end_minute: number
+}
+
+export interface ConditionsInterface {
+  by_sensor: SensorConditionInterface[]
+  by_time: TimeCondition[]
 }
 
 export interface IoInputModesInterface {
@@ -44,4 +62,9 @@ export interface IoValuesInterface {
 export interface PinValuesInterface {
   value: number
   label: string
+}
+
+export interface ConditionDtoInterface {
+  type: 'sensor' | 'time'
+  data: Partial<SensorConditionInterface | TimeCondition>
 }

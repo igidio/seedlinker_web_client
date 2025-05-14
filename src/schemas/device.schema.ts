@@ -3,9 +3,12 @@ import { z } from 'zod'
 export const condition_sensor_schema = z
   .object({
     selected_input: z
-      .object({
-        value: z.number(),
-      }, { message: 'device.conditions.error.input_device_required' })
+      .object(
+        {
+          value: z.number(),
+        },
+        { message: 'device.conditions.error.input_device_required' },
+      )
       .refine((val) => val !== null, { message: 'device.conditions.error.input_device_required' }),
     selected_output: z
       .number({ message: 'device.conditions.error.output_device_required' })
@@ -20,15 +23,28 @@ export const condition_sensor_schema = z
   })
   .refine(
     (data) => {
-      if (data.min_value !== null && data.max_value !== null) {
-        return data.min_value <= data.max_value
-      } else if (data.min_value === null || data.max_value === null) {
+      if (data.min_value !== data.max_value) {
+        if (data.min_value !== null && data.max_value !== null) {
+          return data.min_value <= data.max_value
+        } else if (data.min_value === null || data.max_value === null) {
+          return true
+        }
         return true
       }
-      return true
     },
     {
       message: 'device.conditions.error.number_comparison',
+      path: ['min_value', 'max_value'],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.min_value !== null && data.min_value < 0) return false
+      if (data.max_value !== null && data.max_value < 0) return false
+      return true
+    },
+    {
+      message: 'device.conditions.error.negative_numbers_not_allowed',
       path: ['min_value', 'max_value'],
     },
   )

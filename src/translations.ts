@@ -31,10 +31,11 @@ export const translations = {
         by_sensor: 'By sensor',
         by_time: 'By time',
         error: {
-          number_comparison: 'Minimum value must be less than or equal to maximum value',
+          number_comparison: 'Minimum value must be less than to maximum value',
           input_device_required: 'The sensor or input device is required',
           output_device_required: 'The actuator or output device is required',
           at_least_one_value_required: 'At least one value is required',
+          negative_numbers_not_allowed: 'Negative numbers are not allowed',
         },
       },
       config: {
@@ -124,6 +125,7 @@ export const translations = {
             min_value: 'Minimum value',
             max_value: 'Maximum value',
           },
+          empty: 'No condition of this type registered.',
         },
       },
       fields: {
@@ -228,6 +230,7 @@ export const translations = {
         invalid_password: 'Invalid password',
         invalid_uuid: 'Invalid UUID',
         device_not_found: 'Device not found, please check the UUID',
+        unprocessable: 'The submitted data is not valid',
       },
     },
   },
@@ -265,8 +268,9 @@ export const translations = {
         error: {
           input_device_required: 'El sensor o dispositivo de entrada es obligatorio',
           output_device_required: 'El actuador o dispositivo de salida es obligatorio',
-          number_comparison: 'El valor mínimo debe ser menor o igual al valor máximo',
+          number_comparison: 'El valor mínimo debe ser menor al valor máximo',
           at_least_one_value_required: 'Se requiere al menos un valor',
+          negative_numbers_not_allowed: 'No se permiten números negativos',
         },
       },
       config: {
@@ -356,6 +360,7 @@ export const translations = {
             min_value: 'Valor mínimo',
             max_value: 'Valor máximo',
           },
+          empty: 'No hay ninguna condición registrada de este tipo.',
         },
       },
       fields: {
@@ -462,6 +467,7 @@ export const translations = {
         invalid_password: 'La contraseña es incorrecta',
         invalid_uuid: 'El UUID no es válido',
         device_not_found: 'Dispositivo no encontrado, por favor verifique el UUID',
+        unprocessable: 'Los datos enviados no son válidos',
       },
     },
   },

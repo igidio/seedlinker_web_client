@@ -9,9 +9,8 @@
         {{ $t('add') }}
       </button>
     </div>
-
   </div>
-
+  <span class="opacity-60">{{ $t('device.modal.condition.empty') }}</span>
 </template>
 <script setup lang="ts">
 import TimeConditionForm from '@/components/project/device/TimeConditionForm.vue'

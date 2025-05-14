@@ -1,4 +1,10 @@
-import type { DeviceInterface, PinValuesInterface } from '@/interfaces'
+import type {
+  ConditionDtoInterface,
+  DeviceInterface,
+  PinValuesInterface,
+  SensorConditionInterface,
+  TimeCondition,
+} from '@/interfaces'
 import { computed, ref } from 'vue'
 import { api_client } from '@/utils/axios.ts'
 import type { Device } from '@/classes/device.class.ts'
@@ -104,6 +110,25 @@ export const useDeviceComposable = () => {
       })
   }
 
+  const create_condition = async (data: Partial<ConditionDtoInterface>) => {
+    await api_client
+      .post<
+        SensorConditionInterface | TimeCondition
+      >(`/devices/${device.value?.uuid}/condition`, data)
+      .then((result) => {
+        generate_toast({
+          //TODO: add message
+          message: 'Nueva condicion creada',
+          type: 'success',
+        })
+        if (data.type === 'time') {
+          device.value?.conditions.by_time.push(result.data as TimeCondition)
+        } else if (data.type === 'sensor') {
+          device.value?.conditions.by_sensor.push(result.data as SensorConditionInterface)
+        }
+      })
+  }
+
   const used_pins = computed(() => {
     if (!device.value) return []
     return [...new Set(device.value?.pins.map((pin) => pin.pin))]
@@ -139,5 +164,6 @@ export const useDeviceComposable = () => {
     available_pins,
     device_pins_by_type,
     delete_data,
+    create_condition,
   }
 }

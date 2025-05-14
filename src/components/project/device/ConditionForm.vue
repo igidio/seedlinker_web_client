@@ -10,7 +10,7 @@
             {{ $t('device.modal.io.fields.pin.placeholder') }}
           </option>
           <option :value="pin" v-for="pin in device_pins_by_type?.input" :key="pin._id?.$oid">
-            {{ $t(pin.name) }} ({{ pin.gpio }})
+            {{ $t(`device.io.values.${pin.name}`) }} ({{ pin.gpio }})
           </option>
         </select>
         <p
@@ -26,9 +26,9 @@
           {{ $t('device.modal.condition.fields.mode.label') }}<span class="text-red-500">*</span>
         </legend>
         <select class="select w-full" v-model="form.mode">
-          <option disabled :value="null" :selected="data.is_new">
+          <otion disabled :value="null" :selected="data.is_new">
             {{ $t('device.modal.condition.fields.mode.placeholder') }}
-          </option>
+          </otion>
           <option
             :value="option.value"
             :selected="data.is_new"
@@ -49,7 +49,7 @@
             {{ $t('device.modal.io.fields.pin.placeholder') }}
           </option>
           <option :value="pin.pin" v-for="pin in device_pins_by_type?.output" :key="pin._id?.$oid">
-            {{ $t(pin.name) }} ({{ pin.gpio }})
+            {{ $t(`device.io.values.${pin.name}`) }} ({{ pin.gpio }})
           </option>
         </select>
         <p
@@ -76,21 +76,30 @@
         </fieldset>
       </div>
 
-      <p v-if="error_message" class="text-error text-xs">{{ $t(error_message) }}</p>
+      <p v-if="error_message" class="text-error text-xs text-end mt-2">{{ $t(error_message) }}</p>
 
-      {{ form.selected_input?.value }}
-      {{ form.selected_input?.pin }}
-      {{ form.mode }}
-      {{ form.selected_output }}
+      <template #footer>
+        <button class="btn btn-ghost" type="button" @click="trigger?.close()">
+          {{ $t('close') }}
+        </button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          :disabled="!form.selected_input || !form.selected_output || is_loading || !!error_message"
+        >
+          {{ $t('save') }}
+        </button>
+      </template>
     </UiModal>
   </form>
 </template>
 <script setup lang="ts">
 import UiModal from '@/components/ui/UiModal.vue'
-import type { Pins } from '@/interfaces'
+import type { ConditionDtoInterface, Pins } from '@/interfaces'
 import { computed, inject, reactive, ref } from 'vue'
 import { condition_sensor_schema } from '@/schemas'
 import { io_values } from '@/data/device.data.ts'
+import { capture_detail_error } from '@/utils/axios'
 
 interface Props {
   selected_input?: Pins | null
@@ -120,16 +129,42 @@ withDefaults(
 const trigger = defineModel<HTMLDialogElement>()
 const error_message = ref<string | null>(null)
 const device_pins_by_type = inject<{ input: Pins[]; output: Pins[] }>('device_pins_by_type')!
+const create_condition = inject<(data: ConditionDtoInterface) => Promise<void>>('create_condition')!
+const is_loading = ref(false)
 
 const form = reactive({
   selected_input: null as Pins | null,
-  selected_output: null as Pins | null,
+  selected_output: null as number | null,
   min_value: null as number | null | string,
   max_value: null as number | null | string,
-  mode: null as number | null,
+  mode: 0 as number | null,
 })
 
-const submit = () => {}
+const submit = async () => {
+  is_loading.value = true
+  const data: ConditionDtoInterface = {
+    type: 'sensor',
+    data: {
+      input_pin: form.selected_input?.pin!,
+      output_pin: form.selected_output!,
+      input_mode: form.mode!,
+      min_value: form.min_value != null ? +form.min_value : -1,
+      max_value: form.max_value != null ? +form.max_value : -1,
+    },
+  }
+  console.log(data)
+
+  await create_condition(data)
+    .then(() => {
+      trigger.value?.close()
+    })
+    .catch((e) => {
+      error_message.value = capture_detail_error(e)
+    })
+    .finally(() => {
+      is_loading.value = false
+    })
+}
 
 const on_close = () => {
   trigger.value?.close()

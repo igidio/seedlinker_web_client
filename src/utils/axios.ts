@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { get_cookie, remove_cookie, set_cookie } from '@/utils/cookie.ts'
 
 export const api_client = axios.create({
@@ -30,5 +30,13 @@ api_client.interceptors.response.use(
         }
       }
     }
+    return Promise.reject(error)
   },
 )
+export const capture_detail_error = (error: AxiosError) => {
+  const detail = (error.response?.data as { detail?: unknown })?.detail
+  if (typeof detail !== 'string') {
+    return 'error.form.unprocessable'
+  }
+  return detail || null
+}

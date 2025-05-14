@@ -21,7 +21,7 @@
         <div class="w-full md:w-1/2">
           <PinSection :pins="device?.pins as Pins[]" v-if="device && device?.pins" />
         </div>
-        <ConditionsBy />
+        <ConditionsBy :conditions="device?.conditions || { by_sensor: [], by_time: [] }" />
       </div>
     </div>
   </div>
@@ -59,6 +59,7 @@ const {
   available_pins,
   device_pins_by_type,
   delete_data,
+  create_condition,
 } = useDevice
 
 provide('add_pin', add_pin)
@@ -69,6 +70,7 @@ provide('available_pins', available_pins)
 provide('device_pins_by_type', device_pins_by_type)
 provide('delete_data', delete_data)
 provide('update_data', update_data)
+provide('create_condition', create_condition)
 
 onMounted(async () => {
   await api_client
