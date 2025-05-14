@@ -68,6 +68,7 @@ provide('used_pins', used_pins)
 provide('available_pins', available_pins)
 provide('device_pins_by_type', device_pins_by_type)
 provide('delete_data', delete_data)
+provide('update_data', update_data)
 
 onMounted(async () => {
   await api_client

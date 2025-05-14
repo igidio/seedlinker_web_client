@@ -22,6 +22,10 @@ export const translations = {
       io_label: 'Connected I/O',
       loading: 'Device information is loading',
       title: 'Your device',
+      status_values: {
+        active: 'Active',
+        inactive: 'Inactive',
+      },
       conditions: {
         title: 'Conditions',
         by_sensor: 'By sensor',
@@ -250,6 +254,10 @@ export const translations = {
       io_label: 'I/O conectados',
       loading: 'La información del dispositivo se está cargando',
       title: 'Tu dispositivo',
+      status_values: {
+        active: 'Activo',
+        inactive: 'Inactivo',
+      },
       conditions: {
         title: 'Condiciones',
         by_sensor: 'Por sensor',
