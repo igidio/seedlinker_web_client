@@ -1,9 +1,4 @@
 <template>
-  {{
-    send_props.is_new
-      ? $t('device.modal.condition.title.sensor.create')
-      : $t('device.modal.condition.title.sensor.update')
-  }}
   <ConditionForm
     v-model="condition_trigger"
     :data="send_props"

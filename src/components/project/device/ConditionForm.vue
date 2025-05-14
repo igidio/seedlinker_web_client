@@ -80,15 +80,18 @@
 
       <template #footer>
         <div class="flex flex-row justify-between w-full">
-          <button
-            class="btn btn-error btn-soft"
-            @click="_delete"
-            :disabled="is_loading"
-            type="button"
-          >
-            {{ $t('delete') }}
-          </button>
           <div>
+            <button
+              class="btn btn-error btn-soft"
+              @click="_delete"
+              :disabled="is_loading"
+              type="button"
+              v-if="!data.is_new"
+            >
+              {{ $t('delete') }}
+            </button>
+          </div>
+          <div class="flex flex-row gap-2">
             <button class="btn btn-ghost" type="button" @click="trigger?.close()">
               {{ $t('close') }}
             </button>
@@ -178,6 +181,7 @@ const validate_form = () => {
 }
 
 const reset_data = () => {
+  error_message.value = null
   if (props.data.is_new) {
     form.selected_input = null
     form.selected_output = null
@@ -226,21 +230,8 @@ const submit = async () => {
     },
   }
 
-  try {
-    if (props.data.is_new) {
-      await create_condition(data)
-        .then(() => {
-          trigger.value?.close()
-        })
-        .catch((e) => {
-          error_message.value = capture_detail_error(e)
-        })
-        .finally(() => {
-          is_loading.value = false
-        })
-      return
-    }
-    await update_condition(data, props.data.id!)
+  if (props.data.is_new) {
+    await create_condition(data)
       .then(() => {
         trigger.value?.close()
       })
@@ -250,9 +241,18 @@ const submit = async () => {
       .finally(() => {
         is_loading.value = false
       })
-  } catch (error) {
-    console.log(error)
+    return
   }
+  await update_condition(data, props.data.id!)
+    .then(() => {
+      trigger.value?.close()
+    })
+    .catch((e) => {
+      error_message.value = capture_detail_error(e)
+    })
+    .finally(() => {
+      is_loading.value = false
+    })
 }
 
 const _delete = async () => {

@@ -1,5 +1,12 @@
 <template>
-  <TimeConditionForm title="Time Condition" v-model="condition_trigger" />
+  <TimeConditionForm
+    :title="
+      send_props.is_new
+        ? $t('device.modal.condition.title.sensor.create')
+        : $t('device.modal.condition.title.sensor.update')
+    "
+    v-model="condition_trigger"
+  />
 
   <div class="flex flex-col gap-2">
     <div class="flex flex-row gap-2 justify-between items-center">
@@ -14,7 +21,7 @@
 </template>
 <script setup lang="ts">
 import TimeConditionForm from '@/components/project/device/TimeConditionForm.vue'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 
 const condition_trigger = ref<HTMLDialogElement>()
@@ -26,4 +33,14 @@ const create = () => {
 const open_condition_by_time = () => {
   condition_trigger.value?.showModal()
 }
+
+const send_props = reactive({
+  is_new: true,
+  id: null as string | null,
+  output_pin: null as number | null,
+  start_hour: null as number | null,
+  start_minute: null as number | null,
+  end_hour: null as number | null,
+  end_minute: null as number | null,
+})
 </script>
