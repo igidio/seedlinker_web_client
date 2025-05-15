@@ -9,7 +9,7 @@
           <option disabled :value="null" :selected="data.is_new">
             {{ $t('device.modal.io.fields.pin.placeholder') }}
           </option>
-          <option :value="pin.pin" v-for="pin in device_pins_by_type?.output" :key="pin._id?.$oid">
+          <option :value="pin.pin" v-for="pin in device_pins_by_type?.output" :key="pin.id">
             {{ $t(`device.io.values.${pin.name}`) }} ({{ pin.gpio }})
           </option>
         </select>

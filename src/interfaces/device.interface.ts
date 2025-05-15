@@ -11,7 +11,7 @@ export interface DeviceInterface {
 }
 
 export interface Pins {
-  _id?: ID
+  id?: string
   pin: number
   type: 'input' | 'output'
   gpio: string
@@ -25,7 +25,7 @@ export interface ID {
 }
 
 export interface SensorConditionInterface {
-  _id: ID
+  id: string
   input_pin: number
   input_mode: number
   output_pin: number
@@ -34,7 +34,7 @@ export interface SensorConditionInterface {
 }
 
 export interface TimeConditionInterface {
-  _id: ID
+  id: string
   output_pin: number
   start_hour: number
   start_minute: number

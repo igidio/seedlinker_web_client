@@ -27,7 +27,7 @@
         }}</span>
         <IoCard />
         <div class="flex-col-reverse flex gap-2">
-          <PinItem :pin="pin" v-for="pin in pins" :key="pin._id!.$oid" @click="modify(pin)" />
+          <PinItem :pin="pin" v-for="pin in pins" :key="pin.id" @click="modify(pin)" />
         </div>
       </div>
     </div>
@@ -62,8 +62,7 @@ const create = () => {
 }
 
 const modify = (pin: Pins) => {
-  console.log(pin)
-  send_props.id = pin._id!.$oid
+  send_props.id = pin.id!
   send_props.io_selected = {
     label: pin.name,
     type: pin.type,

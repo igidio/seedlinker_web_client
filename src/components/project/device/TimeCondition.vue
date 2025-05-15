@@ -24,7 +24,7 @@
 
   <DeviceItemCondition
     v-for="condition in conditions"
-    :key="condition._id?.$oid"
+    :key="condition.id"
     @click="modify(condition)"
     :data="[
       {
@@ -82,7 +82,7 @@ const create = () => {
 }
 
 const modify = (condition: TimeConditionInterface) => {
-  send_props.id = condition._id?.$oid
+  send_props.id = condition.id
   send_props.output_pin = condition.output_pin
   send_props.start_hour = condition.start_hour
   send_props.start_minute = condition.start_minute

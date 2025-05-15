@@ -34,6 +34,7 @@ export const useDeviceComposable = () => {
           type: 'success',
           message: 'device.modal.io.submit',
         })
+        if (device.value?.pins === undefined) device.value!.pins = []
         device.value?.pins.push(response.data)
       })
       .catch((e: AxiosError) => {
@@ -50,7 +51,7 @@ export const useDeviceComposable = () => {
           type: 'success',
           message: 'device.modal.io.submit',
         })
-        const index = device.value?.pins.findIndex((p) => p._id?.$oid === id)
+        const index = device.value?.pins.findIndex((p) => p.id === id)
         if (index !== undefined && index !== -1) {
           device.value!.pins[index] = response.data
         }
@@ -69,7 +70,7 @@ export const useDeviceComposable = () => {
           type: 'success',
           message: 'device.modal.io.submit',
         })
-        const index = device.value?.pins.findIndex((p) => p._id?.$oid === id)
+        const index = device.value?.pins.findIndex((p) => p.id === id)
         if (index !== undefined && index !== -1) {
           device.value!.pins.splice(index, 1)
         }
@@ -121,9 +122,17 @@ export const useDeviceComposable = () => {
           message: 'Nueva condicion creada',
           type: 'success',
         })
+        if (!device.value?.conditions) {
+          device.value!.conditions = {
+            by_time: [],
+            by_sensor: [],
+          }
+        }
         if (data.type === 'time') {
+          if (!device.value?.conditions.by_time) device.value!.conditions.by_time = []
           device.value?.conditions.by_time.push(result.data as TimeConditionInterface)
         } else if (data.type === 'sensor') {
+          if (!device.value?.conditions.by_sensor) device.value!.conditions.by_sensor = []
           device.value?.conditions.by_sensor.push(result.data as SensorConditionInterface)
         }
       })
@@ -142,14 +151,14 @@ export const useDeviceComposable = () => {
         })
         if (data.type === 'time') {
           const index = device.value?.conditions.by_time.findIndex(
-            (condition) => condition._id?.$oid === id,
+            (condition) => condition.id === id,
           )
           if (index !== undefined && index !== -1) {
             device.value!.conditions.by_time[index] = result.data as TimeConditionInterface
           }
         } else if (data.type === 'sensor') {
           const index = device.value?.conditions.by_sensor.findIndex(
-            (condition) => condition._id?.$oid === id,
+            (condition) => condition.id === id,
           )
           if (index !== undefined && index !== -1) {
             device.value!.conditions.by_sensor[index] = result.data as SensorConditionInterface
@@ -166,7 +175,7 @@ export const useDeviceComposable = () => {
         type: 'success',
       })
       const index = device.value?.conditions[mode === 'time' ? 'by_time' : 'by_sensor'].findIndex(
-        (condition) => condition._id?.$oid === id,
+        (condition) => condition.id === id,
       )
       if (index !== undefined && index !== -1) {
         device.value!.conditions[mode === 'time' ? 'by_time' : 'by_sensor'].splice(index, 1)

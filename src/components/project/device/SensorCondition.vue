@@ -23,7 +23,7 @@
 
     <DeviceItemCondition
       v-for="condition in conditions"
-      :key="condition._id?.$oid"
+      :key="condition.id"
       @click="modify(condition)"
       :data="[
         {
@@ -102,7 +102,7 @@ const create = () => {
 
 const modify = (condition: SensorConditionInterface) => {
   send_props.is_new = false
-  send_props.id = condition._id!.$oid
+  send_props.id = condition.id
   send_props.input_pin = condition.input_pin
   send_props.output_pin = condition.output_pin
   send_props.input_mode = condition.input_mode
