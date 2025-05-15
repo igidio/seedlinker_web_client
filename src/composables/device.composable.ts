@@ -11,7 +11,6 @@ import type { Device } from '@/classes/device.class.ts'
 import { useConfigStore } from '@/stores/config.store.ts'
 import type { AxiosError } from 'axios'
 import { pin_values } from '@/data/device.data.ts'
-import { useRoute, useRouter } from 'vue-router'
 
 const { generate_toast } = useConfigStore()
 

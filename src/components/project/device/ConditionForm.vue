@@ -162,7 +162,7 @@ const form = reactive({
   selected_output: null as number | null,
   min_value: null as number | null | string,
   max_value: null as number | null | string,
-  mode: 0 as number | null,
+  mode: 1 as number | null,
 })
 
 const validate_form = () => {
@@ -188,6 +188,7 @@ const reset_data = () => {
     form.min_value = null
     form.max_value = null
     error_message.value = null
+    form.mode = 1
     return
   }
   form.selected_input = device_pins_by_type.value.input.find(
@@ -196,7 +197,7 @@ const reset_data = () => {
   form.selected_output = props.data.output_pin || null
   form.min_value = props.data.min_value || null
   form.max_value = props.data.max_value || null
-  form.mode = props.data.input_mode || null
+  form.mode = props.data.input_mode || 1
 }
 
 const on_close = () => {

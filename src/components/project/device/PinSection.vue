@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    <div class="">
+    <div class="mt-2">
       <div class="flex flex-col gap-2">
         <span class="label text-xs text-center inline-block" v-if="pins.length <= 0">{{
           $t('device.io.empty')
@@ -68,7 +68,6 @@ const modify = (pin: Pins) => {
     type: pin.type,
     value: pin.value,
   }
-  console.log(send_props.io_selected)
   send_props.pin_selected = {
     value: pin.pin,
     label: pin.gpio,

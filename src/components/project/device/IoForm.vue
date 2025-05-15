@@ -34,7 +34,7 @@
             v-for="(io, index) in io_values.map(({ mode, ...rest }) => rest)"
             :key="index"
           >
-            {{ $t(io.label) }}
+            {{ $t(`device.io.values.${io.label}`) }}
           </option>
         </select>
         <p class="label" v-if="io_selected && io_selected.type">

@@ -67,37 +67,33 @@ const props = defineProps<{
 const new_uuid = ref('')
 const is_loading = ref(false)
 const disable_save_button = computed(() => {
-  return props.data.is_new && !is_valid_uuid(new_uuid.value)
+  return props.data.is_new && !is_valid_uuid(new_uuid.value.trim())
 })
 
 const submit = async () => {
   const uuid_to_submit = props.data.is_new ? new_uuid.value.trim() : props.data.uuid
+  is_loading.value = true
   if (!is_valid_uuid(uuid_to_submit)) {
     error_message.value = 'error.form.invalid_uuid'
     is_loading.value = false
     return
   }
-  try {
-    await api_client
-      .post(`/devices/${uuid_to_submit}`)
-      .catch((e: AxiosError) => {
-        error_message.value =
-          (e.response?.data as { detail?: string })?.detail || 'error.form.unknown_error'
-        console.log(e)
-        console.log('e')
-      })
-      .then(async () => {
-        await fetch_data()
-        trigger.value?.close()
-        new_uuid.value = ''
-        error_message.value = null
-      })
 
-      .finally(() => {
-        is_loading.value = false
-      })
-  } catch (e) {
-    console.error(e)
-  }
+  await api_client
+    .post(`/devices/${uuid_to_submit}`)
+    .then(async () => {
+      await fetch_data()
+      trigger.value?.close()
+      new_uuid.value = ''
+      error_message.value = null
+    })
+    .catch((e: AxiosError) => {
+      error_message.value =
+        (e.response?.data as { detail?: string })?.detail || 'error.form.unknown_error'
+    })
+
+    .finally(() => {
+      is_loading.value = false
+    })
 }
 </script>

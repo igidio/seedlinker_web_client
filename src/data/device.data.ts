@@ -33,7 +33,8 @@ export const pin_values: Record<'ESP8266' | 'ESP32', PinValuesInterface[]> = {
 
 export const io_values: IoValuesInterface[] = [
   {
-    label: 'device.io.values.temperature_and_humidity_sensor',
+    //device.io.values.
+    label: 'temperature_and_humidity_sensor',
     type: 'input',
     value: 1,
     mode: [
@@ -52,7 +53,7 @@ export const io_values: IoValuesInterface[] = [
     ],
   },
   {
-    label: 'device.io.values.water_sensor',
+    label: 'water_sensor',
     type: 'input',
     value: 2,
     mode: [
@@ -66,7 +67,7 @@ export const io_values: IoValuesInterface[] = [
       },
     ],
   },
-  { label: 'device.io.values.heater', type: 'output', value: 3 },
-  { label: 'device.io.values.air_conditioner', type: 'output', value: 4 },
-  { label: 'device.io.values.water_pump', type: 'output', value: 5 },
+  { label: 'heater', type: 'output', value: 3 },
+  { label: 'air_conditioner', type: 'output', value: 4 },
+  { label: 'water_pump', type: 'output', value: 5 },
 ]
