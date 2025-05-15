@@ -20,7 +20,7 @@
       <span class="font-bold">{{ pin.gpio }}</span>
       <span class="badge badge-outline">pin {{ pin.pin }}</span>
     </div>
-    <span>{{ $t(pin.name) }}</span>
+    <span>{{ $t(`device.io.values.${pin.name}`) }}</span>
   </div>
 </template>
 

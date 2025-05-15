@@ -258,19 +258,16 @@ const submit = async () => {
 const _delete = async () => {
   is_loading.value = true
   if (!props.data.id || props.data.is_new) return
-  try {
-    await delete_condition(props.data.id, 'sensor')
-      .then(() => {
-        trigger.value?.close()
-      })
-      .catch((e) => {
-        error_message.value = capture_detail_error(e)
-      })
-      .finally(() => {
-        is_loading.value = false
-      })
-  } catch (error) {
-    console.log(error)
-  }
+
+  await delete_condition(props.data.id, 'sensor')
+    .then(() => {
+      trigger.value?.close()
+    })
+    .catch((e) => {
+      error_message.value = capture_detail_error(e)
+    })
+    .finally(() => {
+      is_loading.value = false
+    })
 }
 </script>

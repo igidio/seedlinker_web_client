@@ -10,7 +10,7 @@
   />
 
   <div class="flex flex-col gap-2">
-    <div class="flex flex-row gap-2 justify-between items-center">
+    <div class="flex flex-row gap-2 justify-between items-center mb-2">
       <span class="font-bold text-md">{{ $t('device.conditions.by_sensor') }}</span>
       <button class="btn btn-primary btn-xs" @click="create">
         <Icon icon="ph:plus-bold" />{{ $t('add') }}

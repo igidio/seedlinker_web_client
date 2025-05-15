@@ -33,7 +33,7 @@ export interface SensorConditionInterface {
   max_value: number
 }
 
-export interface TimeCondition {
+export interface TimeConditionInterface {
   _id: ID
   output_pin: number
   start_hour: number
@@ -44,7 +44,7 @@ export interface TimeCondition {
 
 export interface ConditionsInterface {
   by_sensor: SensorConditionInterface[]
-  by_time: TimeCondition[]
+  by_time: TimeConditionInterface[]
 }
 
 export interface IoInputModesInterface {
@@ -66,5 +66,5 @@ export interface PinValuesInterface {
 
 export interface ConditionDtoInterface {
   type: 'sensor' | 'time'
-  data: Partial<SensorConditionInterface | TimeCondition>
+  data: Partial<SensorConditionInterface | TimeConditionInterface>
 }

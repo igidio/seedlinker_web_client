@@ -49,6 +49,49 @@ export const condition_sensor_schema = z
     },
   )
 
+export const condition_time_schema = z
+  .object({
+    selected_output: z
+      .number({ message: 'device.conditions.error.output_device_required' })
+      .nullable()
+      .refine((val) => val !== null, { message: 'device.conditions.error.output_device_required' }),
+    start_hour: z
+      .number({ message: 'device.conditions.error.start_hour_required' })
+      .nullable()
+      .refine((val) => val !== null, { message: 'device.conditions.error.start_hour_required' }),
+    start_minute: z
+      .number({ message: 'device.conditions.error.start_minute_required' })
+      .nullable()
+      .refine((val) => val !== null, { message: 'device.conditions.error.start_minute_required' }),
+    end_hour: z
+      .number({ message: 'device.conditions.error.end_hour_required' })
+      .nullable()
+      .refine((val) => val !== null, { message: 'device.conditions.error.end_hour_required' }),
+    end_minute: z
+      .number({ message: 'device.conditions.error.end_minute_required' })
+      .nullable()
+      .refine((val) => val !== null, { message: 'device.conditions.error.end_minute_required' }),
+  })
+  .refine((data) => data.start_hour !== null && data.start_hour >= 0 && data.start_hour <= 23, {
+    message: 'device.conditions.error.start_hour_invalid',
+    path: ['start_hour'],
+  })
+  .refine((data) => data.end_hour !== null && data.end_hour >= 0 && data.end_hour <= 23, {
+    message: 'device.conditions.error.end_hour_invalid',
+    path: ['end_hour'],
+  })
+  .refine(
+    (data) => data.start_minute !== null && data.start_minute >= 0 && data.start_minute <= 59,
+    {
+      message: 'device.conditions.error.start_minute_invalid',
+      path: ['start_minute'],
+    },
+  )
+  .refine((data) => data.end_minute !== null && data.end_minute >= 0 && data.end_minute <= 59, {
+    message: 'device.conditions.error.end_minute_invalid',
+    path: ['end_minute'],
+  })
+
 export const io_form_schema = z.object({
   pin_selected: z
     .object({

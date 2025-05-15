@@ -19,7 +19,7 @@
 
       <div class="flex md:flex-row flex-col gap-4">
         <div class="w-full md:w-1/2">
-          <PinSection :pins="device.pins as Pins[]" v-if="device && device.pins" />
+          <PinSection :pins="(device.pins as Pins[]) || []" v-if="device" />
         </div>
         <div class="grow md:w-1/2">
           <ConditionsBy :conditions="device?.conditions || { by_sensor: [], by_time: [] }" />

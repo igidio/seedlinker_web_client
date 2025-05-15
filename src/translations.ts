@@ -36,6 +36,8 @@ export const translations = {
           output: 'Actuator',
           min_value: 'Minimum value',
           max_value: 'Maximum value',
+          start_time: 'Start time',
+          end_time: 'End time',
         },
         error: {
           number_comparison: 'Minimum value must be less than to maximum value',
@@ -43,6 +45,14 @@ export const translations = {
           output_device_required: 'The actuator or output device is required',
           at_least_one_value_required: 'At least one value is required',
           negative_numbers_not_allowed: 'Negative numbers are not allowed',
+          start_hour_required: 'Start hour is required',
+          start_minute_required: 'Start minute is required',
+          end_hour_required: 'End hour is required',
+          end_minute_required: 'End minute is required',
+          start_hour_invalid: 'Start hour is invalid',
+          end_hour_invalid: 'End hour is invalid',
+          start_minute_invalid: 'Start minute is invalid',
+          end_minute_invalid: 'End minute is invalid',
         },
       },
       config: {
@@ -128,6 +138,20 @@ export const translations = {
             output: {
               label: 'Actuator or output device',
               empty: 'No actuator registered, you must register one to continue.',
+            },
+            start_time: {
+              label: 'Start time (24h)',
+              placeholder: {
+                hour: 'Start hour (0-23)',
+                minute: 'Start minute (0-59)',
+              },
+            },
+            end_time: {
+              label: 'End time (24h)',
+              placeholder: {
+                hour: 'End hour (0-23)',
+                minute: 'End minute (0-59)',
+              },
             },
             min_value: 'Minimum value',
             max_value: 'Maximum value',
@@ -278,6 +302,8 @@ export const translations = {
           output: 'Actuador',
           min_value: 'Valor mínimo',
           max_value: 'Valor máximo',
+          start_time: 'Hora de inicio',
+          end_time: 'Hora de fin',
         },
         error: {
           input_device_required: 'El sensor o dispositivo de entrada es obligatorio',
@@ -285,6 +311,14 @@ export const translations = {
           number_comparison: 'El valor mínimo debe ser menor al valor máximo',
           at_least_one_value_required: 'Se requiere al menos un valor',
           negative_numbers_not_allowed: 'No se permiten números negativos',
+          start_hour_required: 'La hora de inicio es obligatoria',
+          start_minute_required: 'El minuto de inicio es obligatorio',
+          end_hour_required: 'La hora de fin es obligatoria',
+          end_minute_required: 'El minuto de fin es obligatorio',
+          start_hour_invalid: 'La hora de inicio es inválida',
+          end_hour_invalid: 'La hora de fin es inválida',
+          start_minute_invalid: 'El minuto de inicio es inválido',
+          end_minute_invalid: 'El minuto de fin es inválido',
         },
       },
       config: {
@@ -370,6 +404,20 @@ export const translations = {
             output: {
               label: 'Actuador o dispositivo de salida',
               empty: 'No hay ningún actuador registrado, debes registrar uno para continuar.',
+            },
+            start_time: {
+              label: 'Hora y minuto de inicio (24h)',
+              placeholder: {
+                hour: 'Hora de inicio (0-23)',
+                minute: 'Minuto de inicio (0-59)',
+              },
+            },
+            end_time: {
+              label: 'Hora y minuto de fin (24h)',
+              placeholder: {
+                hour: 'Hora de fin (0-23)',
+                minute: 'Minuto de fin (0-59)',
+              },
             },
             min_value: 'Valor mínimo',
             max_value: 'Valor máximo',

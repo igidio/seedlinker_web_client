@@ -3,7 +3,7 @@ import type {
   DeviceInterface,
   PinValuesInterface,
   SensorConditionInterface,
-  TimeCondition,
+  TimeConditionInterface,
 } from '@/interfaces'
 import { computed, ref } from 'vue'
 import { api_client } from '@/utils/axios.ts'
@@ -113,7 +113,7 @@ export const useDeviceComposable = () => {
   const create_condition = async (data: Partial<ConditionDtoInterface>) => {
     await api_client
       .post<
-        SensorConditionInterface | TimeCondition
+        SensorConditionInterface | TimeConditionInterface
       >(`/devices/${device.value?.uuid}/condition`, data)
       .then((result) => {
         generate_toast({
@@ -122,7 +122,7 @@ export const useDeviceComposable = () => {
           type: 'success',
         })
         if (data.type === 'time') {
-          device.value?.conditions.by_time.push(result.data as TimeCondition)
+          device.value?.conditions.by_time.push(result.data as TimeConditionInterface)
         } else if (data.type === 'sensor') {
           device.value?.conditions.by_sensor.push(result.data as SensorConditionInterface)
         }
@@ -132,7 +132,7 @@ export const useDeviceComposable = () => {
   const update_condition = async (data: Partial<ConditionDtoInterface>, id: string) => {
     await api_client
       .patch<
-        TimeCondition | SensorConditionInterface
+        TimeConditionInterface | SensorConditionInterface
       >(`/devices/${device.value?.uuid}/condition/${id}`, data)
       .then((result) => {
         generate_toast({
@@ -145,7 +145,7 @@ export const useDeviceComposable = () => {
             (condition) => condition._id?.$oid === id,
           )
           if (index !== undefined && index !== -1) {
-            device.value!.conditions.by_time[index] = result.data as TimeCondition
+            device.value!.conditions.by_time[index] = result.data as TimeConditionInterface
           }
         } else if (data.type === 'sensor') {
           const index = device.value?.conditions.by_sensor.findIndex(
@@ -169,13 +169,13 @@ export const useDeviceComposable = () => {
         (condition) => condition._id?.$oid === id,
       )
       if (index !== undefined && index !== -1) {
-        device.value!.conditions.by_sensor.splice(index, 1)
+        device.value!.conditions[mode === 'time' ? 'by_time' : 'by_sensor'].splice(index, 1)
       }
     })
   }
 
   const used_pins = computed(() => {
-    if (!device.value) return []
+    if (!device.value || !device.value.pins) return []
     return [...new Set(device.value?.pins.map((pin) => pin.pin))]
   })
 
@@ -186,6 +186,7 @@ export const useDeviceComposable = () => {
   })
 
   const device_pins_by_type = computed(() => {
+    if (!device.value?.pins) return { input: [], output: [] }
     const input_devices = device.value?.pins.filter((pin) => {
       return pin.type === 'input'
     })

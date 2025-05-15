@@ -1,10 +1,9 @@
 <template>
   <form @submit.prevent="submit">
     <UiModal v-model="trigger" :title="title" @close="on_close">
-      {{ form }}
       <fieldset class="fieldset">
         <legend class="fieldset-legend">
-          Actuador / Dispositivo de salida<span class="text-red-500">*</span>
+          {{ $t('device.modal.condition.fields.output.label') }}<span class="text-red-500">*</span>
         </legend>
         <select class="select w-full" v-model="form.selected_output" @change="validate_form">
           <option disabled :value="null" :selected="data.is_new">
@@ -18,12 +17,14 @@
           class="label text-wrap"
           v-if="device_pins_by_type.output && device_pins_by_type?.output.length <= 0"
         >
-          No hay ningún actuador registrado, debes registrar uno para continuar.
+          {{ $t('device.modal.condition.fields.output.empty') }}
         </p>
       </fieldset>
 
       <fieldset class="fieldset">
-        <legend class="fieldset-legend">Hora y minuto de inicio (24h)</legend>
+        <legend class="fieldset-legend">
+          {{ $t('device.modal.condition.fields.start_time.label') }}
+        </legend>
         <div class="flex flex-row gap-2">
           <input
             class="input w-full"
@@ -31,7 +32,8 @@
             type="number"
             min="0"
             max="23"
-            placeholder="Hora"
+            :placeholder="$t('device.modal.condition.fields.start_time.placeholder.hour')"
+            @input="validate_form"
           />
           <input
             class="input w-full"
@@ -39,12 +41,15 @@
             type="number"
             min="0"
             max="60"
-            placeholder="Minuto"
+            :placeholder="$t('device.modal.condition.fields.start_time.placeholder.minute')"
+            @input="validate_form"
           />
         </div>
       </fieldset>
       <fieldset class="fieldset">
-        <legend class="fieldset-legend">Hora y minuto de finalización (24h)</legend>
+        <legend class="fieldset-legend">
+          {{ $t('device.modal.condition.fields.end_time.label') }}
+        </legend>
         <div class="flex flex-row gap-2">
           <input
             class="input w-full"
@@ -52,7 +57,8 @@
             type="number"
             min="0"
             max="23"
-            placeholder="Hora"
+            :placeholder="$t('device.modal.condition.fields.end_time.placeholder.hour')"
+            @input="validate_form"
           />
           <input
             class="input w-full"
@@ -60,7 +66,8 @@
             type="number"
             min="0"
             max="60"
-            placeholder="Minuto"
+            :placeholder="$t('device.modal.condition.fields.end_time.placeholder.minute')"
+            @input="validate_form"
           />
         </div>
       </fieldset>
@@ -84,7 +91,11 @@
             <button class="btn btn-ghost" type="button" @click="trigger?.close()">
               {{ $t('close') }}
             </button>
-            <button class="btn btn-primary" type="submit" :disabled="is_loading || !!error_message">
+            <button
+              class="btn btn-primary"
+              type="submit"
+              :disabled="!form.selected_output || is_loading || !!error_message"
+            >
               {{ $t('save') }}
             </button>
           </div>
@@ -97,6 +108,8 @@
 import UiModal from '@/components/ui/UiModal.vue'
 import { inject, reactive, ref, watch } from 'vue'
 import type { ConditionDtoInterface, Pins } from '@/interfaces'
+import { capture_detail_error } from '@/utils/axios'
+import { condition_time_schema } from '@/schemas'
 
 const trigger = defineModel<HTMLDialogElement>()
 const device_pins_by_type = inject<{ input: Pins[]; output: Pins[] }>('device_pins_by_type')!
@@ -137,10 +150,10 @@ const props = withDefaults(
 )
 const form = reactive({
   selected_output: null as number | null,
-  start_hour: null as number | null,
-  start_minute: null as number | null,
-  end_hour: null as number | null,
-  end_minute: null as number | null,
+  start_hour: null as number | string | null,
+  start_minute: null as number | string | null,
+  end_hour: null as number | string | null,
+  end_minute: null as number | string | null,
 })
 
 const reset_data = () => {
@@ -166,10 +179,10 @@ const submit = () => {
     type: 'time',
     data: {
       output_pin: form.selected_output!,
-      start_hour: form.start_hour!,
-      start_minute: form.start_minute!,
-      end_hour: form.end_hour!,
-      end_minute: form.end_minute!,
+      start_hour: +form.start_hour!,
+      start_minute: +form.start_minute!,
+      end_hour: +form.end_hour!,
+      end_minute: +form.end_minute!,
     },
   }
 
@@ -205,10 +218,34 @@ const on_close = () => {
   trigger.value?.close()
   reset_data()
 }
-const validate_form = () => {}
+const validate_form = () => {
+  if (form.start_hour === '') form.start_hour = null
+  if (form.start_minute === '') form.start_minute = null
+  if (form.end_hour === '') form.end_hour = null
+  if (form.end_minute === '') form.end_minute = null
 
-const _delete = () => {
-  // TODO
+  const result = condition_time_schema.safeParse(form)
+  if (!result.success) {
+    error_message.value = result.error.errors[0].message
+  } else {
+    error_message.value = null
+  }
+}
+
+const _delete = async () => {
+  is_loading.value = true
+  if (!props.data.id || props.data.is_new) return
+
+  await delete_condition(props.data.id, 'time')
+    .then(() => {
+      trigger.value?.close()
+    })
+    .catch((e) => {
+      error_message.value = capture_detail_error(e)
+    })
+    .finally(() => {
+      is_loading.value = false
+    })
 }
 
 watch(

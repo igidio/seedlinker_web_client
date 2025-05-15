@@ -83,6 +83,6 @@ const modify = (pin: Pins) => {
 const available_pins = inject<PinValuesInterface[]>('available_pins')!
 
 defineProps<{
-  pins: Pins[]
+  pins: Pins[] | []
 }>()
 </script>
