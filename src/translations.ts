@@ -55,6 +55,9 @@ export const translations = {
           end_minute_invalid: 'End minute is invalid',
         },
       },
+      manual: {
+        title: 'Actuators',
+      },
       config: {
         auto: 'Automatic',
         manual: 'Manual',
@@ -321,6 +324,9 @@ export const translations = {
           end_minute_invalid: 'El minuto de fin es inválido',
         },
       },
+      manual: {
+        title: 'Actuadores',
+      },
       config: {
         auto: 'Automático',
         manual: 'Manual',
@@ -455,16 +461,8 @@ export const translations = {
         },
         manual: {
           title: 'Conectar manualmente',
-          description: 'Introduce el UUID del dispositivo que desea conectar',
-          field: {
-            placeholder: 'UUID del dispositivo',
-            label: 'El dispositivo debe estar encendido y conectado a la red',
-          },
-          button: 'Conectar',
-          error: {
-            no_available_device: 'El dispositivo no está disponible',
-            already_registered: 'El dispositivo ya está registrado',
-          },
+          empty:
+
         },
       },
       card_connected_client: {

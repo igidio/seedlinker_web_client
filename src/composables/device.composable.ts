@@ -11,6 +11,7 @@ import type { Device } from '@/classes/device.class.ts'
 import { useConfigStore } from '@/stores/config.store.ts'
 import type { AxiosError } from 'axios'
 import { pin_values } from '@/data/device.data.ts'
+import type { Pins } from '../interfaces/device.interface'
 
 const { generate_toast } = useConfigStore()
 
@@ -22,8 +23,6 @@ export const useDeviceComposable = () => {
     device.value = new_device
     pin_values_by_device.value = pin_values[device.value.type as 'ESP8266' | 'ESP32']
   }
-
-  const delete_device = async (uuid: Device) => {}
 
   const add_pin = async (pin: Partial<DeviceInterface['pins'][0]>) => {
     await api_client
@@ -193,7 +192,10 @@ export const useDeviceComposable = () => {
     })
   })
 
-  const device_pins_by_type = computed(() => {
+  const device_pins_by_type = computed<{
+    input: Pins[]
+    output: Pins[]
+  }>(() => {
     if (!device.value?.pins) return { input: [], output: [] }
     const input_devices = device.value?.pins.filter((pin) => {
       return pin.type === 'input'

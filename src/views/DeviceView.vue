@@ -21,8 +21,12 @@
         <div class="w-full md:w-1/2">
           <PinSection :pins="(device.pins as Pins[]) || []" v-if="device" />
         </div>
-        <div class="grow md:w-1/2">
+        <div class="grow md:w-1/2" v-if="device?.mode === 'auto'">
           <ConditionsBy :conditions="device?.conditions || { by_sensor: [], by_time: [] }" />
+        </div>
+        <!-- <div class="grow md:w-1/2" v-if="device?.mode === 'manual'"> -->
+        <div class="grow md:w-1/2" v-if="device?.mode === 'manual'">
+          <DeviceManualMode :output_pines="useDevice.device_pins_by_type.value" />
         </div>
       </div>
     </div>
@@ -42,6 +46,7 @@ import ConditionsBy from '@/components/project/device/ConditionsBy.vue'
 
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
 import DeviceCardConfig from '@/components/project/device/DeviceCardConfig.vue'
+import DeviceManualMode from '@/components/project/device/DeviceManualMode.vue'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
