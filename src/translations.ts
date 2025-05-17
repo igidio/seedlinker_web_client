@@ -461,8 +461,6 @@ export const translations = {
         },
         manual: {
           title: 'Conectar manualmente',
-          empty:
-
         },
       },
       card_connected_client: {
