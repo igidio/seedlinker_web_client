@@ -22,6 +22,7 @@ export const translations = {
       io_label: 'Connected I/O',
       loading: 'Device information is loading',
       title: 'Your device',
+      status_false: 'You must re-enable the device to configure the other aspects.',
       status_values: {
         active: 'Active',
         inactive: 'Inactive',
@@ -291,6 +292,7 @@ export const translations = {
       io_label: 'I/O conectados',
       loading: 'La información del dispositivo se está cargando',
       title: 'Tu dispositivo',
+      status_false: 'Debes volver a habilitar el dispositivo para configurar los demás aspectos.',
       status_values: {
         active: 'Activo',
         inactive: 'Inactivo',

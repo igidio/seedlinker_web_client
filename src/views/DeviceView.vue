@@ -16,8 +16,14 @@
     <span class="text-base-content" v-if="loading">{{ $t('device.loading') }}...</span>
     <div class="flex flex-col gap-4" v-else>
       <DeviceCardConfig v-if="device" :device="device" :update="update_data" />
+      <UiAlert color="warning" soft icon="ph:warning-bold" v-if="!device?.status">{{
+        $t('device.status_false')
+      }}</UiAlert>
 
-      <div class="flex md:flex-row flex-col gap-4">
+      <div
+        class="flex md:flex-row flex-col gap-4"
+        :class="loading || (!device?.status && 'pointer-events-none opacity-60')"
+      >
         <div class="w-full md:w-1/2">
           <PinSection :pins="(device.pins as Pins[]) || []" v-if="device" />
         </div>
@@ -47,6 +53,7 @@ import ConditionsBy from '@/components/project/device/ConditionsBy.vue'
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
 import DeviceCardConfig from '@/components/project/device/DeviceCardConfig.vue'
 import DeviceManualMode from '@/components/project/device/DeviceManualMode.vue'
+import UiAlert from '@/components/ui/UiAlert.vue'
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
