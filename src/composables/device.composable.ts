@@ -7,7 +7,6 @@ import type {
 } from '@/interfaces'
 import { computed, ref } from 'vue'
 import { api_client } from '@/utils/axios.ts'
-import type { Device } from '@/classes/device.class.ts'
 import { useConfigStore } from '@/stores/config.store.ts'
 import type { AxiosError } from 'axios'
 import { pin_values } from '@/data/device.data.ts'

@@ -28,16 +28,20 @@
           />
         </fieldset>
         <p class="text-error text-center" v-if="error_message">{{ $t(error_message) }}</p>
-        <button type="submit" class="btn btn-lg btn-primary block mt-2 flex flex-row" :disabled="is_loading">
+        <button
+          type="submit"
+          class="btn btn-lg btn-primary mt-2 flex flex-row"
+          :disabled="is_loading"
+        >
           <Icon icon="ph:door-open-fill" />
           {{ $t('login.button') }}
         </button>
         <div class="flex flex-row gap-2">
-          <button class="btn btn-base-200 btn-sm w-1/2 block mt-2 flex flex-row" type="button">
+          <button class="btn btn-base-200 btn-sm w-1/2 mt-2 flex flex-row" type="button">
             <Icon icon="ph:github-logo-fill" />
             {{ $t('login.button_github') }}
           </button>
-          <button class="btn btn-lg btn-sm grow block mt-2 flex flex-row" type="button">
+          <button class="btn btn-sm grow mt-2 flex flex-row" type="button">
             <Icon icon="ph:google-logo-bold" />
             {{ $t('login.button_google') }}
           </button>
@@ -50,7 +54,7 @@
 <script setup lang="ts">
 import UiCard from '@/components/ui/UiCard.vue'
 import { Icon } from '@iconify/vue'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { reactive, ref } from 'vue'
 import { z } from 'zod'
 import { api_client } from '@/utils/axios.ts'
@@ -92,8 +96,8 @@ const submit = async () => {
     .then((response) => {
       console.log('Login successful')
       console.log(response)
-      set_cookie('access_token', response.data["access_token"])
-      set_cookie('refresh_token', response.data["refresh_token"])
+      set_cookie('access_token', response.data['access_token'])
+      set_cookie('refresh_token', response.data['refresh_token'])
       window.location.href = '/'
     })
     .catch((e: AxiosError) => {

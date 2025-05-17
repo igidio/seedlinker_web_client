@@ -223,7 +223,7 @@ const submit = async () => {
   const data: ConditionDtoInterface = {
     type: 'sensor',
     data: {
-      input_pin: form.selected_input?.pin!,
+      input_pin: form.selected_input!.pin!,
       output_pin: form.selected_output!,
       input_mode: form.mode!,
       min_value: form.min_value != null ? +form.min_value : -1,
