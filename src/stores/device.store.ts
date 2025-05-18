@@ -36,18 +36,8 @@ export const useDeviceStore = defineStore('device', () => {
     }
   }
 
-  const initialize = async () => {
-    show_error.value = false
-    try {
-      await set_public_ip()
-    } catch (e) {
-      show_error.value = true
-      console.error(e)
-    }
-
-    socket.value = create_socket(public_ip.value)
-
-    socket.value.onopen = async () => {
+  const send_connection_data = async () => {
+    socket.value!.onopen = async () => {
       socket.value?.send(
         JSON.stringify({
           action: 'register_client',
@@ -58,9 +48,36 @@ export const useDeviceStore = defineStore('device', () => {
       )
     }
 
-    socket.value.onmessage = async () => {
+    socket.value!.onmessage = async () => {
       await get_current_devices()
     }
+
+    socket.value!.onclose = async () => {
+      is_loading_connection.value = true
+      current_devices.value = {}
+      console.log('Closed connection, trying to reconnect...')
+      const tryReconnect = async () => {
+        try {
+          socket.value = create_socket(public_ip.value)
+          await send_connection_data()
+        } catch {
+          setTimeout(tryReconnect, 1000)
+        }
+      }
+      tryReconnect()
+    }
+  }
+
+  const initialize = async () => {
+    show_error.value = false
+    try {
+      await set_public_ip()
+    } catch (e) {
+      show_error.value = true
+      console.error(e)
+    }
+    socket.value = create_socket(public_ip.value)
+    send_connection_data()
   }
 
   const socket_update_device = async (uuid: string, data: object) => {
