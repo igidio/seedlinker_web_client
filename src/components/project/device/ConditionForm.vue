@@ -226,8 +226,8 @@ const submit = async () => {
       input_pin: form.selected_input!.pin!,
       output_pin: form.selected_output!,
       input_mode: form.mode!,
-      min_value: form.min_value != null ? +form.min_value : -1,
-      max_value: form.max_value != null ? +form.max_value : -1,
+      min_value: form.min_value != null ? +form.min_value : -999999999,
+      max_value: form.max_value != null ? +form.max_value : 999999999,
     },
   }
 

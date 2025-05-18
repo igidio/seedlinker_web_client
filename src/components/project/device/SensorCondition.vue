@@ -41,7 +41,7 @@
           value: condition.input_mode,
           icon: 'ph:wrench-bold',
         },
-        ...(condition.min_value > -1
+        ...(condition.min_value > -999999999
           ? [
               {
                 label: $t('device.conditions.label.min_value'),
@@ -51,7 +51,7 @@
             ]
           : []),
 
-        ...(condition.max_value > -1
+        ...(condition.max_value < 999999999
           ? [
               {
                 label: $t('device.conditions.label.max_value'),
@@ -106,8 +106,8 @@ const modify = (condition: SensorConditionInterface) => {
   send_props.input_pin = condition.input_pin
   send_props.output_pin = condition.output_pin
   send_props.input_mode = condition.input_mode
-  send_props.min_value = condition.min_value > -1 ? condition.min_value : null
-  send_props.max_value = condition.max_value > -1 ? condition.max_value : null
+  send_props.min_value = condition.min_value > -999999999 ? condition.min_value : null
+  send_props.max_value = condition.max_value < 999999999 ? condition.max_value : null
   if (condition_trigger.value) {
     condition_trigger.value.showModal()
   }

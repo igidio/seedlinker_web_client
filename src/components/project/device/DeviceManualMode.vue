@@ -13,6 +13,7 @@
         class="btn btn-primary btn-block"
         v-for="(pin, index) in props.output_pines.output"
         :key="index"
+        @click="send(pin.pin, pin.value)"
       >
         {{ $t(`device.io.values.${pin.name}`) + ' ' + `(${pin.gpio})` }}
       </button>
@@ -28,7 +29,15 @@
 <script setup lang="ts">
 import UiCard from '@/components/ui/UiCard.vue'
 import type { Pins } from '@/interfaces'
+import { useDeviceStore } from '@/stores/device.store'
+import { get_cookie } from '@/utils/cookie'
 import { Icon } from '@iconify/vue/dist/iconify.js'
+import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
+
+const { socket } = storeToRefs(useDeviceStore())
+
+const route = useRoute()
 
 const props = defineProps<{
   output_pines: {
@@ -36,4 +45,23 @@ const props = defineProps<{
     output: Pins[]
   }
 }>()
+
+const send = (pin: number, value: number) => {
+  const token = get_cookie('access_token')
+  if (!token) {
+    return
+  }
+  socket.value?.send(
+    JSON.stringify({
+      action: 'manual_client',
+      uuid: route.params.uuid,
+      token: token,
+      data: {
+        pin,
+        value,
+      },
+      // Indica que este mensaje es solo para el servidor, no para broadcast
+    }),
+  )
+}
 </script>

@@ -33,7 +33,6 @@ export const useDeviceStore = defineStore('device', () => {
       }
     } catch (e) {
       show_error.value = true
-      console.error(e)
     }
   }
 
@@ -62,6 +61,23 @@ export const useDeviceStore = defineStore('device', () => {
     socket.value.onmessage = async () => {
       await get_current_devices()
     }
+  }
+
+  const socket_update_device = async (uuid: string, data: object) => {
+    socket.value?.send(
+      JSON.stringify({
+        action: 'update_client',
+        uuid,
+        data,
+      }),
+    )
+    console.log(
+      JSON.stringify({
+        action: 'update_client',
+        uuid,
+        data,
+      }),
+    )
   }
 
   const connected_by_types = computed(() => {
@@ -100,5 +116,6 @@ export const useDeviceStore = defineStore('device', () => {
     get_current_devices,
     devices,
     fetch_data,
+    socket_update_device,
   }
 })

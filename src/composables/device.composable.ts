@@ -41,7 +41,7 @@ export const useDeviceComposable = () => {
   }
 
   const update_pin = async (pin: Partial<DeviceInterface['pins'][0]>, id: string) => {
-    await api_client
+    return await api_client
       .patch(`/devices/${device.value?.uuid}/pin/${id}`, pin)
       .then((response) => {
         generate_toast({
@@ -88,6 +88,7 @@ export const useDeviceComposable = () => {
           message: 'device.alert.edit',
           type: 'success',
         })
+        return device.value
       })
       .catch((error) => {
         console.error('Error updating device:', error)

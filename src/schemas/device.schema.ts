@@ -39,8 +39,10 @@ export const condition_sensor_schema = z
   )
   .refine(
     (data) => {
-      if (data.min_value !== null && data.min_value < 0) return false
-      if (data.max_value !== null && data.max_value < 0) return false
+      if (data.min_value !== null && (data.min_value <= -999999999 || data.min_value >= 999999998))
+        return false
+      if (data.max_value !== null && (data.max_value <= -999999998 || data.max_value >= 999999999))
+        return false
       return true
     },
     {

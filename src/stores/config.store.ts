@@ -8,9 +8,9 @@ export const useConfigStore = defineStore('config', () => {
   const { locale } = useI18n()
   const login_modal_state = ref<HTMLDialogElement>()
   const is_authenticated = ref(false)
-  const selected_theme = ref<string|null>('light')
+  const selected_theme = ref<string | null>('light')
 
-  if (!!get_cookie('access_token')) {
+  if (get_cookie('access_token')) {
     is_authenticated.value = true
   }
 
@@ -42,7 +42,6 @@ export const useConfigStore = defineStore('config', () => {
     const language = localStorage.getItem('language')
     if (language) {
       locale.value = language as 'en' | 'es'
-
     } else {
       locale.value = 'en'
     }

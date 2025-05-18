@@ -42,11 +42,17 @@ import type { DeviceInterface } from '@/interfaces'
 import DeviceModalDelete from './DeviceModalDelete.vue'
 import { inject, onMounted, ref } from 'vue'
 import UiBadge from '@/components/ui/UiBadge.vue'
+import { useDeviceStore } from '@/stores/device.store'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps<{
   device: DeviceInterface
   update: (data: Partial<DeviceInterface>) => void
 }>()
+
+const deviceStore = useDeviceStore()
+const { socket_update_device } = deviceStore
+const { socket } = storeToRefs(deviceStore)
 
 const device_modal_delete_trigger = ref<HTMLDialogElement>()
 const update_data = inject<(new_data: Partial<DeviceInterface>) => Promise<void>>('update_data')!
@@ -66,6 +72,7 @@ const toggle_mode = async () => {
 
   try {
     await update_data(new_data)
+    await socket_update_device(props.device.uuid, new_data)
   } catch (error) {
     console.error('Error updating device mode:', error)
   } finally {
