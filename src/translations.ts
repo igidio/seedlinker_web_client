@@ -32,9 +32,9 @@ export const translations = {
         by_sensor: 'By sensor',
         by_time: 'By time',
         label: {
-          input: 'Sensor',
+          input: 'Sensor pin',
           input_mode: 'Sensor type',
-          output: 'Actuator',
+          output: 'Actuator pin',
           min_value: 'Minimum value',
           max_value: 'Maximum value',
           start_time: 'Start time',
@@ -302,9 +302,9 @@ export const translations = {
         by_sensor: 'Por sensor',
         by_time: 'Por tiempo',
         label: {
-          input: 'Sensor',
+          input: 'Pin del sensor',
           input_mode: 'Modo del sensor',
-          output: 'Actuador',
+          output: 'Pin del actuador',
           min_value: 'Valor mínimo',
           max_value: 'Valor máximo',
           start_time: 'Hora de inicio',

@@ -27,6 +27,7 @@ export interface ID {
 export interface SensorConditionInterface {
   id: string
   input_pin: number
+  value: number
   input_mode: number
   output_pin: number
   min_value: number

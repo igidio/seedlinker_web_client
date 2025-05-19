@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="submit">
     <UiModal v-model="trigger" :title="title" @close="on_close">
+      {{ form.selected_input }}
       <fieldset class="fieldset">
         <legend class="fieldset-legend">
           {{ $t('device.modal.condition.fields.input.label') }}<span class="text-red-500">*</span>
@@ -224,6 +225,7 @@ const submit = async () => {
     type: 'sensor',
     data: {
       input_pin: form.selected_input!.pin!,
+      value: form.selected_input!.value!,
       output_pin: form.selected_output!,
       input_mode: form.mode!,
       min_value: form.min_value != null ? +form.min_value : -999999999,

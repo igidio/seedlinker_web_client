@@ -43,7 +43,6 @@ import DeviceModalDelete from './DeviceModalDelete.vue'
 import { inject, onMounted, ref } from 'vue'
 import UiBadge from '@/components/ui/UiBadge.vue'
 import { useDeviceStore } from '@/stores/device.store'
-import { storeToRefs } from 'pinia'
 
 const props = defineProps<{
   device: DeviceInterface
@@ -52,7 +51,6 @@ const props = defineProps<{
 
 const deviceStore = useDeviceStore()
 const { socket_update_device } = deviceStore
-const { socket } = storeToRefs(deviceStore)
 
 const device_modal_delete_trigger = ref<HTMLDialogElement>()
 const update_data = inject<(new_data: Partial<DeviceInterface>) => Promise<void>>('update_data')!

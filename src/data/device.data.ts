@@ -28,6 +28,7 @@ export const pin_values: Record<'ESP8266' | 'ESP32', PinValuesInterface[]> = {
     { value: 14, label: 'D5 - GPIO14' },
     { value: 12, label: 'D6 - GPIO12' },
     { value: 13, label: 'D7 - GPIO13' },
+    { value: 17, label: 'A0 - ADC' },
   ],
 }
 

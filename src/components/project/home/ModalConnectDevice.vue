@@ -81,7 +81,9 @@ const submit = async () => {
 
   await api_client
     .post(`/devices/${uuid_to_submit}`)
-    .then(async () => {
+
+    .then(async (res) => {
+      console.log(res)
       await fetch_data()
       trigger.value?.close()
       new_uuid.value = ''

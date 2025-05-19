@@ -20,11 +20,11 @@
     <span class="opacity-60" v-if="!conditions || conditions.length <= 0">{{
       $t('device.modal.condition.empty')
     }}</span>
-
     <DeviceItemCondition
       v-for="condition in conditions"
       :key="condition.id"
       @click="modify(condition)"
+      :title="$t(`device.io.values.${io_values.find((e) => e.value == condition.value)?.label}`)"
       :data="[
         {
           label: $t('device.conditions.label.input'),
@@ -38,7 +38,9 @@
         },
         {
           label: $t('device.conditions.label.input_mode'),
-          value: condition.input_mode,
+          value: $t(
+            `${io_values[condition.value - 1].mode?.find((e) => e.value == condition.input_mode)?.type}`,
+          ),
           icon: 'ph:wrench-bold',
         },
         ...(condition.min_value > -999999999
@@ -71,6 +73,7 @@ import { reactive, ref } from 'vue'
 import type { SensorConditionInterface } from '@/interfaces'
 import DeviceItemCondition from './DeviceItemCondition.vue'
 import { Icon } from '@iconify/vue'
+import { io_values } from '@/data/device.data'
 const condition_trigger = ref<HTMLDialogElement>()
 
 defineProps<{

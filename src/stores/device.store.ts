@@ -88,9 +88,12 @@ export const useDeviceStore = defineStore('device', () => {
         data,
       }),
     )
-    console.log(
+  }
+
+  const socket_delete_device = async (uuid: string, data: object) => {
+    socket.value?.send(
       JSON.stringify({
-        action: 'update_client',
+        action: 'delete_client',
         uuid,
         data,
       }),
@@ -115,6 +118,8 @@ export const useDeviceStore = defineStore('device', () => {
     await api_client
       .get<DeviceInterface[]>('/devices')
       .then((response) => {
+        console.log(response.data)
+
         devices.value = response.data
       })
       .catch((error) => {
@@ -134,5 +139,6 @@ export const useDeviceStore = defineStore('device', () => {
     devices,
     fetch_data,
     socket_update_device,
+    socket_delete_device,
   }
 })

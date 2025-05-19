@@ -11,8 +11,10 @@ import { useConfigStore } from '@/stores/config.store.ts'
 import type { AxiosError } from 'axios'
 import { pin_values } from '@/data/device.data.ts'
 import type { Pins } from '../interfaces/device.interface'
+import { useDeviceStore } from '@/stores/device.store'
 
 const { generate_toast } = useConfigStore()
+const { socket_update_device, socket_delete_device } = useDeviceStore()
 
 export const useDeviceComposable = () => {
   const device = ref<DeviceInterface | null>(null)
@@ -26,13 +28,14 @@ export const useDeviceComposable = () => {
   const add_pin = async (pin: Partial<DeviceInterface['pins'][0]>) => {
     await api_client
       .post(`/devices/${device.value?.uuid}/pin`, pin)
-      .then((response) => {
+      .then(async (response) => {
         generate_toast({
           type: 'success',
           message: 'device.modal.io.submit',
         })
         if (device.value?.pins === undefined) device.value!.pins = []
         device.value?.pins.push(response.data)
+        await socket_update_device(device.value?.uuid!, { update: true })
       })
       .catch((e: AxiosError) => {
         throw e
@@ -43,7 +46,7 @@ export const useDeviceComposable = () => {
   const update_pin = async (pin: Partial<DeviceInterface['pins'][0]>, id: string) => {
     return await api_client
       .patch(`/devices/${device.value?.uuid}/pin/${id}`, pin)
-      .then((response) => {
+      .then(async (response) => {
         generate_toast({
           type: 'success',
           message: 'device.modal.io.submit',
@@ -52,6 +55,7 @@ export const useDeviceComposable = () => {
         if (index !== undefined && index !== -1) {
           device.value!.pins[index] = response.data
         }
+        await socket_update_device(device.value?.uuid!, { update: true })
       })
       .catch((e: AxiosError) => {
         throw e
@@ -62,7 +66,7 @@ export const useDeviceComposable = () => {
   const delete_pin = async (id: string) => {
     await api_client
       .delete(`/devices/${device.value?.uuid}/pin/${id}`)
-      .then(() => {
+      .then(async () => {
         generate_toast({
           type: 'success',
           message: 'device.modal.io.submit',
@@ -71,6 +75,7 @@ export const useDeviceComposable = () => {
         if (index !== undefined && index !== -1) {
           device.value!.pins.splice(index, 1)
         }
+        await socket_update_device(device.value?.uuid!, { update: true })
       })
       .catch((e: AxiosError) => {
         throw e
@@ -82,12 +87,13 @@ export const useDeviceComposable = () => {
     if (!device.value) return
     await api_client
       .patch(`/devices/${device.value?.uuid}`, new_data)
-      .then(() => {
+      .then(async () => {
         device.value = { ...(device.value as DeviceInterface), ...new_data }
         generate_toast({
           message: 'device.alert.edit',
           type: 'success',
         })
+        await socket_update_device(device.value?.uuid!, { update: true })
         return device.value
       })
       .catch((error) => {
@@ -98,11 +104,12 @@ export const useDeviceComposable = () => {
   const delete_data = async () => {
     await api_client
       .delete(`/devices/${device.value?.uuid}`)
-      .then(() => {
+      .then(async () => {
         generate_toast({
           message: 'device.alert.delete',
           type: 'success',
         })
+        await socket_delete_device(device.value?.uuid!, { delete: true })
       })
       .catch((error) => {
         console.error('Error deleting device:', error)
@@ -114,7 +121,7 @@ export const useDeviceComposable = () => {
       .post<
         SensorConditionInterface | TimeConditionInterface
       >(`/devices/${device.value?.uuid}/condition`, data)
-      .then((result) => {
+      .then(async (result) => {
         generate_toast({
           //TODO: add message
           message: 'Nueva condicion creada',
@@ -133,6 +140,7 @@ export const useDeviceComposable = () => {
           if (!device.value?.conditions.by_sensor) device.value!.conditions.by_sensor = []
           device.value?.conditions.by_sensor.push(result.data as SensorConditionInterface)
         }
+        await socket_update_device(device.value?.uuid!, { update: true })
       })
   }
 
@@ -141,7 +149,7 @@ export const useDeviceComposable = () => {
       .patch<
         TimeConditionInterface | SensorConditionInterface
       >(`/devices/${device.value?.uuid}/condition/${id}`, data)
-      .then((result) => {
+      .then(async (result) => {
         generate_toast({
           //TODO: add message
           message: 'Agregar esto',
@@ -162,11 +170,12 @@ export const useDeviceComposable = () => {
             device.value!.conditions.by_sensor[index] = result.data as SensorConditionInterface
           }
         }
+        await socket_update_device(device.value?.uuid!, { update: true })
       })
   }
 
   const delete_condition = async (id: string, mode: 'time' | 'sensor') => {
-    await api_client.delete(`/devices/${device.value?.uuid}/condition/${id}`).then(() => {
+    await api_client.delete(`/devices/${device.value?.uuid}/condition/${id}`).then(async () => {
       generate_toast({
         // TODO: add message
         message: 'Eliminar esto',
@@ -178,6 +187,7 @@ export const useDeviceComposable = () => {
       if (index !== undefined && index !== -1) {
         device.value!.conditions[mode === 'time' ? 'by_time' : 'by_sensor'].splice(index, 1)
       }
+      await socket_update_device(device.value?.uuid!, { update: true })
     })
   }
 
