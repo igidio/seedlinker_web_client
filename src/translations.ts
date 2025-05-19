@@ -117,6 +117,9 @@ export const translations = {
               },
             },
           },
+          error: {
+            analog_output: 'You cannot assign an analog pin to an actuator.',
+          },
         },
         condition: {
           title: {
@@ -385,6 +388,9 @@ export const translations = {
                 sensor: 'Sensor',
                 actuator: 'Actuador',
               },
+            },
+            error: {
+              analog_output: 'No puedes asignar un pin analógico a un actuador.',
             },
           },
         },

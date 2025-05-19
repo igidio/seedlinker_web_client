@@ -64,6 +64,7 @@ const router = useRouter()
 const useDevice = useDeviceComposable()
 const { device, set_device, update_data } = useDevice
 
+provide('device', device)
 provide('add_pin', useDevice.add_pin)
 provide('update_pin', useDevice.update_pin)
 provide('delete_pin', useDevice.delete_pin)

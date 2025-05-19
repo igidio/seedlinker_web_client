@@ -22,7 +22,6 @@
           {{ $t('device.modal.io.fields.pin.unavailable_pins') }}
         </p>
       </fieldset>
-
       <fieldset class="fieldset">
         <legend class="fieldset-legend">{{ $t('device.modal.io.fields.io_type.legend') }}</legend>
         <select class="select w-full" v-model="io_selected">
@@ -45,6 +44,9 @@
           }}
         </p>
       </fieldset>
+      <span class="text-end inline-block text-error" v-if="error_message">{{
+        $t(error_message)
+      }}</span>
       <template #footer>
         <div class="flex flex-row justify-between w-full">
           <div>
@@ -69,14 +71,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, ref, watch, type Ref } from 'vue'
 import { io_values } from '@/data/device.data.ts'
-import type { IoValuesInterface, Pins, PinValuesInterface } from '@/interfaces'
+import type { DeviceInterface, IoValuesInterface, Pins, PinValuesInterface } from '@/interfaces'
 import UiModal from '@/components/ui/UiModal.vue'
 import { io_form_schema } from '@/schemas'
 
 const trigger = defineModel<HTMLDialogElement>()
 const is_loading = ref(false)
+const error_message = ref<string | null>(null)
 
 interface Props {
   io_selected: IoValuesInterface | null
@@ -101,6 +104,7 @@ const define_props = withDefaults(defineProps<{ props: Props }>(), {
 const io_selected = ref<IoValuesInterface | null>(null)
 const pin_selected = ref<PinValuesInterface | null>(null)
 const available_pins = inject<PinValuesInterface[]>('available_pins')!
+const device = inject<Ref<DeviceInterface>>('device')!
 
 const validateInputs = () => {
   const result = io_form_schema.safeParse({
@@ -108,7 +112,6 @@ const validateInputs = () => {
     io_selected: io_selected.value,
   })
   if (!result.success) {
-    console.error(result.error.errors)
     return false
   }
   return true
@@ -140,7 +143,24 @@ const submit = async () => {
   }
 }
 
+const additional_validations = () => {
+  if (
+    device.value.type === 'ESP8266' &&
+    io_selected.value?.type === 'output' &&
+    pin_selected.value?.value === 17
+  ) {
+    error_message.value = 'device.modal.io.error.analog_output'
+    return true
+  }
+  error_message.value = null
+}
+
 const is_disabled = computed(() => {
+  const additional_valid = additional_validations()
+
+  if (additional_valid) {
+    return true
+  }
   return !pin_selected.value || !io_selected.value || is_loading.value
 })
 
