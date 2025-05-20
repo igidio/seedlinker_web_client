@@ -44,7 +44,7 @@
           }}
         </p>
       </fieldset>
-      <span class="text-end inline-block text-error" v-if="error_message">{{
+      <span class="text-end inline-block text-error text-sm" v-if="error_message">{{
         $t(error_message)
       }}</span>
       <template #footer>
@@ -76,6 +76,8 @@ import { io_values } from '@/data/device.data.ts'
 import type { DeviceInterface, IoValuesInterface, Pins, PinValuesInterface } from '@/interfaces'
 import UiModal from '@/components/ui/UiModal.vue'
 import { io_form_schema } from '@/schemas'
+import { capture_detail_error } from '@/utils/axios'
+import type { AxiosError } from 'axios'
 
 const trigger = defineModel<HTMLDialogElement>()
 const is_loading = ref(false)
@@ -136,10 +138,10 @@ const submit = async () => {
       await update_pin(data, define_props.props.id!)
     }
     on_close()
-    is_loading.value = false
   } catch (e) {
-    console.log(e)
+    error_message.value = capture_detail_error(e as AxiosError)
   } finally {
+    is_loading.value = false
   }
 }
 
@@ -152,7 +154,6 @@ const additional_validations = () => {
     error_message.value = 'device.modal.io.error.analog_output'
     return true
   }
-  error_message.value = null
 }
 
 const is_disabled = computed(() => {
@@ -168,6 +169,7 @@ const on_close = async () => {
   trigger.value?.close()
   pin_selected.value = null
   io_selected.value = null
+  error_message.value = null
 }
 
 const on_delete = async () => {
@@ -176,9 +178,10 @@ const on_delete = async () => {
   try {
     await delete_pin(define_props.props.id)
     on_close()
-    is_loading.value = false
   } catch (e) {
-    console.log(e)
+    error_message.value = capture_detail_error(e as AxiosError)
+  } finally {
+    is_loading.value = false
   }
 }
 

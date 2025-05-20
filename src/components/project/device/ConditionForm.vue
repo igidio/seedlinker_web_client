@@ -1,7 +1,6 @@
 <template>
   <form @submit.prevent="submit">
     <UiModal v-model="trigger" :title="title" @close="on_close">
-      {{ form.selected_input }}
       <fieldset class="fieldset">
         <legend class="fieldset-legend">
           {{ $t('device.modal.condition.fields.input.label') }}<span class="text-red-500">*</span>

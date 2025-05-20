@@ -54,6 +54,7 @@ export const translations = {
           end_hour_invalid: 'End hour is invalid',
           start_minute_invalid: 'Start minute is invalid',
           end_minute_invalid: 'End minute is invalid',
+          pin_is_in_use: 'The pin is already in use, delete the condition that uses the pin to continue',
         },
       },
       manual: {
@@ -327,6 +328,7 @@ export const translations = {
           end_hour_invalid: 'La hora de fin es inválida',
           start_minute_invalid: 'El minuto de inicio es inválido',
           end_minute_invalid: 'El minuto de fin es inválido',
+          pin_is_in_use: 'El pin ya está en uso, borra la condición que usa el pin para continuar',
         },
       },
       manual: {
