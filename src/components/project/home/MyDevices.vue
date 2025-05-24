@@ -2,9 +2,14 @@
   <div class="flex flex-col gap-2">
     <div class="flex flex-row justify-between items-center">
       <span class="font-bold text-lg mb-2 inline-block">{{ $t('home.my_devices.title') }}</span>
-      <button class="btn btn-xs" @click="load">
-        <Icon icon="ph:arrow-clockwise-bold" />
-      </button>
+      <div class="flex flex-row gap-2 items-center">
+        <RouterLink :to="{ name: 'logs' }">
+          <button class="btn btn-xs"><Icon icon="ph:scroll-bold" />{{ $t('logs.button') }}</button>
+        </RouterLink>
+        <button class="btn btn-xs" @click="load">
+          <Icon icon="ph:arrow-clockwise-bold" />
+        </button>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-2">

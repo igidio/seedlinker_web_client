@@ -5,7 +5,7 @@ import { applyDefaultLayout } from '@/router/apply_default_layout.ts'
 import CenteredLayout from '@/layouts/CenteredLayout.vue'
 import { is_valid_uuid } from '@/utils/validate_uuid.ts'
 
-const routes:RouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
@@ -14,36 +14,42 @@ const routes:RouteRecordRaw[] = [
   {
     path: '/about',
     name: 'about',
-    component: () => import('../views/AboutView.vue'),
-
+    component: () => import('./../views/AboutView.vue'),
   },
+
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/LoginView.vue'),
+    component: () => import('./../views/LoginView.vue'),
     meta: {
-      layout: CenteredLayout
-    }
+      layout: CenteredLayout,
+    },
   },
   {
     path: '/signup',
     name: 'signup',
-    component: () => import('../views/SignupView.vue'),
+    component: () => import('./../views/SignupView.vue'),
     meta: {
-      layout: CenteredLayout
-    }
+      layout: CenteredLayout,
+    },
   },
   {
     path: '/device/:uuid',
     name: 'device',
-    component: () => import('../views/DeviceView.vue'),
+    component: () => import('./../views/DeviceView.vue'),
     beforeEnter: (to, from, next) => {
       if (is_valid_uuid(to.params.uuid as string)) {
-        next();
+        next()
       } else {
-        next({ name: 'home' });
+        next({ name: 'home' })
       }
     },
+  },
+  {
+    path: '/logs',
+    name: 'logs',
+    component: () => import('./../views/LogsView.vue'),
+
   },
 ]
 applyDefaultLayout(routes)

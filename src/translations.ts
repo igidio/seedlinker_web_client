@@ -247,6 +247,10 @@ export const translations = {
         link: 'terms and conditions',
       },
     },
+    logs: {
+      title: 'Logs',
+      button: 'View logs',
+    },
     error: {
       input: {
         username: {
@@ -511,6 +515,10 @@ export const translations = {
         text: 'Al ingresar estás aceptando los {0}',
         link: 'términos y condiciones',
       },
+    },
+    logs: {
+      title: 'Registros',
+      button: 'Ver registros',
     },
     error: {
       input: {
