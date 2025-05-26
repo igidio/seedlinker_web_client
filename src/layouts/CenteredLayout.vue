@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-between items-center min-h-screen bg-base-200">
+  <div class="flex flex-col justify-between items-center min-h-screen bg-base-200 p-2">
     <div class="flex flex-row justify-between w-full sticky top-0  z-50 bg-base-200 items-center">
       <RouterLink :to="{ name: 'home' }">
         <button class="btn btn-ghost">

@@ -1,7 +1,7 @@
 <template>
   <UiCard>
     <template #default>
-      <form class="flex flex-col gap-2" autocomplete="off" @submit.prevent="submit">
+      <form class="flex flex-col gap-2" @submit.prevent="submit">
         <h2 class="font-black text-xl text-center">{{ $t('signup.title') }}</h2>
         <p class="text-center">{{ $t('signup.description') }}</p>
 
@@ -9,8 +9,9 @@
           <legend class="fieldset-legend">{{ $t('signup.fields.username') }}</legend>
           <input
             type="text"
+            id="username"
             class="input w-full"
-            autocomplete="username"
+            autocomplete="off"
             v-model="form.username"
             @input="validate_inputs"
           />
@@ -20,6 +21,7 @@
           <legend class="fieldset-legend">{{ $t('signup.fields.email') }}</legend>
           <input
             type="email"
+            id="email"
             class="input w-full"
             autocomplete="email"
             v-model="form.email"
@@ -31,6 +33,7 @@
           <legend class="fieldset-legend">{{ $t('signup.fields.password') }}</legend>
           <input
             type="password"
+            id="password"
             class="input w-full"
             autocomplete="new_password"
             v-model="form.password"
@@ -41,6 +44,7 @@
           <legend class="fieldset-legend">{{ $t('signup.fields.confirm_password') }}</legend>
           <input
             type="password"
+            id="password_confirm"
             class="input w-full"
             autocomplete="new_password"
             v-model="form.confirm_password"
@@ -48,7 +52,7 @@
           />
         </fieldset>
         <p class="text-error text-center" v-if="error_message">{{ $t(error_message) }}</p>
-        <button class="btn btn-lg btn-primary block mt-2 flex flex-row" :disabled="is_loading">
+        <button class="btn btn-lg btn-primary mt-2 flex flex-row" :disabled="is_loading">
           <Icon icon="ph:door-open-fill" />{{ $t('signup.button') }}
         </button>
         <i18n-t
