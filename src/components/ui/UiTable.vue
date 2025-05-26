@@ -13,7 +13,7 @@
         </slot>
       </thead>
       <tbody>
-        <slot nam="body">
+        <slot name="body">
           <tr>
             <td>Item 1</td>
             <td>Item 2</td>

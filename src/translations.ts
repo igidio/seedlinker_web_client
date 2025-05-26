@@ -251,6 +251,19 @@ export const translations = {
       title: 'Logs',
       button: 'View logs',
       general: 'General logs',
+      table: {
+        headers: {
+          id: 'ID',
+          device_id: 'Device ID',
+          type: 'Type',
+          device_name: 'Device Name',
+          user_id: 'User ID',
+          actuator: 'Actuator',
+          value: 'Value',
+          device_type: 'Device Type',
+          created_at: 'Created At',
+        },
+      },
     },
     error: {
       input: {
@@ -521,6 +534,19 @@ export const translations = {
       title: 'Registros',
       button: 'Ver registros',
       general: "Registros generales",
+      table: {
+        headers: {
+          id: 'ID',
+          device_id: 'ID del dispositivo',
+          type: 'Tipo',
+          device_name: 'Nombre del dispositivo',
+          user_id: 'ID del usuario',
+          actuator: 'Actuador',
+          value: 'Valor',
+          device_type: 'Tipo de dispositivo',
+          created_at: 'Fecha de creación',
+        }
+      }
     },
     error: {
       input: {
