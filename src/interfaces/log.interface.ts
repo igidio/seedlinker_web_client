@@ -7,7 +7,7 @@ export interface LogInterface {
   actuator: number
   value: boolean
   device_type: "ESP32" | "ESP8266"
-  created_at: Date
+  created_at: string
   water?: WaterInterface[]
   dht?: DhtInterface[]
 }
