@@ -7,7 +7,7 @@
           <SidebarContent />
         </div>
 
-        <div class="flex-1 max-w-[2000px]">
+        <div class="flex-1 min-w-[200px] max-w-[2000px]">
             <Transition>
           <Suspense fallback="">
               <slot />

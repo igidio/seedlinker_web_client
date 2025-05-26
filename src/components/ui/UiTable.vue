@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full p-4 text-sm">
-    <table class="table table-xs w-full border-separate border-spacing-2 text-start">
+  <div class="overflow-x-auto">
+    <table class="table table-xs w-full text-xs">
       <!-- head -->
       <thead>
         <slot name="header">
@@ -12,7 +12,7 @@
           </tr>
         </slot>
       </thead>
-      <tbody class="text-center divide-y">
+      <tbody class="divide-y">
         <slot name="body">
           <tr>
             <td>Item 1</td>

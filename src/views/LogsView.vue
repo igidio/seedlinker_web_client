@@ -10,7 +10,8 @@
     :title="$t('logs.title')"
   />
   <div class="flex flex-col gap-2">
-    <div class="flex flex-col gap-2">
+
+    <div class="flex flex-col gap-2 flex-1">
       <span class="font-bold">{{ $t('logs.general') }}</span>
       <LogsTable :logs="logs" />
     </div>
