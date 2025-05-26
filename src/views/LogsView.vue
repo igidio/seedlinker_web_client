@@ -20,25 +20,17 @@
 <script setup lang="ts">
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
 import LogsTable from '@/components/project/logs/LogsTable.vue'
-import type { LogInterface } from '@/interfaces/log.interface'
-import { api_client } from '@/utils/axios'
-import { onMounted, ref } from 'vue'
+import { useLogComposable } from '@/composables/log.composable'
+import { onMounted, provide} from 'vue'
 
-const logs = ref<LogInterface[]>([])
+const logComposable = useLogComposable();
+const { logs } = logComposable
 
-const get_content = async () => {
-  await api_client
-    .get<LogInterface[]>('/service/logs')
-    .then((response) => {
-      console.log(response.data)
-      logs.value = response.data
-    })
-    .catch((error) => {
-      console.error('Error fetching logs:', error)
-    })
-}
+provide('get_content', logComposable.get_content)
+provide('set_limit', logComposable.set_limit)
+provide('set_offset', logComposable.set_offset)
 
 onMounted(async () => {
-  await get_content()
+  await logComposable.get_content()
 })
 </script>

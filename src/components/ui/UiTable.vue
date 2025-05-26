@@ -1,10 +1,10 @@
 <template>
-  <div class="w-full bg-base-100 shadow-lg p-4 rounded-box">
+  <div class="w-full p-4 text-sm">
     <table class="table table-xs w-full border-separate border-spacing-2 text-start">
       <!-- head -->
       <thead>
         <slot name="header">
-          <tr class="text-starts">
+          <tr>
             <th>Table head 1</th>
             <th>Table head 2</th>
             <th>Table head 3</th>
@@ -12,7 +12,7 @@
           </tr>
         </slot>
       </thead>
-      <tbody>
+      <tbody class="text-center divide-y">
         <slot name="body">
           <tr>
             <td>Item 1</td>
