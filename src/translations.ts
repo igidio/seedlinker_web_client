@@ -250,6 +250,7 @@ export const translations = {
     logs: {
       title: 'Logs',
       button: 'View logs',
+      general: 'General logs',
     },
     error: {
       input: {
@@ -519,6 +520,7 @@ export const translations = {
     logs: {
       title: 'Registros',
       button: 'Ver registros',
+      general: "Registros generales",
     },
     error: {
       input: {

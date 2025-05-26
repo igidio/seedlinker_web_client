@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import { applyDefaultLayout } from '@/router/apply_default_layout.ts'
 import CenteredLayout from '@/layouts/CenteredLayout.vue'
 import { is_valid_uuid } from '@/utils/validate_uuid.ts'
