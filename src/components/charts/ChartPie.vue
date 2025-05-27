@@ -9,7 +9,7 @@ import { Pie } from 'vue-chartjs'
 import { useConfigStore } from '@/stores/config.store.ts'
 const configStore = useConfigStore()
 
-const { selected_theme, chart_options } = storeToRefs(configStore)
+const { chart_options } = storeToRefs(configStore)
 
 import { Chart as ChartJS, Tooltip, Legend, ArcElement } from 'chart.js'
 import { storeToRefs } from 'pinia'

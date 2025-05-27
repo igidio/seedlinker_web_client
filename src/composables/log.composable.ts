@@ -1,9 +1,11 @@
+import type { GraphInterface } from '@/interfaces'
 import type { LogInterface } from '@/interfaces/log.interface'
 import { api_client } from '@/utils/axios'
 import { ref } from 'vue'
 
 export const useLogComposable = () => {
   const logs = ref<LogInterface[]>([])
+  const graph_data = ref<GraphInterface>({} as GraphInterface)
   const loading = ref(false)
 
   const limit = ref(10)
@@ -34,6 +36,11 @@ export const useLogComposable = () => {
     offset.value = rest ? offset.value - new_offset : offset.value + new_offset
   }
 
+  const get_graph_data = async () => {
+    const response = await api_client.get<GraphInterface>('/service/logs/graph_data');
+    graph_data.value = response.data;
+  }
+
   return {
     logs,
     loading,
@@ -41,6 +48,8 @@ export const useLogComposable = () => {
     set_limit,
     set_offset,
     offset,
-    limit
+    limit,
+    get_graph_data,
+    graph_data
   }
 }
