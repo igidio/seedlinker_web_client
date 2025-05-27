@@ -1,33 +1,32 @@
 <template>
-  <div class="w-32">
-  <Pie id="pie-chart" :options="chartOptions" :data="chartData" />
+  <div class="w-full">
+    <Pie id="pie-chart" :options="chart_options" :data="chartData" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { Pie } from 'vue-chartjs'
+import { useConfigStore } from '@/stores/config.store.ts'
+const configStore = useConfigStore()
 
-import {
-  Chart as ChartJS,
-  Tooltip,
-  Legend,
-  ArcElement,
-  type ChartOptions,
-} from 'chart.js'
+const { selected_theme, chart_options } = storeToRefs(configStore)
+
+import { Chart as ChartJS, Tooltip, Legend, ArcElement } from 'chart.js'
+import { storeToRefs } from 'pinia'
+import { generate_color_palette } from '@/utils/generate_color_palette'
+import type { ChartInterface } from '@/interfaces'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-const chartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
 
+const props = defineProps<ChartInterface>()
 
-}
 const chartData = {
-  labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+  labels: props.elements.map((element) => element.label),
   datasets: [
     {
-      backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-      data: [40, 20, 80, 10],
+      backgroundColor: generate_color_palette('#3498db', props.elements.length),
+      data: props.elements.map((element) => element.value),
+      borderWidth: 1,
     },
   ],
 }

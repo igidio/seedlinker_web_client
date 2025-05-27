@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { get_cookie, remove_cookie } from '@/utils/cookie.ts'
 import type { ToastInterface } from '@/interfaces'
@@ -66,6 +66,27 @@ export const useConfigStore = defineStore('config', () => {
     }, toast_data.duration || 3000)
   }
 
+  const chart_options = computed(
+  () =>
+    ({
+      responsive: true,
+      maintainAspectRatio: false,
+      color: selected_theme.value == 'dark' ? '#fff' : '#000',
+      borderColor: selected_theme.value == 'dark' ? '#fff' : '#000',
+      plugins: {
+        legend: {
+          labels: {
+            boxWidth: 12,
+            boxHeight: 12,
+            font: {
+              size: 10,
+            },
+          },
+        },
+      },
+    })
+)
+
   return {
     login_modal_state,
     locale,
@@ -80,5 +101,7 @@ export const useConfigStore = defineStore('config', () => {
     // TOAST
     toasts,
     generate_toast,
+    // CHARTS
+    chart_options
   }
 })

@@ -54,7 +54,8 @@ export const translations = {
           end_hour_invalid: 'End hour is invalid',
           start_minute_invalid: 'Start minute is invalid',
           end_minute_invalid: 'End minute is invalid',
-          pin_is_in_use: 'The pin is already in use, delete the condition that uses the pin to continue',
+          pin_is_in_use:
+            'The pin is already in use, delete the condition that uses the pin to continue',
         },
       },
       manual: {
@@ -282,9 +283,9 @@ export const translations = {
           time: 'Time Condition',
         },
         last: 'Last',
-        charts: {
-          by_device_type: 'By device type',
-        }
+      },
+      charts: {
+        by_device_type: 'By device type',
       },
     },
     error: {
@@ -555,7 +556,7 @@ export const translations = {
     logs: {
       title: 'Registros',
       button: 'Ver registros',
-      general: "Registros generales",
+      general: 'Registros generales',
       table: {
         headers: {
           id: 'ID',
@@ -590,7 +591,7 @@ export const translations = {
       },
       charts: {
         by_device_type: 'Por tipo de dispositivo',
-      }
+      },
     },
     error: {
       input: {
