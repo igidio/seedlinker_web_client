@@ -15,11 +15,12 @@
     </div>
   </div>
 
-  <div v-if="!is_loading_graphs" class="grid grid-cols-2 gap-4">
+  <div v-if="!is_loading_graphs" class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <ByDeviceTypeChart />
     <ByActionTypeChart />
     <ByDayChart />
     <AverageDhtByDay />
+    <AverageDhtByDevice />
   </div>
   <!-- <div class="grid grid-cols-2 gap-4"> -->
 
@@ -29,6 +30,7 @@
 <script setup lang="ts">
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
 import AverageDhtByDay from '@/components/project/logs/AverageDhtByDay.vue'
+import AverageDhtByDevice from '@/components/project/logs/AverageDhtByDevice.vue'
 import ByActionTypeChart from '@/components/project/logs/ByActionTypeChart.vue'
 import ByDayChart from '@/components/project/logs/ByDayChart.vue'
 import ByDeviceTypeChart from '@/components/project/logs/ByDeviceTypeChart.vue'

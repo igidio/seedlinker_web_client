@@ -1,6 +1,10 @@
 <template>
   <div class="w-full">
-    <Line id="doughnut-chart" :options="chart_options" :data="chartData" />
+    <Line
+      id="doughnut-chart"
+      :options="{ ...chart_options, ...chart_option_border }"
+      :data="chartData"
+    />
   </div>
 </template>
 
@@ -9,7 +13,7 @@ import { Line } from 'vue-chartjs'
 import { useConfigStore } from '@/stores/config.store.ts'
 const configStore = useConfigStore()
 
-const { chart_options } = storeToRefs(configStore)
+const { chart_options, chart_option_border } = storeToRefs(configStore)
 
 import {
   Chart as ChartJS,
@@ -36,6 +40,22 @@ const chartData = computed(() => ({
       label: props.label,
       data: props.elements.map((element) => element.value),
       borderWidth: 1,
+      borderColor: '#8fff00',
+      pointBackgroundColor: '#8fff00',
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: props.label,
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Date',
+          },
+        },
+      }
     },
   ],
 }))

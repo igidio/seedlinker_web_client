@@ -66,26 +66,56 @@ export const useConfigStore = defineStore('config', () => {
     }, toast_data.duration || 3000)
   }
 
-  const chart_options = computed(
-  () =>
-    ({
-      responsive: true,
-      maintainAspectRatio: false,
-      color: selected_theme.value == 'dark' ? '#fff' : '#000',
-      borderColor: selected_theme.value == 'dark' ? '#fff' : '#000',
-      plugins: {
-        legend: {
-          labels: {
-            boxWidth: 12,
-            boxHeight: 12,
-            font: {
-              size: 10,
-            },
+  const chart_options = computed(() => ({
+    responsive: true,
+    maintainAspectRatio: false,
+    color: selected_theme.value == 'dark' ? '#fff' : '#000',
+    borderColor: '#0000',
+    plugins: {
+      legend: {
+        labels: {
+          boxWidth: 12,
+          boxHeight: 12,
+          font: {
+            size: 10,
           },
         },
       },
-    })
-)
+    },
+  }))
+
+  const chart_option_border = computed(() => ({
+    borderColor: selected_theme.value == 'dark' ? '#fff' : '#000',
+    backgroundColor: selected_theme.value == 'dark' ? '#fff' : '#000',
+    pointBackgroundColor: selected_theme.value == 'dark' ? '#fff' : '#000',
+    pointBorderColor: selected_theme.value == 'dark' ? '#fff' : '#000',
+    scales: {
+      x: {
+        display: true,
+        grid: {
+          color: selected_theme.value == 'dark' ? '#fff4' : '#0004',
+        },
+        ticks: {
+          color: selected_theme.value == 'dark' ? '#fff' : '#000',
+          font: {
+            size: 8,
+          },
+        },
+      },
+      y: {
+        display: true,
+        grid: {
+          color: selected_theme.value == 'dark' ? '#fff4' : '#0004',
+        },
+        ticks: {
+          color: selected_theme.value == 'dark' ? '#fff' : '#000',
+          font: {
+            size: 8,
+          },
+        },
+      },
+    },
+  }))
 
   return {
     login_modal_state,
@@ -98,10 +128,11 @@ export const useConfigStore = defineStore('config', () => {
     selected_theme,
     get_theme,
     set_theme,
+    chart_option_border,
     // TOAST
     toasts,
     generate_toast,
     // CHARTS
-    chart_options
+    chart_options,
   }
 })

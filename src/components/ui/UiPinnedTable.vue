@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-pin-rows bg-base-200">
+  <table class="table table-pin-rows bg-base-200 text-xs">
     <template v-for="section in elements" :key="section.label">
       <thead>
         <tr>
