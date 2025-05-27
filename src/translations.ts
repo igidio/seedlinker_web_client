@@ -288,6 +288,8 @@ export const translations = {
         by_device_type: 'By device type',
         by_action_type: 'By action type',
         by_day: 'By day',
+        avg_temperature: 'Average temperature',
+        avg_humidity: 'Average humidity',
       },
     },
     error: {
@@ -595,6 +597,8 @@ export const translations = {
         by_device_type: 'Por tipo de dispositivo',
         by_action_type: 'Por tipo de acción',
         by_day: 'Por día',
+        avg_temperature: 'Temperatura promedio',
+        avg_humidity: 'Humedad promedio',
       },
     },
     error: {

@@ -8,6 +8,8 @@ export interface GraphInterface {
   value_changes_by_device_type: ByDeviceName[]
   count_on_off_by_date: CountOnOffByDate[]
   count_on_off_by_actuator: CountOnOffByActuator[]
+  average_dht_by_device: AverageDhtByDevice[]
+  average_dht_by_day: AverageDhtByDay[]
 }
 
 export interface ByActionType {
@@ -51,4 +53,16 @@ export interface CountOnOffByDate {
   date: Date
   true: number
   false: number
+}
+
+export interface AverageDhtByDay {
+  date: Date
+  avg_temperature: number
+  avg_humidity: number
+}
+
+export interface AverageDhtByDevice {
+  device_name: string
+  avg_temperature: number
+  avg_humidity: number
 }

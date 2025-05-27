@@ -19,12 +19,16 @@
     <ByDeviceTypeChart />
     <ByActionTypeChart />
     <ByDayChart />
+    <AverageDhtByDay />
   </div>
+  <!-- <div class="grid grid-cols-2 gap-4"> -->
 
+  <!-- </div> -->
 </template>
 
 <script setup lang="ts">
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
+import AverageDhtByDay from '@/components/project/logs/AverageDhtByDay.vue'
 import ByActionTypeChart from '@/components/project/logs/ByActionTypeChart.vue'
 import ByDayChart from '@/components/project/logs/ByDayChart.vue'
 import ByDeviceTypeChart from '@/components/project/logs/ByDeviceTypeChart.vue'
@@ -51,6 +55,6 @@ const load_graphs = async () => {
 
 onMounted(async () => {
   await logComposable.get_content()
-  await load_graphs();
+  await load_graphs()
 })
 </script>
