@@ -31,7 +31,7 @@ export const useLogComposable = () => {
   }
 
   const set_offset = (new_offset: number, rest: boolean = false) => {
-    offset.value = rest ? new_offset : offset.value + new_offset
+    offset.value = rest ? offset.value - new_offset : offset.value + new_offset
   }
 
   return {
@@ -39,6 +39,8 @@ export const useLogComposable = () => {
     loading,
     get_content,
     set_limit,
-    set_offset
+    set_offset,
+    offset,
+    limit
   }
 }

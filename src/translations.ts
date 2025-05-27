@@ -262,7 +262,26 @@ export const translations = {
           value: 'Value',
           device_type: 'Device Type',
           created_at: 'Created At',
+          more_info: 'More Info',
         },
+        value: {
+          true: 'On',
+          false: 'Off',
+        },
+        mode: {
+          analog: 'Analog',
+          digital: 'Digital',
+          humidity: 'Humidity',
+          temperature_celsius: 'Temperature (Celsius)',
+          temperature_fahrenheit: 'Temperature (Fahrenheit)',
+        },
+        type: {
+          dht: 'DHT Sensor',
+          water: 'Water Sensor',
+          manual: 'Manual',
+          time: 'Time Condition',
+        },
+        last: 'Last',
       },
     },
     error: {
@@ -545,7 +564,26 @@ export const translations = {
           value: 'Valor',
           device_type: 'Tipo de dispositivo',
           created_at: 'Fecha de creación',
-        }
+          more_info: 'Más información',
+        },
+        value: {
+          true: 'Encendido',
+          false: 'Apagado',
+        },
+        mode: {
+          analog: 'Analógico',
+          digital: 'Digital',
+          humidity: 'Humedad',
+          temperature_celsius: 'Temperatura (Celsius)',
+          temperature_fahrenheit: 'Temperatura (Fahrenheit)',
+        },
+        type: {
+          dht: 'Sensor DHT',
+          water: 'Sensor de agua',
+          manual: 'Manual',
+          time: 'Condición por tiempo',
+        },
+        last: 'Últimos',
       }
     },
     error: {

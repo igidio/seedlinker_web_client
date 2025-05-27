@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-x-auto">
-    <table class="table table-xs w-full text-xs">
+    <table class="table table-xs w-full text-xs whitespace-nowrap">
       <!-- head -->
       <thead>
         <slot name="header">

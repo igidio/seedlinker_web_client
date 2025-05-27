@@ -3,7 +3,6 @@
 
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
-  /*themes: light --default, dark --prefersdark;*/
 }
 
 @plugin "daisyui/theme" {
@@ -80,4 +79,9 @@
 
 @theme {
   --default-font-family: "aileron", sans-serif;
+}
+
+.tooltip {
+    --tooltip-color: #000;
+    --tooltip-text-color: #FFF;
 }

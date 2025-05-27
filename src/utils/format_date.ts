@@ -6,5 +6,5 @@ export const format_date = (date: string) => {
   return DateTime.fromISO(date)
     .setLocale('es')
     .setZone(userZone)
-    .toFormat('dd-LL-yyyy HH:mm')
+    .toFormat('LL/dd/yyyy HH:mm')
 }
