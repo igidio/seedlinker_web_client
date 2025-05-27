@@ -282,6 +282,9 @@ export const translations = {
           time: 'Time Condition',
         },
         last: 'Last',
+        charts: {
+          by_device_type: 'By device type',
+        }
       },
     },
     error: {
@@ -584,6 +587,9 @@ export const translations = {
           time: 'Condición por tiempo',
         },
         last: 'Últimos',
+      },
+      charts: {
+        by_device_type: 'Por tipo de dispositivo',
       }
     },
     error: {

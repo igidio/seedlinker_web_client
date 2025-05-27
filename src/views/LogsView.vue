@@ -13,21 +13,17 @@
     <div class="flex flex-col gap-2 flex-1">
       <LogsTable :logs="logs" />
     </div>
-  </div>
 
-  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+  </div>
+  <ByDeviceTypeChart/>
 </template>
 
 <script setup lang="ts">
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
+import ByDeviceTypeChart from '@/components/project/logs/ByDeviceTypeChart.vue'
 import LogsTable from '@/components/project/logs/LogsTable.vue'
 import { useLogComposable } from '@/composables/log.composable'
 import { onMounted, provide } from 'vue'
-import { Bar } from 'vue-chartjs'
-
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const logComposable = useLogComposable()
 const { logs } = logComposable
@@ -41,12 +37,4 @@ provide('limit', logComposable.limit)
 onMounted(async () => {
   await logComposable.get_content()
 })
-
-const chartOptions = {
-  responsive: true,
-}
-const chartData = {
-  labels: ['January', 'February', 'March'],
-  datasets: [{ data: [40, 20, 12] }],
-}
 </script>
