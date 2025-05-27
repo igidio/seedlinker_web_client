@@ -286,6 +286,7 @@ export const translations = {
       },
       charts: {
         by_device_type: 'By device type',
+        by_action_type: 'By action type',
       },
     },
     error: {
@@ -591,6 +592,7 @@ export const translations = {
       },
       charts: {
         by_device_type: 'Por tipo de dispositivo',
+        by_action_type: 'Por tipo de acción',
       },
     },
     error: {

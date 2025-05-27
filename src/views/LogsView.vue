@@ -15,14 +15,16 @@
     </div>
   </div>
 
-  <div v-if="!is_loading_graphs" class="flex flex-col gap-2">
+  <div v-if="!is_loading_graphs" class="grid grid-cols-2 gap-4">
     <ByDeviceTypeChart />
+    <ByActionTypeChart />
   </div>
 
 </template>
 
 <script setup lang="ts">
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
+import ByActionTypeChart from '@/components/project/logs/ByActionTypeChart.vue'
 import ByDeviceTypeChart from '@/components/project/logs/ByDeviceTypeChart.vue'
 import LogsTable from '@/components/project/logs/LogsTable.vue'
 import { useLogComposable } from '@/composables/log.composable'
