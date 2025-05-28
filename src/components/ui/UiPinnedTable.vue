@@ -1,5 +1,6 @@
 <template>
-  <table class="table table-pin-rows bg-base-200 text-xs">
+  <div class="">
+  <table class="table table-pin-rows bg-base-200 text-xs ">
     <template v-for="section in elements" :key="section.label">
       <thead>
         <tr>
@@ -13,6 +14,7 @@
       </tbody>
     </template>
   </table>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -9,24 +9,28 @@
     ]"
     :title="$t('logs.title')"
   />
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-2 mb-4">
     <div class="flex flex-col gap-2 flex-1">
       <LogsTable :logs="logs" />
     </div>
   </div>
 
-  <div v-if="!is_loading_graphs" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <ByDeviceTypeChart />
-    <ByActionTypeChart />
-    <ByDayChart />
+  <div class="flex flex-row w-full gap-4">
+    <div v-if="!is_loading_graphs" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-[80%]">
+      <ByDeviceTypeChart />
+      <ByActionTypeChart />
+      <ByDayChart />
 
-    <ValueChangesByDevice />
-    <CountOnOffByDate />
-    <CountOnOffByActuator />
+      <ValueChangesByDevice />
+      <CountOnOffByDate />
+      <CountOnOffByActuator />
+    </div>
+    <div class="flex flex-col grow gap-8">
+      <AverageDhtByDay />
+      <AverageDhtByDevice />
+    </div>
   </div>
-  <AverageDhtByDay />
-  <AverageDhtByDevice />
-  <div></div>
+
   <!-- <div class="grid grid-cols-2 gap-4"> -->
 
   <!-- </div> -->
@@ -34,15 +38,15 @@
 
 <script setup lang="ts">
 import ContentHeader from '@/components/project/global/ContentHeader.vue'
-import AverageDhtByDay from '@/components/project/logs/AverageDhtByDay.vue'
-import AverageDhtByDevice from '@/components/project/logs/AverageDhtByDevice.vue'
-import ByActionTypeChart from '@/components/project/logs/ByActionTypeChart.vue'
-import ByDayChart from '@/components/project/logs/ByDayChart.vue'
-import ByDeviceTypeChart from '@/components/project/logs/ByDeviceTypeChart.vue'
-import CountOnOffByActuator from '@/components/project/logs/CountOnOffByActuator.vue'
-import CountOnOffByDate from '@/components/project/logs/CountOnOffByDate.vue'
-import LogsTable from '@/components/project/logs/LogsTable.vue'
-import ValueChangesByDevice from '@/components/project/logs/ValueChangesByDevice.vue'
+import AverageDhtByDay from '@/components/project/log/AverageDhtByDay.vue'
+import AverageDhtByDevice from '@/components/project/log/AverageDhtByDevice.vue'
+import ByActionTypeChart from '@/components/project/log/ByActionTypeChart.vue'
+import ByDayChart from '@/components/project/log/ByDayChart.vue'
+import ByDeviceTypeChart from '@/components/project/log/ByDeviceTypeChart.vue'
+import CountOnOffByActuator from '@/components/project/log/CountOnOffByActuator.vue'
+import CountOnOffByDate from '@/components/project/log/CountOnOffByDate.vue'
+import LogsTable from '@/components/project/log/LogsTable.vue'
+import ValueChangesByDevice from '@/components/project/log/ValueChangesByDevice.vue'
 import { useLogComposable } from '@/composables/log.composable'
 import { onMounted, provide, ref } from 'vue'
 
