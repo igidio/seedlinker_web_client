@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <Bar id="pie-chart" :options="chart_options" :data="chartData" />
+    <Bar id="pie-chart" :options="{ ...chart_options, ...chart_option_border }" :data="chartData" />
   </div>
 </template>
 
@@ -9,25 +9,32 @@ import { Bar } from 'vue-chartjs'
 import { useConfigStore } from '@/stores/config.store.ts'
 const configStore = useConfigStore()
 
-const { chart_options } = storeToRefs(configStore)
+const { chart_option_border, chart_options } = storeToRefs(configStore)
 
-import { Chart as ChartJS, Tooltip, Legend, ArcElement } from 'chart.js'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from 'chart.js'
 import { storeToRefs } from 'pinia'
 import { generate_color_palette } from '@/utils/generate_color_palette'
-import type { ChartInterface } from '@/interfaces'
-ChartJS.register(ArcElement, Tooltip, Legend)
+import type { BarChartInterface } from '@/interfaces'
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
-
-const props = defineProps<ChartInterface>()
+const props = defineProps<BarChartInterface>()
+const color_palette = generate_color_palette('#3498db', props.elements.type.length)
 
 const chartData = {
-  labels: props.elements.map((element) => element.label),
-  datasets: [
-    {
-      backgroundColor: generate_color_palette('#3498db', props.elements.length),
-      data: props.elements.map((element) => element.value),
-      borderWidth: 1,
-    },
-  ],
+  labels: props.elements.label.map((e) => e),
+  datasets: props.elements.value.map((value, index) => ({
+    label: props.elements.type[index],
+    backgroundColor: color_palette[index],
+    data: value,
+    borderWidth: 0,
+  })),
 }
 </script>

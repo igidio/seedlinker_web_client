@@ -19,9 +19,14 @@
     <ByDeviceTypeChart />
     <ByActionTypeChart />
     <ByDayChart />
-    <AverageDhtByDay />
-    <AverageDhtByDevice />
+
+    <ValueChangesByDevice />
+    <CountOnOffByDate />
+    <CountOnOffByActuator />
   </div>
+  <AverageDhtByDay />
+  <AverageDhtByDevice />
+  <div></div>
   <!-- <div class="grid grid-cols-2 gap-4"> -->
 
   <!-- </div> -->
@@ -34,7 +39,10 @@ import AverageDhtByDevice from '@/components/project/logs/AverageDhtByDevice.vue
 import ByActionTypeChart from '@/components/project/logs/ByActionTypeChart.vue'
 import ByDayChart from '@/components/project/logs/ByDayChart.vue'
 import ByDeviceTypeChart from '@/components/project/logs/ByDeviceTypeChart.vue'
+import CountOnOffByActuator from '@/components/project/logs/CountOnOffByActuator.vue'
+import CountOnOffByDate from '@/components/project/logs/CountOnOffByDate.vue'
 import LogsTable from '@/components/project/logs/LogsTable.vue'
+import ValueChangesByDevice from '@/components/project/logs/ValueChangesByDevice.vue'
 import { useLogComposable } from '@/composables/log.composable'
 import { onMounted, provide, ref } from 'vue'
 
