@@ -16,7 +16,7 @@
     <span class="text-xs">{{ $t('home.connection_state.error') }}</span>
   </UiAlert>
 
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-4 overflow-y-auto" :style="`height: calc(100vh - ${height_to_subtract}px);`">
     <div
       class="flex flex-col gap-1 bg-base-100 rounded-xl border border-primary border-dashed text-xs p-2"
       v-for="(client, key) in clients_connected"
@@ -34,6 +34,12 @@ import { useDeviceStore } from '@/stores/device.store.ts'
 import { Icon } from '@iconify/vue/dist/iconify.js'
 import UiAlert from '@/components/ui/UiAlert.vue'
 
-const { connected_by_types, is_loading_connection, show_error, clients_connected } =
+const { is_loading_connection, show_error, clients_connected } =
   storeToRefs(useDeviceStore())
+
+withDefaults(defineProps<{
+  height_to_subtract?: number
+}>(), {
+  height_to_subtract: 0,
+})
 </script>

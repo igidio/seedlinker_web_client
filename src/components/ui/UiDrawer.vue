@@ -9,7 +9,7 @@
     </div>
     <div class="drawer-side">
       <label :for="element?.id" aria-label="close sidebar" class="drawer-overlay"></label>
-      <div class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+      <div class="menu bg-base-200 text-base-content min-h-full w-80 pt-4 px-4">
         <slot name="default"/>
       </div>
     </div>
