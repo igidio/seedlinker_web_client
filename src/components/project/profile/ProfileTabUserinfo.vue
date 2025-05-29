@@ -63,7 +63,7 @@ const form = reactive({
   email: '',
 })
 
-const submit = () => {
+const submit = async () => {
   is_loading.value = true
   validate_inputs()
   if (error_message.value) {
@@ -74,8 +74,7 @@ const submit = () => {
     username: form.username,
     email: form.email,
   }
-  update_user(data).then(() => {
-    console.log('User updated successfully')
+  await update_user(data).then(() => {
     error_message.value = null
   })
   .catch((error: Error) => {

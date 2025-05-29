@@ -28,6 +28,7 @@ const profileComposable = useProfileComposable()
 const { get_user, user } = profileComposable
 
 provide('update_user', profileComposable.update_user)
+provide('update_password', profileComposable.update_password)
 
 await get_user()
 </script>

@@ -315,7 +315,16 @@ export const translations = {
           new_password: 'New Password',
           confirm_new_password: 'Confirm New Password',
         },
-        button: 'Guardar cambios',
+        button: 'Save changes',
+        error: {
+          current_password_required: 'Current password must be at least 8 characters long',
+          current_password_too_long: 'Current password cannot be longer than 20 characters',
+          new_password_required: 'New password must be at least 8 characters long',
+          new_password_too_long: 'New password cannot be longer than 20 characters',
+          confirm_password_required: 'Confirm password must be at least 8 characters long',
+          confirm_password_too_long: 'Confirm password cannot be longer than 20 characters',
+          passwords_do_not_match: 'Passwords do not match',
+        }
       },
       sign_up: {
         title: 'Sign Up Alternatives',
@@ -356,6 +365,7 @@ export const translations = {
         invalid_uuid: 'Invalid UUID',
         device_not_found: 'Device not found, please check the UUID',
         unprocessable: 'The submitted data is not valid',
+        no_spaces_allowed: 'No spaces allowed',
       },
     },
   },
@@ -667,7 +677,16 @@ export const translations = {
           new_password: 'Nueva contraseña',
           confirm_new_password: 'Confirmar nueva contraseña',
         },
-        button: 'Cambiar contraseña',
+        button: 'Guardar cambios',
+        error: {
+          current_password_required: 'La contraseña actual debe tener al menos 8 caracteres',
+          current_password_too_long: 'La contraseña actual no puede tener más de 20 caracteres',
+          new_password_required: 'La nueva contraseña debe tener al menos 8 caracteres',
+          new_password_too_long: 'La nueva contraseña no puede tener más de 20 caracteres',
+          confirm_password_required: 'La confirmación de la contraseña  debe tener al menos 8 caracteres',
+          confirm_password_too_long: 'La confirmación de la contraseña no puede tener más de 20 caracteres',
+          passwords_do_not_match: 'Las contraseñas no coinciden',
+        }
       },
       sign_up: {
         title: 'Alternativas de inicio de sesión',
@@ -709,6 +728,7 @@ export const translations = {
         invalid_uuid: 'El UUID no es válido',
         device_not_found: 'Dispositivo no encontrado, por favor verifique el UUID',
         unprocessable: 'Los datos enviados no son válidos',
+        no_spaces_allowed: 'No se permiten espacios en blanco',
       },
     },
   },

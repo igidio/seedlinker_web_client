@@ -33,10 +33,21 @@ export const useProfileComposable = () => {
     })
   }
 
+  const update_password = async (data: { current_password: string; new_password: string }) => {
+    await api_client.post('/service/auth/update/password', data).then((response) => {
+      console.log('User password updated:', response.data)
+      generate_toast({
+        type: 'success',
+        message: 'profile.success',
+      })
+    })
+  }
+
   return {
     user,
     loading,
     get_user,
     update_user,
+    update_password,
   }
 }
