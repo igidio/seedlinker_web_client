@@ -12,10 +12,10 @@
         <UiAvatar />
         <template #dropdown>
           <li>
-            <a>
+            <router-link :to="{ name: 'profile' }">
               <Icon icon="ph:user-fill" />
               {{ $t('profile') }}
-            </a>
+            </router-link>
           </li>
           <li>
             <button @click="configStore.logout">
@@ -65,9 +65,7 @@ import UiDropdown from '@/components/ui/UiDropdown.vue'
 import { Icon } from '@iconify/vue'
 import { useConfigStore } from '@/stores/config.store.ts'
 import { storeToRefs } from 'pinia'
-import UiDrawer from '@/components/ui/UiDrawer.vue'
 import MobileSidebar from '@/components/project/global/MobileSidebar.vue'
-import ToggleLanguage from '@/components/project/global/ToggleLanguage.vue'
 
 const configStore = useConfigStore()
 const { is_authenticated } = storeToRefs(configStore)

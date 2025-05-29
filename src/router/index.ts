@@ -34,6 +34,11 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('./../views/ProfileView.vue'),
+  },
+  {
     path: '/device/:uuid',
     name: 'device',
     component: () => import('./../views/DeviceView.vue'),
