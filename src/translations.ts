@@ -9,7 +9,6 @@ export const translations = {
     connect_manually: 'Connect manually',
     go_home: 'Go to home',
     select_language: 'Select language',
-    profile: 'Edit profile',
     logout: 'Log out',
     configure: 'Configure',
     device: {
@@ -297,6 +296,27 @@ export const translations = {
         state_change: 'State changes',
       },
     },
+    profile: {
+      title: 'Edit Profile',
+      user_info: {
+        title: 'User Information',
+        description: 'Modify your user information such as username and email',
+      },
+      password: {
+        title: 'Change Password',
+        description: 'Change your current password to a new one',
+        fields: {
+          current_password: 'Current Password',
+          new_password: 'New Password',
+          confirm_new_password: 'Confirm New Password',
+        },
+        button: 'Change Password',
+      },
+      sign_up: {
+        title: 'Sign Up Alternatives',
+        description: 'You can change your sign-up options here',
+      }
+    },
     error: {
       input: {
         username: {
@@ -330,7 +350,7 @@ export const translations = {
     add: 'Agregar',
     close: 'Cerrar',
     cancel: 'Cancelar',
-    profile: 'Modificar perfil',
+
     logout: 'Cerrar sesión',
     connect_manually: 'Conectar manualmente',
     configure: 'Configurar',
@@ -610,6 +630,27 @@ export const translations = {
         avg_humidity: 'Humedad promedio',
         state_change: 'Cambios de estado',
       },
+    },
+    profile: {
+      title: 'Editar perfil',
+      user_info: {
+        title: 'Información del usuario',
+        description: 'Modifica la información de tu usuario como el nombre de usuario y correo electrónico',
+      },
+      password: {
+        title: 'Cambiar contraseña',
+        description: 'Cambia tu contraseña actual por una nueva',
+        fields: {
+          current_password: 'Contraseña actual',
+          new_password: 'Nueva contraseña',
+          confirm_new_password: 'Confirmar nueva contraseña',
+        },
+        button: 'Cambiar contraseña',
+      },
+      sign_up: {
+        title: 'Alternativas de inicio de sesión',
+        description: 'Puedes cambiar tus opciones de inicio de sesión aquí',
+      }
     },
     error: {
       input: {

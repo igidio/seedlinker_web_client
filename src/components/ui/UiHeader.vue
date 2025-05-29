@@ -14,7 +14,7 @@
           <li>
             <router-link :to="{ name: 'profile' }">
               <Icon icon="ph:user-fill" />
-              {{ $t('profile') }}
+              {{ $t('profile.title') }}
             </router-link>
           </li>
           <li>
