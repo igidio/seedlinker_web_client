@@ -301,6 +301,11 @@ export const translations = {
       user_info: {
         title: 'User Information',
         description: 'Modify your user information such as username and email',
+        fields: {
+          username: 'Username',
+          email: 'Email',
+        },
+        button: 'Save changes',
       },
       password: {
         title: 'Change Password',
@@ -310,12 +315,22 @@ export const translations = {
           new_password: 'New Password',
           confirm_new_password: 'Confirm New Password',
         },
-        button: 'Change Password',
+        button: 'Guardar cambios',
       },
       sign_up: {
         title: 'Sign Up Alternatives',
         description: 'You can change your sign-up options here',
-      }
+        button: {
+          github: {
+            true: 'Link account with GitHub',
+            false: 'Unlink account from GitHub',
+          },
+          google: {
+            true: 'Link account with Google',
+            false: 'Unlink account from Google',
+          },
+        },
+      },
     },
     error: {
       input: {
@@ -635,7 +650,13 @@ export const translations = {
       title: 'Editar perfil',
       user_info: {
         title: 'Información del usuario',
-        description: 'Modifica la información de tu usuario como el nombre de usuario y correo electrónico',
+        description:
+          'Modifica la información de tu usuario como el nombre de usuario y correo electrónico',
+        fields: {
+          username: 'Nombre de usuario',
+          email: 'Correo electrónico',
+        },
+        button: 'Guardar cambios',
       },
       password: {
         title: 'Cambiar contraseña',
@@ -650,7 +671,17 @@ export const translations = {
       sign_up: {
         title: 'Alternativas de inicio de sesión',
         description: 'Puedes cambiar tus opciones de inicio de sesión aquí',
-      }
+        button: {
+          github: {
+            true: 'Vincular cuenta con GitHub',
+            false: 'Desvincular cuenta de GitHub',
+          },
+          google: {
+            true: 'Vincular cuenta con Google',
+            false: 'Desvincular cuenta de Google',
+          },
+        },
+      },
     },
     error: {
       input: {

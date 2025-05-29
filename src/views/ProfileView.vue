@@ -9,7 +9,7 @@
     ]"
     :title="$t('profile.title')"
   />
-  <div class="tabs tabs-lift max-w-[800px] place-self-center">
+  <div class="tabs tabs-lift w-full lg:w-[800px] place-self-center">
     <ProfileTabUserinfo />
     <ProfileTabPassword />
     <ProfileTabSignup />
