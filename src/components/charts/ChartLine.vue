@@ -13,7 +13,7 @@ import { Line } from 'vue-chartjs'
 import { useConfigStore } from '@/stores/config.store.ts'
 const configStore = useConfigStore()
 
-const { chart_options, chart_option_border } = storeToRefs(configStore)
+const { chart_options, chart_option_border, color_base } = storeToRefs(configStore)
 
 import {
   Chart as ChartJS,
@@ -36,12 +36,12 @@ const chartData = computed(() => ({
   labels: props.elements.map((element) => element.label),
   datasets: [
     {
-      backgroundColor: '#8fff00',
+      backgroundColor: color_base.value,
       label: props.label,
       data: props.elements.map((element) => element.value),
-      borderWidth: 1,
-      borderColor: '#8fff00',
-      pointBackgroundColor: '#8fff00',
+      borderWidth: 2,
+      borderColor: color_base.value,
+      pointBackgroundColor: color_base.value,
       scales: {
         y: {
           title: {

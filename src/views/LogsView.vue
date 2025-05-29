@@ -15,13 +15,13 @@
     </div>
   </div>
 
-  <div class="flex flex-row w-full gap-4">
-    <div v-if="!is_loading_graphs" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-[80%]">
+  <div class="flex flex-col md:flex-row w-full gap-4" v-if="!is_loading_graphs">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:w-[80%]">
       <ByDeviceTypeChart />
       <ByActionTypeChart />
-      <ByDayChart />
-      <ValueChangesByDevice />
-      <CountOnOffByDate class="col-span-2" />
+      <ByDayChart class="lg:col-span-2 xl:col-span-1" />
+      <ValueChangesByDevice  class="lg:col-span-2 xl:col-span-1" />
+      <CountOnOffByDate  class="lg:col-span-2"/>
     </div>
     <div class="flex flex-col grow gap-8">
       <AverageDhtByDay />

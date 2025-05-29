@@ -117,6 +117,8 @@ export const useConfigStore = defineStore('config', () => {
     },
   }))
 
+  const color_base = ref('#80eda9')
+
   return {
     login_modal_state,
     locale,
@@ -134,5 +136,6 @@ export const useConfigStore = defineStore('config', () => {
     generate_toast,
     // CHARTS
     chart_options,
+    color_base
   }
 })

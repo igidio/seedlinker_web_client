@@ -9,7 +9,7 @@ import { Bar } from 'vue-chartjs'
 import { useConfigStore } from '@/stores/config.store.ts'
 const configStore = useConfigStore()
 
-const { chart_option_border, chart_options } = storeToRefs(configStore)
+const { chart_option_border, chart_options, color_base } = storeToRefs(configStore)
 
 import {
   Chart as ChartJS,
@@ -26,7 +26,7 @@ import type { BarChartInterface } from '@/interfaces'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const props = defineProps<BarChartInterface & { additional_options?: object }>()
-const color_palette = generate_color_palette('#3498db', props.elements.type.length)
+const color_palette = generate_color_palette(color_base.value, props.elements.type.length)
 
 const chartData = {
   labels: props.elements.label.map((e) => e),
