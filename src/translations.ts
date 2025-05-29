@@ -285,11 +285,13 @@ export const translations = {
         last: 'Last',
       },
       charts: {
-        by_device_type: 'By device type',
-        by_action_type: 'By action type',
-        by_day: 'By day',
+        by_device_type: 'Logs by device type',
+        by_action_type: 'Logs by action type',
+        by_day: 'Logs by day',
+        changes_by_device_type: 'Changes by device',
         avg_temperature: 'Average temperature',
         avg_humidity: 'Average humidity',
+        state_change: 'State changes',
       },
     },
     error: {
@@ -594,11 +596,13 @@ export const translations = {
         last: 'Últimos',
       },
       charts: {
-        by_device_type: 'Por tipo de dispositivo',
-        by_action_type: 'Por tipo de acción',
-        by_day: 'Por día',
+        by_device_type: 'Registros por tipo de dispositivo',
+        by_action_type: 'Registros por tipo de acción',
+        by_day: 'Registros por día',
+        changes_by_device_type: 'Cambios por dispositivo',
         avg_temperature: 'Temperatura promedio',
         avg_humidity: 'Humedad promedio',
+        state_change: 'Cambios de estado',
       },
     },
     error: {

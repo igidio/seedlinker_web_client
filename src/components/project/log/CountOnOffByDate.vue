@@ -3,7 +3,7 @@
     <ChartBar
       :elements="{
         label: graph_data.count_on_off_by_date.map((e) => String(e.date)),
-        type: ['On', 'Off'],
+        type: [$t('logs.table.value.true'), $t('logs.table.value.false')],
         value: [
           [...graph_data.count_on_off_by_date.map((e) => e.true)],
           [...graph_data.count_on_off_by_date.map((e) => e.false)],

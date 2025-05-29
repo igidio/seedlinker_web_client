@@ -1,16 +1,19 @@
 <template>
-  <UiCard :title="$t('logs.charts.by_action_type')">
+  <UiCard :title="$t('logs.charts.changes_by_device_type')">
     <ChartBar
       :elements="{
-        label: graph_data.count_on_off_by_date.map((e) => String(e.date)),
-        type: ['On'],
+        label: graph_data.value_changes_by_device_type.map((e) => e.device_name),
+        type: [$t('logs.charts.state_change')],
         value: [
           [...graph_data.value_changes_by_device_type.map((e) => e.total)],
         ],
       }"
+      :additional_options="{
+        indexAxis: 'y',
+        maintainAspectRatio: false,
+      }"
       v-if="graph_data.value_changes_by_device_type"
     />
-    {{ graph_data.value_changes_by_device_type }}
   </UiCard>
 </template>
 

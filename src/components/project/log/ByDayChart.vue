@@ -1,5 +1,5 @@
 <template>
-  <UiCard :title="$t('logs.charts.by_action_type')">
+  <UiCard :title="$t('logs.charts.by_day')">
     <ChartLine
       :elements="
         graph_data.by_day.map((e) => {

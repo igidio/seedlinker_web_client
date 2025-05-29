@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <Bar id="pie-chart" :options="{ ...chart_options, ...chart_option_border }" :data="chartData" />
+    <Bar id="pie-chart" :options="{ ...chart_options, ...chart_option_border, ...additional_options }" :data="chartData" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@ import { generate_color_palette } from '@/utils/generate_color_palette'
 import type { BarChartInterface } from '@/interfaces'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
-const props = defineProps<BarChartInterface>()
+const props = defineProps<BarChartInterface & { additional_options?: object }>()
 const color_palette = generate_color_palette('#3498db', props.elements.type.length)
 
 const chartData = {

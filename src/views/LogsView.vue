@@ -20,20 +20,14 @@
       <ByDeviceTypeChart />
       <ByActionTypeChart />
       <ByDayChart />
-
       <ValueChangesByDevice />
-      <CountOnOffByDate />
-      <CountOnOffByActuator />
+      <CountOnOffByDate class="col-span-2" />
     </div>
     <div class="flex flex-col grow gap-8">
       <AverageDhtByDay />
       <AverageDhtByDevice />
     </div>
   </div>
-
-  <!-- <div class="grid grid-cols-2 gap-4"> -->
-
-  <!-- </div> -->
 </template>
 
 <script setup lang="ts">
@@ -43,7 +37,6 @@ import AverageDhtByDevice from '@/components/project/log/AverageDhtByDevice.vue'
 import ByActionTypeChart from '@/components/project/log/ByActionTypeChart.vue'
 import ByDayChart from '@/components/project/log/ByDayChart.vue'
 import ByDeviceTypeChart from '@/components/project/log/ByDeviceTypeChart.vue'
-import CountOnOffByActuator from '@/components/project/log/CountOnOffByActuator.vue'
 import CountOnOffByDate from '@/components/project/log/CountOnOffByDate.vue'
 import LogsTable from '@/components/project/log/LogsTable.vue'
 import ValueChangesByDevice from '@/components/project/log/ValueChangesByDevice.vue'

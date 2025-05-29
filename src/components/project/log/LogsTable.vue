@@ -63,7 +63,7 @@
               </div>
               <div v-else-if="log.water">
                 {{ log.water[0].value }}
-                ({{  $t(`logs.table.mode.${log.water[0].mode}`) }})
+                ({{ $t(`logs.table.mode.${log.water[0].mode}`) }})
               </div>
 
               <span v-else class="">---</span>
