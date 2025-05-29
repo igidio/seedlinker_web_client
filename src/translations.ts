@@ -283,6 +283,7 @@ export const translations = {
           time: 'Time Condition',
         },
         last: 'Last',
+        no_data: 'No logs available',
       },
       charts: {
         by_device_type: 'Logs by device type',
@@ -596,6 +597,7 @@ export const translations = {
           time: 'Condición por tiempo',
         },
         last: 'Últimos',
+        no_data: 'No hay registros',
       },
       charts: {
         by_device_type: 'Registros por tipo de dispositivo',

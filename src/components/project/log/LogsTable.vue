@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="overflow-hidden">
+    <div class="overflow-hidden" v-if="logs.length > 0">
       <UiTable>
         <template #header>
           <tr class="table-header">
@@ -71,6 +71,10 @@
           </tr>
         </template>
       </UiTable>
+    </div>
+
+    <div class="text-center opacity-75" v-else-if ="!is_loading">
+      {{ $t('logs.table.no_data') }}
     </div>
   </UiCard>
 </template>

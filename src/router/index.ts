@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import { applyDefaultLayout } from '@/router/apply_default_layout.ts'
 import CenteredLayout from '@/layouts/CenteredLayout.vue'
 import { is_valid_uuid } from '@/utils/validate_uuid.ts'
+import { get_cookie } from '@/utils/cookie'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -56,6 +57,16 @@ applyDefaultLayout(routes)
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const token = get_cookie('access_token')
+  const publicPages = ['login', 'signup', 'home']
+  if (!publicPages.includes(to.name as string) && !token) {
+    next({ name: 'login' })
+  } else {
+    next()
+  }
 })
 
 export default router

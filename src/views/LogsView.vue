@@ -20,13 +20,16 @@
       <ByDeviceTypeChart />
       <ByActionTypeChart />
       <ByDayChart class="lg:col-span-2 xl:col-span-1" />
-      <ValueChangesByDevice  class="lg:col-span-2 xl:col-span-1" />
-      <CountOnOffByDate  class="lg:col-span-2"/>
+      <ValueChangesByDevice class="lg:col-span-2 xl:col-span-1" />
+      <CountOnOffByDate class="lg:col-span-2" />
     </div>
     <div class="flex flex-col grow gap-8">
       <AverageDhtByDay />
       <AverageDhtByDevice />
     </div>
+  </div>
+    <div class="place-self-center opacity-50" v-else>
+    <span class="loading loading-spinner loading-xl"></span>
   </div>
 </template>
 
