@@ -331,6 +331,7 @@ export const translations = {
           },
         },
       },
+      success: 'Profile updated successfully',
     },
     error: {
       input: {
@@ -682,6 +683,7 @@ export const translations = {
           },
         },
       },
+      success: 'Perfil actualizado correctamente',
     },
     error: {
       input: {
