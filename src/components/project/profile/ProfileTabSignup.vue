@@ -9,15 +9,15 @@
     <p class="text-xs">{{ $t('profile.sign_up.description') }}</p>
 
     <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
-      <button class="btn btn-soft" @click="link_google" v-if=!user.google_id>
+      <button class="btn btn-soft" @click="link_google" v-if="!user.google_id" :disabled="is_loading">
         <Icon icon="ph:google-logo-bold" />
         {{ $t('profile.sign_up.button.google.true') }}
       </button>
-      <button class="btn btn-error btn-soft" @click="unlink_google" v-else>
+      <button class="btn btn-error btn-soft" @click="unlink_google" v-else :disabled="is_loading">
         <Icon icon="ph:google-logo-bold" />
         {{ $t('profile.sign_up.button.google.false') }}
       </button>
-      <button class="btn btn-soft">
+      <button class="btn btn-soft" :disabled="is_loading">
         <Icon icon="ph:github-logo-bold" />
         {{ $t('profile.sign_up.button.github.true') }}
       </button>
@@ -29,16 +29,20 @@
 
 <script setup lang="ts">
 import type { UserInterface } from '@/interfaces'
-import { api_client } from '@/utils/axios'
+import { useConfigStore } from '@/stores/config.store'
 import { get_cookie } from '@/utils/cookie'
 import { Icon } from '@iconify/vue/dist/iconify.js'
 import { inject, ref } from 'vue'
 
+const { generate_toast } = useConfigStore()
 const error_message = ref<string | null>(null)
 const update_strategy = inject('update_strategy') as (
   strategy: 'google' | 'github',
   id: 'string',
 ) => void
+const unlink_account = inject('unlink_account') as (strategy: "google" | "github") => Promise<void>
+const is_loading = ref(false)
+
 window.addEventListener('message', (event) => {
   handleMessage(event, 'google')
 })
@@ -64,23 +68,27 @@ const handleMessage = (event: MessageEvent, method: string) => {
     error_message.value = data['detail']
   } else if (data['strategy'] && data['id']) {
     update_strategy(data['strategy'], data['id'])
+    generate_toast({
+      type: 'success',
+      message: 'profile.success',
+    })
   }
 }
 
-// const unlink_google = async () => {
-//   error_message.value = null
-//   try {
-//     await api_client.delete('/service/auth/google', {
-//       headers: {
-//         Authorization: `Bearer ${get_cookie('access_token')}`,
-//       },
-//     })
-//     update_strategy('google', '')
-//   } catch (error) {
-//     console.error('Error unlinking Google account:', error)
-//     error_message.value = 'profile.sign_up.error.unlink_google'
-//   }
-// }
+const unlink_google = async () => {
+  is_loading.value = true
+  await unlink_account("google")
+    .then(() => {
+      error_message.value = null
+    })
+    .catch((error) => {
+      console.error('Error unlinking Google account:', error)
+      error_message.value = 'error.oauth.unlink_google'
+    })
+    .finally(() => {
+      is_loading.value = false
+    })
+}
 
 defineProps<{
   user: UserInterface

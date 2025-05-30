@@ -46,12 +46,24 @@ export const useProfileComposable = () => {
     user.value[strategy === "google" ? "google_id" : "github_id"] = id
   }
 
+  const unlink_account = async (strategy: "google"|"github") => {
+    await api_client.post(`/service/auth/${strategy}/unlink`, { strategy }).then((response) => {
+      console.log(`Unlinked ${strategy} account:`, response.data)
+      user.value[strategy === "google" ? "google_id" : "github_id"] = undefined
+      generate_toast({
+        type: 'success',
+        message: `profile.unlink`,
+      })
+    })
+  }
+
   return {
     user,
     loading,
     get_user,
     update_user,
     update_password,
-    update_strategy
+    update_strategy,
+    unlink_account
   }
 }

@@ -30,6 +30,7 @@ const { get_user, user } = profileComposable
 provide('update_user', profileComposable.update_user)
 provide('update_password', profileComposable.update_password)
 provide('update_strategy', profileComposable.update_strategy)
+provide('unlink_account', profileComposable.unlink_account)
 
 await get_user()
 </script>

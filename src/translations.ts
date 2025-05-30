@@ -341,6 +341,7 @@ export const translations = {
         },
       },
       success: 'Profile updated successfully',
+      unlink: 'Profile unlinked successfully',
     },
     error: {
       input: {
@@ -367,6 +368,13 @@ export const translations = {
         unprocessable: 'The submitted data is not valid',
         no_spaces_allowed: 'No spaces allowed',
       },
+      oauth: {
+        invalid_strategy: 'Invalid authentication strategy',
+        github_account_already_linked: 'GitHub account is already linked to another user',
+        google_account_already_linked: 'Google account is already linked to another user',
+        user_not_found: 'User not found',
+        unlink_google: 'Could not unlink Google account',
+      }
     },
   },
   es: {
@@ -703,6 +711,7 @@ export const translations = {
         },
       },
       success: 'Perfil actualizado correctamente',
+      unlink: 'Perfil desvinculado correctamente',
     },
     error: {
       input: {
@@ -730,6 +739,13 @@ export const translations = {
         unprocessable: 'Los datos enviados no son válidos',
         no_spaces_allowed: 'No se permiten espacios en blanco',
       },
+      oauth: {
+        invalid_strategy: 'Estrategia de autenticación no válida',
+        github_account_already_linked: 'La cuenta de GitHub ya está vinculada a otro usuario',
+        google_account_already_linked: 'La cuenta de Google ya está vinculada a otro usuario',
+        user_not_found: 'Usuario no encontrado',
+        unlink_google: 'No se pudo desvincular la cuenta de Google',
+      }
     },
   },
 }
