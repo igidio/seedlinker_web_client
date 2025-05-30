@@ -90,7 +90,7 @@ export const translations = {
       },
       pin: {
         title: 'Connected I/O',
-        button: 'New component (I/O)',
+        button: 'Add',
         status: {
           active: 'Active',
           inactive: 'Inactive',
@@ -174,6 +174,11 @@ export const translations = {
       },
       alert: {
         edit: 'Device updated successfully',
+        delete: 'Device deleted successfully',
+        pin_delete: 'Pin deleted successfully',
+        condition_delete: 'Condition deleted successfully',
+        condition_create: 'Condition created successfully',
+        condition_update: 'Condition updated successfully',
       },
     },
     home: {
@@ -367,6 +372,9 @@ export const translations = {
         device_not_found: 'Device not found, please check the UUID',
         unprocessable: 'The submitted data is not valid',
         no_spaces_allowed: 'No spaces allowed',
+        invalid_pin_value: 'Pin value is not valid',
+        invalid_condition_type: 'Invalid condition type',
+        pin_not_found: 'Pin not found, please check the pin value',
       },
       oauth: {
         invalid_strategy: 'Invalid authentication strategy',
@@ -468,7 +476,7 @@ export const translations = {
       },
       pin: {
         title: 'I/O conectados',
-        button: 'Nuevo componente (I/O)',
+        button: 'Agregar',
         status: {
           active: 'Activo',
           inactive: 'Inactivo',
@@ -552,6 +560,11 @@ export const translations = {
       },
       alert: {
         edit: 'Dispositivo modificado correctamente',
+        delete: 'Dispositivo eliminado correctamente',
+        pin_delete: 'Pin eliminado correctamente',
+        condition_delete: 'Condición eliminada correctamente',
+        condition_create: 'Condición creada correctamente',
+        condition_update: 'Condición modificada correctamente',
       },
     },
     home: {
@@ -574,7 +587,17 @@ export const translations = {
           description: 'Este dispositivo será conectado automáticamente a la red:',
         },
         manual: {
-          title: 'Conectar manualmente',
+          title: 'Conectar {0} manualmente',
+          description: 'Ingresa el UUID del dispositivo que deseas conectar',
+          field: {
+            placeholder: 'UUID del dispositivo',
+            label: 'El dispositivo debe estar encendido y conectado a la red',
+          },
+          button: 'Conectar',
+          error: {
+            no_available_device: 'El dispositivo no está disponible',
+            already_registered: 'El dispositivo ya está registrado',
+          }
         },
       },
       card_connected_client: {
@@ -738,6 +761,9 @@ export const translations = {
         device_not_found: 'Dispositivo no encontrado, por favor verifique el UUID',
         unprocessable: 'Los datos enviados no son válidos',
         no_spaces_allowed: 'No se permiten espacios en blanco',
+        invalid_pin_value: 'El valor del pin no es válido',
+        invalid_condition_type: 'Tipo de condición no válido',
+        pin_not_found: 'Pin no encontrado, por favor verifique el valor del pin',
       },
       oauth: {
         invalid_strategy: 'Estrategia de autenticación no válida',

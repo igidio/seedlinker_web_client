@@ -31,7 +31,7 @@
           <p>{{ $t('home.modal_connect_device.auto.description') }}</p>
           <p class="font-bold">{{ data.uuid }}</p>
         </div>
-        <p class="text-error text-end" v-if="error_message">{{ $t(error_message) }}</p>
+        <p class="text-error text-end text-xs" v-if="error_message">{{ $t(error_message) }}</p>
       </template>
       <template v-slot:footer>
         <button class="btn btn-ghost" type="button" @click="trigger!.close">
@@ -82,8 +82,7 @@ const submit = async () => {
   await api_client
     .post(`/devices/${uuid_to_submit}`)
 
-    .then(async (res) => {
-      console.log(res)
+    .then(async () => {
       await fetch_data()
       trigger.value?.close()
       new_uuid.value = ''

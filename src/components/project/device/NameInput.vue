@@ -53,7 +53,6 @@ const new_name = ref('')
 
 const set_edit = () => {
   edit.value = true
-  console.log(props.title)
   new_name.value = props.title
 }
 

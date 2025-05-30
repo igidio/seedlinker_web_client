@@ -20,7 +20,6 @@ export const useLogComposable = () => {
         },
       })
       .then((response) => {
-        console.log(response.data)
         logs.value = response.data
       })
       .catch((error) => {

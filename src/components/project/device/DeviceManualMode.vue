@@ -19,7 +19,7 @@
       </button>
     </div>
     <div v-else>
-      <span class="label text-xs text-center inline-block">
+      <span class="text-xs text-center opacity-60">
         {{ $t('device.modal.condition.fields.output.empty') }}
       </span>
     </div>

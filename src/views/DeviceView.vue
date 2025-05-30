@@ -81,7 +81,6 @@ onMounted(async () => {
   await api_client
     .get<DeviceInterface>(`/devices/${route.params.uuid}`)
     .then((response) => {
-      console.log('sadfasdsad')
       set_device(response.data)
     })
     .catch(() => {

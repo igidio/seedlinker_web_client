@@ -123,8 +123,7 @@ export const useDeviceComposable = () => {
       >(`/devices/${device.value?.uuid}/condition`, data)
       .then(async (result) => {
         generate_toast({
-          //TODO: add message
-          message: 'Nueva condicion creada',
+          message: 'device.alert.condition_create',
           type: 'success',
         })
         if (!device.value?.conditions) {
@@ -151,8 +150,7 @@ export const useDeviceComposable = () => {
       >(`/devices/${device.value?.uuid}/condition/${id}`, data)
       .then(async (result) => {
         generate_toast({
-          //TODO: add message
-          message: 'Agregar esto',
+          message: 'device.alert.condition_update',
           type: 'success',
         })
         if (data.type === 'time') {
@@ -177,8 +175,7 @@ export const useDeviceComposable = () => {
   const delete_condition = async (id: string, mode: 'time' | 'sensor') => {
     await api_client.delete(`/devices/${device.value?.uuid}/condition/${id}`).then(async () => {
       generate_toast({
-        // TODO: add message
-        message: 'Eliminar esto',
+        message: 'device.alert.condition_delete',
         type: 'success',
       })
       const index = device.value?.conditions[mode === 'time' ? 'by_time' : 'by_sensor'].findIndex(

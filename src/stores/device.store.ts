@@ -118,8 +118,6 @@ export const useDeviceStore = defineStore('device', () => {
     await api_client
       .get<DeviceInterface[]>('/devices')
       .then((response) => {
-        console.log(response.data)
-
         devices.value = response.data
       })
       .catch((error) => {

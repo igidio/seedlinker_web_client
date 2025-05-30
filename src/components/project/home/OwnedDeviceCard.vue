@@ -12,7 +12,7 @@
         <span class=""
           >{{ $t('device.status') }}: {{ device.status ? $t('device.on') : $t('device.off') }}</span
         >
-        <span class="">{{ $t('device.io') }}: {{ device.pins.length }}</span>
+        <span class="">{{ $t('device.io_label') }}: {{ device.pins.length }}</span>
       </div>
       <div class="flex flex-row justify-end gap-2">
         <RouterLink :to="{ name: 'device', params: { uuid: device.uuid } }">
