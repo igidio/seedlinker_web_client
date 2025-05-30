@@ -9,17 +9,21 @@
     <p class="text-xs">{{ $t('profile.sign_up.description') }}</p>
 
     <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
-      <button class="btn btn-soft" @click="link_google" v-if="!user.google_id" :disabled="is_loading">
+      <button class="btn btn-soft" @click="link_account('google')" v-if="!user.google_id" :disabled="is_loading">
         <Icon icon="ph:google-logo-bold" />
         {{ $t('profile.sign_up.button.google.true') }}
       </button>
-      <button class="btn btn-error btn-soft" @click="unlink_google" v-else :disabled="is_loading">
+      <button class="btn btn-error btn-soft" @click="unlink('google')" v-else :disabled="is_loading">
         <Icon icon="ph:google-logo-bold" />
         {{ $t('profile.sign_up.button.google.false') }}
       </button>
-      <button class="btn btn-soft" :disabled="is_loading">
+      <button class="btn btn-soft" :disabled="is_loading" v-if="!user.github_id" @click="link_account('github')">
         <Icon icon="ph:github-logo-bold" />
         {{ $t('profile.sign_up.button.github.true') }}
+      </button>
+      <button class="btn btn-error btn-soft" @click="unlink('github')" v-else :disabled="is_loading">
+        <Icon icon="ph:github-logo-bold" />
+        {{ $t('profile.sign_up.button.github.false') }}
       </button>
     </div>
 
@@ -44,25 +48,24 @@ const unlink_account = inject('unlink_account') as (strategy: "google" | "github
 const is_loading = ref(false)
 
 window.addEventListener('message', (event) => {
-  handleMessage(event, 'google')
+  handleMessage(event)
 })
 
-const link_google = async () => {
-  const googleAuthUrl = `http://192.168.0.99:8000/service/auth/google?next=${get_cookie('access_token')}`
+const link_account = async (strategy: 'google'|'github') => {
+  const auth_url = `http://192.168.0.99:8000/service/auth/${strategy}?next=${get_cookie('access_token')}`
   const width = 500
   const height = 600
   const left = window.screen.width / 2 - width / 2
   const top = window.screen.height / 2 - height / 2
 
   window.open(
-    googleAuthUrl,
-    'GoogleAuth',
+    auth_url,
+    'Link Account',
     `width=${width},height=${height},top=${top},left=${left}`,
   )
 }
 
-const handleMessage = (event: MessageEvent, method: string) => {
-  console.log(method, event.data)
+const handleMessage = (event: MessageEvent) => {
   const data = event.data
   if (data['detail']) {
     error_message.value = data['detail']
@@ -75,9 +78,9 @@ const handleMessage = (event: MessageEvent, method: string) => {
   }
 }
 
-const unlink_google = async () => {
+const unlink = async (strategy: "google"|"github") => {
   is_loading.value = true
-  await unlink_account("google")
+  await unlink_account(strategy)
     .then(() => {
       error_message.value = null
     })

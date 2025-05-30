@@ -91,7 +91,6 @@ const submit = async () => {
       error_message.value = null
     })
     .catch((error: AxiosError) => {
-      console.error('Error updating user:', error)
       error_message.value = capture_detail_error(error)
     })
     .finally(() => {
