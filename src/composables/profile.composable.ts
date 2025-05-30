@@ -14,7 +14,6 @@ export const useProfileComposable = () => {
     try {
       const response = await api_client.get<UserInterface>('/service/auth/info')
       user.value = await response.data
-      console.log('User profile fetched:', user.value)
     } catch (error) {
       console.error('Error fetching user profile:', error)
     } finally {
@@ -43,11 +42,16 @@ export const useProfileComposable = () => {
     })
   }
 
+  const update_strategy = (strategy: "google"|"github", id: "string") => {
+    user.value[strategy === "google" ? "google_id" : "github_id"] = id
+  }
+
   return {
     user,
     loading,
     get_user,
     update_user,
     update_password,
+    update_strategy
   }
 }

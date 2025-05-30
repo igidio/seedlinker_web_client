@@ -12,7 +12,7 @@
   <div class="tabs tabs-lift w-full lg:w-[800px] place-self-center" v-if="user">
     <ProfileTabUserinfo :user="user" v-if="user" />
     <ProfileTabPassword />
-    <ProfileTabSignup />
+    <ProfileTabSignup :user="user" />
   </div>
 </template>
 
@@ -29,6 +29,7 @@ const { get_user, user } = profileComposable
 
 provide('update_user', profileComposable.update_user)
 provide('update_password', profileComposable.update_password)
+provide('update_strategy', profileComposable.update_strategy)
 
 await get_user()
 </script>

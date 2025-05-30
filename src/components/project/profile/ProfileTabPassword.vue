@@ -16,6 +16,7 @@
           class="input w-full"
           v-model="form.current_password"
           @input="validate_inputs"
+          autocomplete="current-password"
         />
       </fieldset>
       <fieldset class="fieldset">
@@ -27,6 +28,7 @@
           class="input w-full"
           v-model="form.new_password"
           @input="validate_inputs"
+          autocomplete="new-password"
         />
       </fieldset>
       <fieldset class="fieldset">
@@ -38,6 +40,7 @@
           class="input w-full"
           v-model="form.confirm_new_password"
           @input="validate_inputs"
+          autocomplete="new-password"
         />
       </fieldset>
       <p v-if="error_message" class="text-xs text-error">{{ $t(error_message) }}</p>
