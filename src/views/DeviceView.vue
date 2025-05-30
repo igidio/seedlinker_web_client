@@ -10,10 +10,11 @@
     :title="$t('device.title')"
   />
   <div class="flex flex-col gap-2">
-    <div class="flex flex-row justify-between items-center">
-      <UiLoading v-if="loading && !device" />
+    <div class="flex flex-row gap-2 items-center self-center" v-if="loading && !device">
+      <UiLoading class="opacity-65" />
+      <span class="text-base-content opacity-65 text-sm">{{ $t('device.loading') }}...</span>
     </div>
-    <span class="text-base-content" v-if="loading">{{ $t('device.loading') }}...</span>
+
     <div class="flex flex-col gap-4" v-else>
       <DeviceCardConfig v-if="device" :device="device" :update="update_data" />
       <UiAlert color="warning" soft icon="ph:warning-bold" v-if="!device?.status">{{
@@ -30,7 +31,6 @@
         <div class="grow md:w-1/2" v-if="device?.mode === 'auto'">
           <ConditionsBy :conditions="device?.conditions || { by_sensor: [], by_time: [] }" />
         </div>
-        <!-- <div class="grow md:w-1/2" v-if="device?.mode === 'manual'"> -->
         <div class="grow md:w-1/2" v-if="device?.mode === 'manual'">
           <DeviceManualMode :output_pines="useDevice.device_pins_by_type.value" />
         </div>
