@@ -37,11 +37,11 @@
           {{ $t('login.button') }}
         </button>
         <div class="flex flex-row gap-2">
-          <button class="btn btn-base-200 btn-sm w-1/2 mt-2 flex flex-row" type="button">
+          <button class="btn btn-base-200 btn-sm w-1/2 mt-2 flex flex-row" type="button" @click="login_with_strategy('github')">
             <Icon icon="ph:github-logo-fill" />
             {{ $t('login.button_github') }}
           </button>
-          <button class="btn btn-sm grow mt-2 flex flex-row" type="button">
+          <button class="btn btn-sm grow mt-2 flex flex-row" type="button" @click="login_with_strategy('google')">
             <Icon icon="ph:google-logo-bold" />
             {{ $t('login.button_google') }}
           </button>
@@ -94,8 +94,6 @@ const submit = async () => {
       password: form.password,
     })
     .then((response) => {
-      console.log('Login successful')
-      console.log(response)
       set_cookie('access_token', response.data['access_token'])
       set_cookie('refresh_token', response.data['refresh_token'])
       window.location.href = '/'
@@ -106,5 +104,34 @@ const submit = async () => {
     .finally(() => {
       is_loading.value = false
     })
+}
+
+window.addEventListener('message', (event) => {
+  handleMessage(event)
+})
+
+const login_with_strategy = async (strategy: 'google'|'github') => {
+  const auth_url = `http://192.168.0.99:8000/service/auth/${strategy}`
+  const width = 500
+  const height = 600
+  const left = window.screen.width / 2 - width / 2
+  const top = window.screen.height / 2 - height / 2
+
+  window.open(
+    auth_url,
+    'Login with ' + strategy.charAt(0).toUpperCase() + strategy.slice(1),
+    `width=${width},height=${height},top=${top},left=${left}`,
+  )
+}
+
+const handleMessage = (event: MessageEvent) => {
+  const data = event.data
+  if (data['detail']) {
+    error_message.value = data['detail']
+  } else if (data['access_token'] && data['refresh_token']) {
+    set_cookie('access_token', data['access_token'])
+    set_cookie('refresh_token', data['refresh_token'])
+    window.location.href = '/'
+  }
 }
 </script>

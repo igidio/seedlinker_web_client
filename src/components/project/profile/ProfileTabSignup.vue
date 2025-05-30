@@ -47,10 +47,6 @@ const update_strategy = inject('update_strategy') as (
 const unlink_account = inject('unlink_account') as (strategy: "google" | "github") => Promise<void>
 const is_loading = ref(false)
 
-window.addEventListener('message', (event) => {
-  handleMessage(event)
-})
-
 const link_account = async (strategy: 'google'|'github') => {
   const auth_url = `http://192.168.0.99:8000/service/auth/${strategy}?next=${get_cookie('access_token')}`
   const width = 500
@@ -96,4 +92,10 @@ const unlink = async (strategy: "google"|"github") => {
 defineProps<{
   user: UserInterface
 }>()
+
+
+window.removeEventListener('message', handleMessage)
+window.addEventListener('message', (event) => {
+  handleMessage(event)
+})
 </script>
