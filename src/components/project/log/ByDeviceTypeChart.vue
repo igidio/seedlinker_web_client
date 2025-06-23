@@ -1,5 +1,6 @@
 <template>
   <UiCard :title="$t('logs.charts.by_device_type')">
+
     <ChartPie
       :elements="
         graph_data.by_device_type.map((e) => {
@@ -9,8 +10,11 @@
           }
         })
       "
-      v-if="graph_data.by_device_type"
+      v-if="graph_data.by_device_type && graph_data.by_device_type.length > 0"
     />
+    <div class="p-4 text-sm text-center opacity-80" v-else>
+      {{ $t('logs.no_items_to_show') }}
+    </div>
   </UiCard>
 </template>
 

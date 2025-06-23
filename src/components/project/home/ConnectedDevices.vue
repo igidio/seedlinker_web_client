@@ -27,12 +27,14 @@
       </div>
     </div>
 
-    <NewDevice
-      :device="device.device!"
-      v-for="device in connected_by_types.devices"
-      :key="device.device?.uuid"
-      :show_modal_connect_device="show_modal_connect_device"
-    />
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-2">
+      <NewDevice
+        :device="device.device!"
+        v-for="device in connected_by_types.devices"
+        :key="device.device?.uuid"
+        :show_modal_connect_device="show_modal_connect_device"
+      />
+    </div>
 
     <div
       v-if="connected_by_types.devices.length <= 0 && !is_loading_connection && !show_error"

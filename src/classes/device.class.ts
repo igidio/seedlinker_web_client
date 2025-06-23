@@ -4,7 +4,7 @@ import type { current_devices_interface } from '@/interfaces'
 export class Device {
   private readonly server_direction: string
 
-  constructor({ server_direction, group }: { server_direction: string; group: string }) {
+  constructor({ server_direction }: { server_direction: string; group: string }) {
     this.server_direction = server_direction
   }
 

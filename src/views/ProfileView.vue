@@ -22,7 +22,9 @@ import ProfileTabPassword from '@/components/project/profile/ProfileTabPassword.
 import ProfileTabSignup from '@/components/project/profile/ProfileTabSignup.vue'
 import ProfileTabUserinfo from '@/components/project/profile/ProfileTabUserinfo.vue'
 import { useProfileComposable } from '@/composables/profile.composable'
+import { useI18n } from 'vue-i18n'
 import { provide } from 'vue'
+const { t } = useI18n()
 
 const profileComposable = useProfileComposable()
 const { get_user, user } = profileComposable
@@ -33,4 +35,6 @@ provide('update_strategy', profileComposable.update_strategy)
 provide('unlink_account', profileComposable.unlink_account)
 
 await get_user()
+document.title = t('profile.title')
+
 </script>

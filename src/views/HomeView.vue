@@ -16,7 +16,11 @@ import ConnectedDevices from '@/components/project/home/ConnectedDevices.vue'
 import MyDevices from '@/components/project/home/MyDevices.vue'
 import { useConfigStore } from '@/stores/config.store.ts'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const configStore = useConfigStore()
 const { is_authenticated } = storeToRefs(configStore)
+
+document.title = t('home.title')
 </script>

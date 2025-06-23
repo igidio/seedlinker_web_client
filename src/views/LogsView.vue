@@ -45,6 +45,8 @@ import LogsTable from '@/components/project/log/LogsTable.vue'
 import ValueChangesByDevice from '@/components/project/log/ValueChangesByDevice.vue'
 import { useLogComposable } from '@/composables/log.composable'
 import { onMounted, provide, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const logComposable = useLogComposable()
 const { logs } = logComposable
@@ -57,6 +59,7 @@ provide('offset', logComposable.offset)
 provide('limit', logComposable.limit)
 provide('graph_data', logComposable.graph_data)
 
+
 const load_graphs = async () => {
   is_loading_graphs.value = true
   await logComposable.get_graph_data()
@@ -67,4 +70,5 @@ onMounted(async () => {
   await logComposable.get_content()
   await load_graphs()
 })
+document.title = t('logs.title')
 </script>

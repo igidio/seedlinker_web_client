@@ -221,6 +221,7 @@ export const translations = {
     login: {
       title: 'Log In',
       description: 'You must log in to access our services.',
+      continue: 'You must log in to continue',
       button: 'Log In',
       button_github: 'Log In with GitHub',
       button_google: 'Log In with Google',
@@ -256,6 +257,7 @@ export const translations = {
       title: 'Logs',
       button: 'View logs',
       general: 'General logs',
+      no_items_to_show: 'No items to show',
       table: {
         headers: {
           id: 'ID',
@@ -303,6 +305,14 @@ export const translations = {
     },
     profile: {
       title: 'Edit Profile',
+      error: {
+        email_invalid: 'Email is not valid',
+        email_required: 'Email is required',
+        email_too_long: 'Email cannot be longer than 255 characters',
+        username_required: 'Username is required',
+        username_too_long: 'Username cannot be longer than 50 characters',
+        no_spaces_allowed: 'No spaces allowed',
+      },
       user_info: {
         title: 'User Information',
         description: 'Modify your user information such as username and email',
@@ -608,6 +618,7 @@ export const translations = {
     login: {
       title: 'Iniciar sesión',
       description: 'Debes iniciar sesión para acceder a nuestros servicios.',
+      continue: 'Debes iniciar sesión para continuar',
       button: 'Iniciar sesión',
       button_github: 'Iniciar con GitHub',
       button_google: 'Iniciar con Google',
@@ -642,6 +653,7 @@ export const translations = {
     logs: {
       title: 'Registros',
       button: 'Ver registros',
+      no_items_to_show: 'No hay elementos para mostrar',
       general: 'Registros generales',
       table: {
         headers: {
@@ -690,6 +702,14 @@ export const translations = {
     },
     profile: {
       title: 'Editar perfil',
+      error: {
+        email_invalid: 'El correo electrónico no es válido',
+        email_required: 'El correo electrónico es obligatorio',
+        email_too_long: 'El correo electrónico no puede tener más de 255 caracteres',
+        username_required: 'El nombre de usuario es obligatorio',
+        username_too_long: 'El nombre de usuario no puede tener más de 50 caracteres',
+        no_spaces_allowed: 'No se permiten espacios en blanco',
+      },
       user_info: {
         title: 'Información del usuario',
         description:

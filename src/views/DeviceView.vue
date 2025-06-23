@@ -54,6 +54,8 @@ import ContentHeader from '@/components/project/global/ContentHeader.vue'
 import DeviceCardConfig from '@/components/project/device/DeviceCardConfig.vue'
 import DeviceManualMode from '@/components/project/device/DeviceManualMode.vue'
 import UiAlert from '@/components/ui/UiAlert.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const { generate_toast } = useConfigStore()
 const loading = ref(true)
@@ -78,6 +80,7 @@ provide('create_condition', useDevice.create_condition)
 provide('delete_condition', useDevice.delete_condition)
 
 onMounted(async () => {
+  document.title = t('device.title')
   await api_client
     .get<DeviceInterface>(`/devices/${route.params.uuid}`)
     .then((response) => {

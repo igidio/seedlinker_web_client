@@ -1,10 +1,10 @@
 <template>
   <UiModal v-model="login_modal_state">
     <template v-slot:default>
-      Debes iniciar sesión para continuar
+      {{ $t('login.continue') }}
     </template>
     <template v-slot:footer>
-      <div @click="login_modal_state?.close" class="flex flex-row gap-2">
+      <div @click="() => login_modal_state?.close()" class="flex flex-row gap-2">
         <router-link :to="{ name: 'login' }" class="btn btn-ghost"
         >{{ $t('login.title') }}
         </router-link>

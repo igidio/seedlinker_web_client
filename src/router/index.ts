@@ -4,19 +4,18 @@ import { applyDefaultLayout } from '@/router/apply_default_layout.ts'
 import CenteredLayout from '@/layouts/CenteredLayout.vue'
 import { is_valid_uuid } from '@/utils/validate_uuid.ts'
 import { get_cookie } from '@/utils/cookie'
+import { useI18n } from 'vue-i18n'
+
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
+    meta: {
+      title:  'home.title',
+    }
   },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import('./../views/AboutView.vue'),
-  },
-
   {
     path: '/login',
     name: 'login',
@@ -31,6 +30,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('./../views/SignupView.vue'),
     meta: {
       layout: CenteredLayout,
+      title: 'Sign Up',
     },
   },
   {
@@ -72,6 +72,13 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+})
+
+router.afterEach((to) => {
+  const { t } = useI18n({ useScope: 'global' })
+
+  //console.log(i18n.global.locale.value);
+  document.title = (to.meta.title as string) || 'Seedlinker'
 })
 
 export default router

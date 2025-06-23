@@ -1,5 +1,5 @@
 <template>
-  <div class="card w-96 bg-base-100 card-xs shadow-sm p-4" :key="device.uuid">
+  <div class="card bg-base-100 card-xs shadow-sm p-4" :key="device.uuid">
     <div class="card-body">
       <div class="flex flex-row justify-between">
         <h2 class="card-title font-semibold">{{ device.type }}</h2>

@@ -26,4 +26,8 @@
 <script setup lang="ts">
 import UiLogo from '@/components/ui/UiLogo.vue'
 import SignupForm from '@/components/project/auth/SignupForm.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+document.title = t('signup.title')
 </script>

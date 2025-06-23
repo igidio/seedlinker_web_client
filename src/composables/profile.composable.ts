@@ -33,7 +33,7 @@ export const useProfileComposable = () => {
   }
 
   const update_password = async (data: { current_password: string; new_password: string }) => {
-    await api_client.post('/service/auth/update/password', data).then((response) => {
+    await api_client.post('/service/auth/update/password', data).then(() => {
       generate_toast({
         type: 'success',
         message: 'profile.success',
@@ -46,7 +46,7 @@ export const useProfileComposable = () => {
   }
 
   const unlink_account = async (strategy: 'google' | 'github') => {
-    await api_client.post(`/service/auth/${strategy}/unlink`, { strategy }).then((response) => {
+    await api_client.post(`/service/auth/${strategy}/unlink`, { strategy }).then(() => {
       user.value[strategy === 'google' ? 'google_id' : 'github_id'] = undefined
       generate_toast({
         type: 'success',
