@@ -34,7 +34,6 @@ export const pin_values: Record<'ESP8266' | 'ESP32', PinValuesInterface[]> = {
 
 export const io_values: IoValuesInterface[] = [
   {
-    //device.io.values.
     label: 'temperature_and_humidity_sensor',
     type: 'input',
     value: 1,

@@ -40,12 +40,10 @@
 </template>
 
 <script setup lang="ts">
-import { api_client } from '@/utils/axios.ts'
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted, provide, ref } from 'vue'
-import { useConfigStore } from '@/stores/config.store.ts'
 import UiLoading from '@/components/ui/UiLoading.vue'
-import type { DeviceInterface, Pins } from '@/interfaces'
+import type { Pins } from '@/interfaces'
 import { useDeviceComposable } from '@/composables/device.composable.ts'
 import PinSection from '@/components/project/device/PinSection.vue'
 import ConditionsBy from '@/components/project/device/ConditionsBy.vue'
@@ -56,17 +54,16 @@ import DeviceManualMode from '@/components/project/device/DeviceManualMode.vue'
 import UiAlert from '@/components/ui/UiAlert.vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-
-const { generate_toast } = useConfigStore()
 const loading = ref(true)
 
 const route = useRoute()
 const router = useRouter()
 
 const useDevice = useDeviceComposable()
-const { device, set_device, update_data } = useDevice
+const { device, get_device, update_data } = useDevice
 
 provide('device', device)
+provide('get_device', useDevice.get_device)
 provide('add_pin', useDevice.add_pin)
 provide('update_pin', useDevice.update_pin)
 provide('delete_pin', useDevice.delete_pin)
@@ -81,16 +78,10 @@ provide('delete_condition', useDevice.delete_condition)
 
 onMounted(async () => {
   document.title = t('device.title')
-  await api_client
-    .get<DeviceInterface>(`/devices/${route.params.uuid}`)
-    .then((response) => {
-      set_device(response.data)
-    })
+  loading.value = true
+
+  await get_device(route.params.uuid as string)
     .catch(() => {
-      generate_toast({
-        type: 'error',
-        message: 'error.form.device_not_found',
-      })
       router.replace('/')
     })
     .finally(() => {

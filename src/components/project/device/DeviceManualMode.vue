@@ -60,7 +60,6 @@ const send = (pin: number, value: number) => {
         pin,
         value,
       },
-      // Indica que este mensaje es solo para el servidor, no para broadcast
     }),
   )
 }

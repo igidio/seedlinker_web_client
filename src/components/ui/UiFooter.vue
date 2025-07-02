@@ -3,7 +3,8 @@
     <span class="font-bold">{{ current }} igid.io</span>
   </div>
   <div class="flex flex-row justify-between items-center px-2 py-2" v-else>
-    <span class="font-bold">{{ current }} igid.io</span>
+    <!-- <span class="font-bold">{{ current }} igid.io</span> -->
+    <span></span>
     <div>
       <ToggleDarkLight/>
       <ToggleLanguage/>

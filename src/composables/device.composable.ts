@@ -25,6 +25,22 @@ export const useDeviceComposable = () => {
     pin_values_by_device.value = pin_values[device.value.type as 'ESP8266' | 'ESP32']
   }
 
+  const get_device = async (uuid: string) => {
+
+    await api_client
+      .get<DeviceInterface>(`/devices/${uuid}`)
+      .then((response) => {
+        set_device(response.data)
+      })
+      .catch(() => {
+        generate_toast({
+          type: 'error',
+          message: 'error.form.device_not_found',
+        })
+        throw new Error()
+      })
+  }
+
   const add_pin = async (pin: Partial<DeviceInterface['pins'][0]>) => {
     await api_client
       .post(`/devices/${device.value?.uuid}/pin`, pin)
@@ -219,6 +235,7 @@ export const useDeviceComposable = () => {
   return {
     device,
     set_device,
+    get_device,
     update_data,
     update_pin,
     add_pin,
