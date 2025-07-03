@@ -22,6 +22,8 @@ export const translations = {
       loading: 'Device information is loading',
       title: 'Your device',
       status_false: 'You must re-enable the device to configure the other aspects.',
+      new_connected_device: 'New device connected',
+
       status_values: {
         active: 'Active',
         inactive: 'Inactive',
@@ -339,7 +341,7 @@ export const translations = {
           confirm_password_required: 'Confirm password must be at least 8 characters long',
           confirm_password_too_long: 'Confirm password cannot be longer than 20 characters',
           passwords_do_not_match: 'Passwords do not match',
-        }
+        },
       },
       sign_up: {
         title: 'Sign Up Alternatives',
@@ -392,7 +394,7 @@ export const translations = {
         google_account_already_linked: 'Google account is already linked to another user',
         user_not_found: 'User not found',
         unlink_google: 'Could not unlink Google account',
-      }
+      },
     },
   },
   es: {
@@ -419,6 +421,7 @@ export const translations = {
       loading: 'La información del dispositivo se está cargando',
       title: 'Tu dispositivo',
       status_false: 'Debes volver a habilitar el dispositivo para configurar los demás aspectos.',
+      new_connected_device: 'Nuevo dispositivo conectado',
       status_values: {
         active: 'Activo',
         inactive: 'Inactivo',
@@ -607,7 +610,7 @@ export const translations = {
           error: {
             no_available_device: 'El dispositivo no está disponible',
             already_registered: 'El dispositivo ya está registrado',
-          }
+          },
         },
       },
       card_connected_client: {
@@ -734,10 +737,12 @@ export const translations = {
           current_password_too_long: 'La contraseña actual no puede tener más de 20 caracteres',
           new_password_required: 'La nueva contraseña debe tener al menos 8 caracteres',
           new_password_too_long: 'La nueva contraseña no puede tener más de 20 caracteres',
-          confirm_password_required: 'La confirmación de la contraseña  debe tener al menos 8 caracteres',
-          confirm_password_too_long: 'La confirmación de la contraseña no puede tener más de 20 caracteres',
+          confirm_password_required:
+            'La confirmación de la contraseña  debe tener al menos 8 caracteres',
+          confirm_password_too_long:
+            'La confirmación de la contraseña no puede tener más de 20 caracteres',
           passwords_do_not_match: 'Las contraseñas no coinciden',
-        }
+        },
       },
       sign_up: {
         title: 'Alternativas de inicio de sesión',
@@ -791,7 +796,7 @@ export const translations = {
         google_account_already_linked: 'La cuenta de Google ya está vinculada a otro usuario',
         user_not_found: 'Usuario no encontrado',
         unlink_google: 'No se pudo desvincular la cuenta de Google',
-      }
+      },
     },
   },
 }

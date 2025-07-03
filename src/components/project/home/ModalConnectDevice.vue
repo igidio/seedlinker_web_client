@@ -51,7 +51,9 @@ import { is_valid_uuid } from '@/utils/validate_uuid.ts'
 import { api_client } from '@/utils/axios.ts'
 import type { AxiosError } from 'axios'
 import { useDeviceStore } from '@/stores/device.store'
+import { useConfigStore } from '@/stores/config.store'
 
+const { generate_toast } = useConfigStore()
 const trigger = defineModel<HTMLDialogElement>()
 const error_message = ref<string | null>(null)
 const deviceStore = useDeviceStore()
@@ -83,10 +85,17 @@ const submit = async () => {
     .post(`/devices/${uuid_to_submit}`)
 
     .then(async () => {
-      await fetch_data()
       trigger.value?.close()
       new_uuid.value = ''
       error_message.value = null
+      generate_toast({
+        type: 'success',
+        message: 'device.new_connected_device',
+      })
+      setTimeout(async () => {
+        await fetch_data();
+      }, 1000)
+
     })
     .catch((e: AxiosError) => {
       error_message.value =
