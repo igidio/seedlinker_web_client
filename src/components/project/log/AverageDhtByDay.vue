@@ -10,8 +10,8 @@
         :elements="graph_data.average_dht_by_day.map((e) => ({
             label: format_date(String(e.date)),
             items: [
-              `${$t('logs.charts.avg_temperature')}: ${e.avg_humidity}`,
-              `${$t('logs.charts.avg_temperature')}: ${e.avg_temperature}`,
+              `${$t('logs.charts.avg_humidity')}: ${(e.avg_humidity).toFixed(2)}`,
+              `${$t('logs.charts.avg_temperature')}: ${e.avg_temperature.toFixed(2)}`,
             ],
           }))
         "
