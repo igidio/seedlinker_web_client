@@ -1,7 +1,8 @@
 {
   "name": "seedlinker_web_client",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
+  "author": "igidio",
   "type": "module",
   "scripts": {
     "dev": "vite",

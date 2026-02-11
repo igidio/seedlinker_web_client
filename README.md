@@ -1,39 +1,90 @@
-# mi_invernadero_web_client
+# Seedlinker Web Client
 
-This template should help get you started developing with Vue 3 in Vite.
+<p align="center">
+  <img src="https://i.imgur.com/qoFLhUC.png" width="49%" />
+  <img src="https://i.imgur.com/ThHYxAZ.png" width="49%" />
+  <img src="https://i.imgur.com/eqAZvem.png" width="49%" />
+  <img src="https://i.imgur.com/V9Hn9tc.png" width="49%" />
+</p>
 
-## Recommended IDE Setup
+Seedlinker Web Client is a progressive web application for the Seedlinker IoT ecosystem. It provides an intuitive interface to monitor and control devices, visualize real-time data, configure automations, and manage ESP32/ESP8266 microcontrollers from any browser.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
 
-## Type Support for `.vue` Imports in TS
+- **Control dashboard:** Centralized view of all registered devices with current states, sensor readings, and manual actuator control.
+- **Real-time data visualization:** Interactive charts for sensor readings (temperature, humidity, water level) updated in real time.
+- **Logs and graphs view:** Dedicated screen to query event history and sensor readings with visualizations.
+- **Light/dark theme:** Switch between light and dark themes for improved UX.
+- **Internationalization:** Supports English and Spanish, with extensibility for additional languages.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Technologies Used
 
-## Customize configuration
+- **Vue 3 (Composition API)**: The progressive JavaScript framework.
+- **TypeScript**: For type-safe code and better maintainability.
+- **Vite**: Next-generation frontend tooling.
+- **Pinia**: Intuitive, type-safe state management for Vue.
+- **Tailwind CSS & DaisyUI**: Utility-first CSS framework with pre-designed components.
+- **Axios**: Promise-based HTTP client.
+- **Chart.js & vue-chartjs**: For data charting.
+- **Zod**: Schema declaration and validation.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+> Note: Please check package.json for the full list of dependencies.
 
-## Project Setup
+## Getting Started
 
-```sh
-npm install
-```
+### Prerequisites
 
-### Compile and Hot-Reload for Development
+- **Node.js** (v18+ recommended)
+- **npm**
+- **Seedlinker Server**: Ensure you have the Seedlinker backend server running and accessible.
 
-```sh
-npm run dev
-```
+### Installation
 
-### Type-Check, Compile and Minify for Production
+1. Clone the repository:
 
-```sh
-npm run build
-```
+   ```bash
+   git clone https://github.com/igidio/seedlinker_web_client.git
+   cd seedlinker_web_client
+   ```
 
-### Lint with [ESLint](https://eslint.org/)
+2. Install dependencies:
 
-```sh
-npm run lint
-```
+   ```bash
+   npm install
+   ```
+
+3. Environment variables: Copy `.env.template` to `.env` and set the Seedlinker server address (if it's running on a different port than 8000).
+
+   ```bash
+   cp .env.template .env
+   # Edit .env with your values
+   ```
+
+4. Start the app in development mode:
+
+   ```bash
+   npm run dev
+   ```
+
+The app should be available at 🔗http://localhost:3000 and ready to interact with the Seedlinker server.
+
+### Project Structure
+
+- **📁src/**
+	- **📄translations.ts**: Translations (EN/ES).
+	- **📄main.ts**: Entry point.
+	- **📁router/**: App routes.
+	- **📁stores/**: Pinia stores.
+	- **📁components**: Reusable Vue components.
+	- **📁layouts**: Page layouts.
+	- **📁assets**: CSS, images and global styles.
+	- **📁schemas**: Validation schemas with Zod.
+	- **📁interfaces**: TypeScript types and interfaces.
+
+## Scripts
+- `npm run dev`: Start development server with hot reloading.
+- `npm run build`: Build for production.
+- `npm run preview`: Preview production build locally.
+
+### License
+ This project is licensed under the MIT License - see the [📄LICENSE.md](LICENSE.md) file for details.
