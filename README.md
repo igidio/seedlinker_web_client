@@ -1,10 +1,10 @@
 # Seedlinker Web Client
 
 <p align="center">
-  <img src="https://i.imgur.com/qoFLhUC.png" width="49%" />
-  <img src="https://i.imgur.com/ThHYxAZ.png" width="49%" />
-  <img src="https://i.imgur.com/eqAZvem.png" width="49%" />
-  <img src="https://i.imgur.com/V9Hn9tc.png" width="49%" />
+  <img src="https://i.imgur.com/WW7ptrC.png" width="49%" />
+  <img src="https://i.imgur.com/AhDpkSj.png" width="49%" />
+  <img src="https://i.imgur.com/tQM6Blw.png" width="49%" />
+  <img src="https://i.imgur.com/ZIKdK51.png" width="49%" />
 </p>
 
 Seedlinker Web Client is a progressive web application for the Seedlinker IoT ecosystem. It provides an intuitive interface to monitor and control devices, visualize real-time data, configure automations, and manage ESP32/ESP8266 microcontrollers from any browser.
